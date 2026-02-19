@@ -1,0 +1,122 @@
+@use "../../styles//global//mixins" as *;
+
+// title-h1
+.heading-primary {
+  font-size: 44px;
+  line-height: 60px;
+  font-weight: var(--fw-semi-bold);
+  color: var(--c-white);
+  margin: 0 0 30px 0;
+
+  @include vp-1023 {
+    font-size: 40px;
+  }
+
+  @include vp-767 {
+    font-size: 36px;
+  }
+
+  @media (max-width: 520px) {
+    font-size: 24px;
+    line-height: 40px;
+    margin: 0 0 15px 0;
+  }
+
+  &--accent {
+    color: var(--c-light-blue);
+  }
+}
+
+// .title-h2 {
+.heading-secondary {
+  font-size: 40px;
+  line-height: 55px;
+  font-weight: var(--fw-bold);
+  margin: 0 0 60px 0;
+
+  &--black {
+    color: var(--c-black);
+  }
+
+  &--m-120 {
+    margin: 0 0 120px 0;
+  }
+
+  @include vp-767 {
+    font-size: 32px;
+    line-height: 44px;
+    margin: 0 0 50px 0;
+  }
+}
+
+// .title-h3 {
+.heading-tertiary {
+  font-size: 32px;
+  line-height: 46px;
+  font-weight: var(--fw-bold);
+  margin: 0 0 20px 0;
+
+  @include vp-767 {
+    font-size: 28px;
+    line-height: 44px;
+  }
+}
+
+// .subtitle {
+.lead {
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: -0.02em;
+  font-weight: var(--fw-medium);
+  color: var(--c-white);
+  margin: 0 0 40px 0;
+
+  @include vp-1023 {
+    font-size: 20px;
+  }
+
+  @media (max-width: 520px) {
+    font-size: 18px;
+    margin: 0 0 20px 0;
+  }
+}
+
+// .paragraph {
+.body-text {
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: var(--fw-medium);
+
+  @include vp-767 {
+    font-size: 14px;
+  }
+}
+
+.link {
+  font-size: 14px;
+  font-weight: var(--fw-regular);
+  padding: 10px 48px;
+  border-radius: 20px;
+  background-color: var(--c-white);
+  color: var(--c-black);
+  text-align: center;
+  transition:
+    background-color var(--transition-200),
+    color var(--transition-200);
+
+  @media (max-width: 520px) {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--c-light-blue);
+    color: var(--c-white);
+  }
+
+  &--blue {
+    background-color: var(--c-light-blue);
+    color: var(--c-white);
+  }
+}

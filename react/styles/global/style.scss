@@ -1,0 +1,101 @@
+@use "../../styles//global//mixins" as *;
+
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.page {
+  padding: 200px 0 0 0;
+  margin: 0 0 100px 0;
+
+  @include vp-767 {
+    padding: 150px 0 0 0;
+  }
+
+  @media (max-width: 400px) {
+    padding: 50px 0 0 0;
+  }
+}
+
+.page-sect {
+  display: flex;
+  flex-direction: column;
+  gap: 250px;
+
+  @include vp-767 {
+    gap: 200px;
+  }
+
+  @media (max-width: 400px) {
+    gap: 150px;
+  }
+}
+
+.text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 200px;
+}
+
+.flex-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: start;
+
+  &--card-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    gap: 100px 20px;
+    align-items: unset;
+  }
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: space-between;
+  gap: 20px;
+
+  @include vp-767 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  &--1 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    @include vp-767 {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+.content-box {
+  display: grid;
+  background-color: var(--c-white);
+  border-radius: 20px;
+  padding: 15px;
+  gap: 5px;
+}
+
+.form-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  @include vp-767 {
+    flex-direction: column;
+  }
+}

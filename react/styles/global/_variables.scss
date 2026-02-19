@@ -1,0 +1,22 @@
+:root {
+  // Colors
+  --c-white: #ffffff;
+  --c-black: #212121;
+  --c-light-blue: #38BDF9;
+
+  // Typography
+  --ff-main: "Manrope", "Arial", sans-serif;
+
+  // fons weights
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+
+  // Transitions
+  --transition-200: 0.2s linear;
+}
+
+// Viewport
+$vp-tablet: 1023px;
+$vp-mobile: 767px;
