@@ -1,3 +1,11 @@
 .form {
-  
+
+  &-label {
+    font-size: 56px;
+    margin: 0 0 150px 0;
+  }
+
+  &-btns {
+    grid-template-columns: repeat(2, 250px);
+  }
 }
