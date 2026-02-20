@@ -2,16 +2,17 @@ import { useState } from "react";
 import History from "../History/History";
 import "./Form.scss";
 import { useUrl } from "../Context/useUrl";
+import useCopyToClipboard from "../Utils/useCopyToClipboard";
 
 const Form = () => {
-  const { url, setUrl } = useUrl();
+  const { url, setUrl, copy, setUrlHistory } = useUrl();
   const [err, setErr] = useState("");
-  const [copy, setCopy] = useState(false);
   const [timerErr, setTimerErr] = useState(false);
 
   const urlPattern =
     /^(https?:\/\/)?(([a-z0-9-]+\.)+[a-z]{2,10}|(\d{1,3}\.){3}\d{1,3})(:\d{1,5})?(\/.*)?$/i;
 
+  // Отправка формы
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -26,19 +27,13 @@ const Form = () => {
       return;
     }
 
+    setUrlHistory(prev => [...prev, url]);
     setErr("");
     console.log("Сокращено", url);
   };
 
-  const copyToClipboard = async (text: string) => {
-    setCopy(true);
-
-    setTimeout(() => {
-      setCopy(false);
-    }, 1000);
-
-    return await navigator.clipboard.writeText(text);
-  };
+  // Копировать ссылку
+  const copyClip = useCopyToClipboard();
 
   return (
     <div className="form-wrapper d-flex justify-content-center flex-column align-items-center vh-100">
@@ -73,7 +68,7 @@ const Form = () => {
           <button
             type="button"
             className="btn btn-primary text-light mt-2 col p-3"
-            onClick={() => copyToClipboard(url)}
+            onClick={() => copyClip(url)}
           >
             Скопировать
           </button>
