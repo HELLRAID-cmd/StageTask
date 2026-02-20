@@ -1,6 +1,10 @@
 .form {
   margin: 0 0 150px 0;
 
+  &-inner {
+    position: relative;
+  }
+
   &-label {
     font-size: 56px;
     margin: 0 0 150px 0;
@@ -8,5 +12,13 @@
 
   &-btns {
     grid-template-columns: repeat(2, 250px);
+  }
+
+  &-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
   }
 }
