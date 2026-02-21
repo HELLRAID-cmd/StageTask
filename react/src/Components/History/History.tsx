@@ -1,15 +1,27 @@
+import { useEffect } from "react";
 import { useUrl } from "../Context/useUrl";
 import useCopyToClipboard from "../Utils/useCopyToClipboard";
 import "./History.scss";
 
 const History = () => {
-  const { urlHistory, setUrlHistory } = useUrl();
+  const { setUrlHistory, urlHistory } = useUrl();
 
   const copyClip = useCopyToClipboard();
 
   const deleteItem = (id: number) => {
-    setUrlHistory((prev) => prev.filter((_, i) => i !== id));
+    setUrlHistory((prev) => {
+      const updated = prev.filter((_, i) => i !== id);
+      localStorage.setItem("url", JSON.stringify(updated));
+      return updated;
+    });
   };
+
+  useEffect(() => {
+    const saved = localStorage.getItem("url");
+    if (saved) {
+      setUrlHistory(JSON.parse(saved));
+    }
+  }, []);
 
   return (
     <div className="history w-50 mb-5">
@@ -20,7 +32,7 @@ const History = () => {
             key={index}
           >
             <a
-              href="#!"
+              href={url}
               className="link-item text-light w-100 d-block p-3"
               target="_blank"
             >

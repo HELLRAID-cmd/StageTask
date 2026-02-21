@@ -27,7 +27,12 @@ const Form = () => {
       return;
     }
 
-    setUrlHistory(prev => [...prev, url]);
+    setUrlHistory((prev) => {
+      const updated = [...prev, url];
+      localStorage.setItem("url", JSON.stringify(updated));
+      return updated;
+    });
+
     setErr("");
     console.log("Сокращено", url);
   };
@@ -60,7 +65,10 @@ const Form = () => {
           />
         </div>
         <div className="form-btns btns d-grid gap-4 row-gap-3 justify-content-center">
-          <button type="submit" className="btn btn-danger text-light mt-2 col p-3">
+          <button
+            type="submit"
+            className="btn btn-danger text-light mt-2 col p-3"
+          >
             Сократить URL
           </button>
           <button

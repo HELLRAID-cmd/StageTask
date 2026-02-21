@@ -17,7 +17,16 @@ export const UrlProvider = ({ children }: { children: ReactNode }) => {
   const [urlHistory, setUrlHistory] = useState<string[]>([]);
 
   return (
-    <UrlContext.Provider value={{ url, setUrl, copy, setCopy, urlHistory, setUrlHistory }}>
+    <UrlContext.Provider
+      value={{
+        url,
+        setUrl,
+        copy,
+        setCopy,
+        urlHistory,
+        setUrlHistory,
+      }}
+    >
       {children}
     </UrlContext.Provider>
   );
