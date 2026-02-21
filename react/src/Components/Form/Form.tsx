@@ -36,12 +36,10 @@ const Form = () => {
   const copyClip = useCopyToClipboard();
 
   return (
-    <div className="form-wrapper d-flex justify-content-center flex-column align-items-center vh-100">
+    <div className="form-wrapper d-flex justify-content-center flex-column align-items-center">
+      <h1 className="form-label fw-medium text-light">Сокращение URL</h1>
       <form className="d-flex flex-column w-50 form" onSubmit={handleSubmit}>
         <div className="form-inner mb-3 text-center">
-          <label className="form-label fw-medium text-light" htmlFor="url">
-            Сокращение URL
-          </label>
           {timerErr && (
             <div className="form-error invalid-feedback d-block text-danger p-2 bg-white w-25 rounded-2">
               {err}
@@ -62,7 +60,7 @@ const Form = () => {
           />
         </div>
         <div className="form-btns btns d-grid gap-4 row-gap-3 justify-content-center">
-          <button type="submit" className="btn btn-danger text-light mt-2 col">
+          <button type="submit" className="btn btn-danger text-light mt-2 col p-3">
             Сократить URL
           </button>
           <button
