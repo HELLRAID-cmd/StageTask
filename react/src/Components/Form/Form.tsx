@@ -13,28 +13,43 @@ const Form = () => {
     /^(https?:\/\/)?(([a-z0-9-]+\.)+[a-z]{2,10}|(\d{1,3}\.){3}\d{1,3})(:\d{1,5})?(\/.*)?$/i;
 
   // Отправка формы
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!urlPattern.test(url)) {
+    try {
+      if (!urlPattern.test(url)) {
+        setErr("Неверный URL");
+        setTimerErr(true);
+
+        setTimeout(() => {
+          setTimerErr(false);
+        }, 3000);
+
+        return;
+      }
+
+      const response = await fetch(
+        `https://api.shrtco.de/v2/shorten?url=${url}`,
+        {
+          method: "GET",
+        },
+      );
+
+      const data = await response.json();
+      const shortUrl = data.result.full_short_link;
+
+      setUrlHistory((prev) => {
+        const updated = [...prev, url, shortUrl];
+        localStorage.setItem("url", JSON.stringify(updated));
+        return updated;
+      });
+
+      setErr("");
+      console.log("Сокращено", url);
+    } catch (error) {
+      console.log("Ошибка", error);
       setErr("Неверный URL");
-      setTimerErr(true);
-
-      setTimeout(() => {
-        setTimerErr(false);
-      }, 3000);
-
-      return;
     }
-
-    setUrlHistory((prev) => {
-      const updated = [...prev, url];
-      localStorage.setItem("url", JSON.stringify(updated));
-      return updated;
-    });
-
-    setErr("");
-    console.log("Сокращено", url);
   };
 
   // Копировать ссылку
