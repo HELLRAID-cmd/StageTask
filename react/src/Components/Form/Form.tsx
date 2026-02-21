@@ -2,16 +2,17 @@ import { useState } from "react";
 import History from "../History/History";
 import "./Form.scss";
 import { useUrl } from "../Context/useUrl";
+import useCopyToClipboard from "../Utils/useCopyToClipboard";
 
 const Form = () => {
-  const { url, setUrl } = useUrl();
+  const { url, setUrl, copy, setUrlHistory } = useUrl();
   const [err, setErr] = useState("");
-  const [copy, setCopy] = useState(false);
   const [timerErr, setTimerErr] = useState(false);
 
   const urlPattern =
     /^(https?:\/\/)?(([a-z0-9-]+\.)+[a-z]{2,10}|(\d{1,3}\.){3}\d{1,3})(:\d{1,5})?(\/.*)?$/i;
 
+  // Отправка формы
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -26,27 +27,19 @@ const Form = () => {
       return;
     }
 
+    setUrlHistory(prev => [...prev, url]);
     setErr("");
     console.log("Сокращено", url);
   };
 
-  const copyToClipboard = async (text: string) => {
-    setCopy(true);
-
-    setTimeout(() => {
-      setCopy(false);
-    }, 1000);
-
-    return await navigator.clipboard.writeText(text);
-  };
+  // Копировать ссылку
+  const copyClip = useCopyToClipboard();
 
   return (
-    <div className="form-wrapper d-flex justify-content-center flex-column align-items-center vh-100">
+    <div className="form-wrapper d-flex justify-content-center flex-column align-items-center">
+      <h1 className="form-label fw-medium text-light">Сокращение URL</h1>
       <form className="d-flex flex-column w-50 form" onSubmit={handleSubmit}>
         <div className="form-inner mb-3 text-center">
-          <label className="form-label fw-medium text-light" htmlFor="url">
-            Сокращение URL
-          </label>
           {timerErr && (
             <div className="form-error invalid-feedback d-block text-danger p-2 bg-white w-25 rounded-2">
               {err}
@@ -67,13 +60,13 @@ const Form = () => {
           />
         </div>
         <div className="form-btns btns d-grid gap-4 row-gap-3 justify-content-center">
-          <button type="submit" className="btn btn-danger text-light mt-2 col">
+          <button type="submit" className="btn btn-danger text-light mt-2 col p-3">
             Сократить URL
           </button>
           <button
             type="button"
             className="btn btn-primary text-light mt-2 col p-3"
-            onClick={() => copyToClipboard(url)}
+            onClick={() => copyClip(url)}
           >
             Скопировать
           </button>
