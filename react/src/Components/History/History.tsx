@@ -33,7 +33,7 @@ const History = () => {
           >
             <a
               href={url}
-              className="link-item text-light w-100 d-block p-3"
+              className="link-item text-light text-truncate w-100 d-block p-3"
               target="_blank"
             >
               {url}
