@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/global/_reset.scss";
-import Form from "./Components/Form/Form";
-import { UrlProvider } from './Components/Context/UrlContext';
+import { Provider } from './Components/Context/Context';
+import Task from './Components/Task/Task';
 
 function App() {
   return (
-    <UrlProvider>
-      <Form/>
-    </UrlProvider>
+    <Provider>
+      <Task/>
+    </Provider>
   )
 }
 

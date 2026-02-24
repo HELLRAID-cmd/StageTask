@@ -1,6 +1,6 @@
 import { createContext, useState, type ReactNode } from "react";
 
-export type UrlContextType = {
+export type ContextType = {
   url: string;
   setUrl: React.Dispatch<React.SetStateAction<string>>;
   copy: boolean;
@@ -9,25 +9,21 @@ export type UrlContextType = {
   setUrlHistory: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-export const UrlContext = createContext<UrlContextType | undefined>(undefined);
+export const Context = createContext<ContextType | undefined>(undefined);
 
-export const UrlProvider = ({ children }: { children: ReactNode }) => {
+export const Provider = ({ children }: { children: ReactNode }) => {
   const [url, setUrl] = useState("");
   const [copy, setCopy] = useState(false);
   const [urlHistory, setUrlHistory] = useState<string[]>([]);
 
-  return (
-    <UrlContext.Provider
-      value={{
-        url,
-        setUrl,
-        copy,
-        setCopy,
-        urlHistory,
-        setUrlHistory,
-      }}
-    >
-      {children}
-    </UrlContext.Provider>
-  );
+  const contextValue: ContextType = {
+    url,
+    setUrl,
+    copy,
+    setCopy,
+    urlHistory,
+    setUrlHistory,
+  };
+
+  return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
