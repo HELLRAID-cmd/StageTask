@@ -1,0 +1,21 @@
+.task {
+  height: 100vh;
+
+  &-title {
+    font-size: 56px;
+    margin: 0 0 50px 0;
+  }
+
+  &-subtitle {
+    font-size: 50px;
+  }
+
+  &-button {
+    font-size: 50px;
+    padding: 40px;
+  }
+
+  &-modal .ant-modal-content {
+    background-color: #ffe4e1 !important;
+  }
+}

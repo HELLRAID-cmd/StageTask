@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { UrlContext } from "./UrlContext";
+import { Context } from "./Context";
 
 export const useUrl = () => {
-  const context = useContext(UrlContext);
+  const context = useContext(Context);
   if (!context) throw new Error("useUrl must be used within a UrlProvider");
   return context;
 };
