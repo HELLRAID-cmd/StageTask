@@ -1,29 +1,57 @@
-import { createContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type ReactNode,
+} from "react";
 
-export type ContextType = {
-  url: string;
-  setUrl: React.Dispatch<React.SetStateAction<string>>;
-  copy: boolean;
-  setCopy: React.Dispatch<React.SetStateAction<boolean>>;
-  urlHistory: string[];
-  setUrlHistory: React.Dispatch<React.SetStateAction<string[]>>;
+type Project = {
+  id: string;
+  title: string;
+  desc: string;
+  colorCode: string;
+  createdAt: number;
 };
 
-export const Context = createContext<ContextType | undefined>(undefined);
+type ProjectContextType = {
+  projects: Project[];
+  createProject: (title: string, desc: string, colorCode: string) => void;
+};
 
-export const Provider = ({ children }: { children: ReactNode }) => {
-  const [url, setUrl] = useState("");
-  const [copy, setCopy] = useState(false);
-  const [urlHistory, setUrlHistory] = useState<string[]>([]);
+const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
-  const contextValue: ContextType = {
-    url,
-    setUrl,
-    copy,
-    setCopy,
-    urlHistory,
-    setUrlHistory,
+export const ProjectProvider = ({ children }: { children: ReactNode }) => {
+  const [projects, setProjects] = useState<Project[]>(() => {
+    // загрузка проектов из LS
+    const saved = localStorage.getItem("projects");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const createProject = (title: string, desc: string, colorCode: string) => {
+    const newProject = {
+      id: crypto.randomUUID(),
+      title,
+      desc,
+      colorCode,
+      createdAt: Date.now(),
+    };
+    setProjects((prev) => {
+      const updated = [...prev, newProject];
+      localStorage.setItem("projects", JSON.stringify(updated));
+      return updated;
+    });
   };
 
-  return <Context.Provider value={contextValue}>{children}</Context.Provider>;
+  return (
+    <ProjectContext.Provider value={{ projects, createProject }}>
+      {children}
+    </ProjectContext.Provider>
+  );
+};
+
+export const useProjects = () => {
+  const context = useContext(ProjectContext);
+  if (!context)
+    throw new Error("useProjects must be used within ProjectProvider");
+  return context;
 };
