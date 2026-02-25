@@ -18,4 +18,15 @@
   &-modal .ant-modal-content {
     background-color: #ffe4e1 !important;
   }
+
+  &-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:active {
+      padding: 5px;
+    }
+  }
 }
