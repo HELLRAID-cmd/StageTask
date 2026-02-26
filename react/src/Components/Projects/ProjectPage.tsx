@@ -6,14 +6,18 @@ const ProjectPage = () => {
   const { projects } = useProjects();
   const project = projects.find((p) => p.id === id);
 
-  if (!project) return <p>Проект не найден 😢</p>;
+  if (!project) return <p>Проект не найден</p>;
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>{project.title}</h2>
-      <p>{project.desc}</p>
-
-    </div>
+    <section className="sect-project">
+      <div className="container">
+        <div className="project-top">
+          <h1 className="project-title">{project.title}</h1>
+        </div>
+        <div style={{ padding: "20px" }}>
+        </div>
+      </div>
+    </section>
   );
 };
 
