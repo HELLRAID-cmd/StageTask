@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Input, Modal, Space } from "antd";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
+import { useProjects } from "../Context/Context";
+import Colors from "./Colors";
 
 const ModalWindow: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,20 +10,15 @@ const ModalWindow: React.FC = () => {
   const [inputValueDesc, setInputValueDesc] = useState("");
   const [color, setColor] = useState("");
 
-  const colors = [
-    { id: "primary", colorCode: "#0d6efd" },
-    { id: "primary-subtle", colorCode: "#cfe2ff" },
-    { id: "secondary", colorCode: "#6c757d" },
-    { id: "secondary-subtle", colorCode: "#e2e3e5" },
-    { id: "success", colorCode: "#198754" },
-    { id: "success-subtle", colorCode: "#d1e7dd" },
-    { id: "warning", colorCode: "#ffc107" },
-    { id: "warning-subtle", colorCode: "#fff3cd" },
-    { id: "info", colorCode: "#0dcaf0" },
-    { id: "info-subtle", colorCode: "#cff4fc" },
-    { id: "body-secondary", colorCode: "#6c757d" },
-    { id: "body-tertiary", colorCode: "#adb5bd" },
-  ];
+  const { createProject, projects } = useProjects();
+
+  const handleOk = () => {
+    createProject(inputValueName, inputValueDesc, color);
+    setInputValueName("");
+    setInputValueDesc("");
+    setIsOpen(false);
+    console.log(projects);
+  };
 
   return (
     <>
@@ -45,9 +42,9 @@ const ModalWindow: React.FC = () => {
         style={{ fontWeight: 500, marginBottom: 20 }}
         width={400}
         onOk={() => {
-          console.log("Введено:", inputValueName, inputValueDesc, color);
-          setInputValueName("");
+          handleOk();
           setIsOpen(false);
+          console.log("Введено:", inputValueName, inputValueDesc, color);
         }}
         closeIcon={
           <span style={{ color: "#000000", fontSize: "18px" }}>
@@ -79,14 +76,14 @@ const ModalWindow: React.FC = () => {
           Цвет
         </label>
         <div className="task-list-color d-flex justify-content-between gap-1">
-          {colors.map((c) => (
+          {Colors.map((c) => (
             <span
               key={c.id}
-              onClick={() => setColor(c.id)}
+              onClick={() => setColor(c.colorCode)}
               className={`task-color icon-link-hover`}
               style={{
                 border: `5px solid ${c.colorCode}`,
-                backgroundColor: color === c.id ? c.colorCode : "transparent",
+                backgroundColor: color === c.colorCode ? c.colorCode : "transparent",
               }}
             ></span>
           ))}
