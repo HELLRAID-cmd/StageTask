@@ -12,8 +12,9 @@
   }
 
   &-list {
-    display: grid;
-    grid-template-columns: repeat(auto, 300px)
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 
   &-item {
