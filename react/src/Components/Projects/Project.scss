@@ -1,0 +1,23 @@
+.project {
+
+  &-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 100px 0;
+  }
+
+  &-title {
+    font-size: 56px;
+  }
+
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(auto, 300px)
+  }
+
+  &-item {
+    max-width: 300px;
+    width: 100%;
+  }
+}

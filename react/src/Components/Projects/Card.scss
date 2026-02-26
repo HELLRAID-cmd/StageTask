@@ -1,0 +1,32 @@
+.card {
+  width: 300px;
+  height: 100%;
+  min-height: 300px;
+  padding: 20px;
+  border: 3px solid transparent;
+  transition: transform .2s linear;
+  position: relative;
+
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.015);
+  }
+
+  &-title {
+    font-size: 26px;
+    margin: 0 0 20px 0;
+    color: #fff;
+  }
+
+  &-text {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: auto 0 0 0;
+  }
+  
+  &__btn {
+    margin: auto 0 0 0;
+    align-self: flex-end;
+  }
+}
