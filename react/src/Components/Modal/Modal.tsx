@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, Modal, Space } from "antd";
-import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
 import { useProjects } from "../Context/Context";
 import Colors from "./Colors";
 
@@ -10,41 +10,39 @@ const ModalWindow: React.FC = () => {
   const [inputValueDesc, setInputValueDesc] = useState("");
   const [color, setColor] = useState("");
 
-  const { createProject, projects } = useProjects();
+  const { createProject } = useProjects();
 
   const handleOk = () => {
+    if (!inputValueName.trim() || !color) return;
     createProject(inputValueName, inputValueDesc, color);
     setInputValueName("");
     setInputValueDesc("");
     setIsOpen(false);
-    console.log(projects);
   };
 
   return (
     <>
       <Space>
         <button
-          className="task-button rounded-2 border border-black"
+          className="task-button"
           onClick={() => setIsOpen(true)}
         >
-          <PlusOutlined />
+          <PlusCircleOutlined style={{ fontSize: "40px" }}/>
         </button>
       </Space>
 
       <Modal
         title="Создание проекта"
         open={isOpen}
-        onCancel={() => setIsOpen(false)}
         cancelButtonProps={{ style: { display: "none" } }}
         centered
         okText="Создать"
         className="task-modal"
         style={{ fontWeight: 500, marginBottom: 20 }}
         width={400}
+        onCancel={() => setIsOpen(false)}
         onOk={() => {
           handleOk();
-          setIsOpen(false);
-          console.log("Введено:", inputValueName, inputValueDesc, color);
         }}
         closeIcon={
           <span style={{ color: "#000000", fontSize: "18px" }}>
@@ -83,7 +81,8 @@ const ModalWindow: React.FC = () => {
               className={`task-color icon-link-hover`}
               style={{
                 border: `5px solid ${c.colorCode}`,
-                backgroundColor: color === c.colorCode ? c.colorCode : "transparent",
+                backgroundColor:
+                  color === c.colorCode ? c.colorCode : "transparent",
               }}
             ></span>
           ))}

@@ -4,14 +4,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-
-type Project = {
-  id: string;
-  title: string;
-  desc: string;
-  colorCode: string;
-  createdAt: number;
-};
+import type { Project } from "../Utils/Type";
 
 type ProjectContextType = {
   projects: Project[];
