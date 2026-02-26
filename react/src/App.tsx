@@ -1,5 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/global/_reset.scss";
+import "../styles/global/_antd.scss";
+import "../styles/global/_container.scss";
 import { ProjectProvider, useProjects } from "./Components/Context/Context";
 import Task from "./Components/Task/Task";
 import ProjectsList from "./Components/Projects/ProjectsList";
