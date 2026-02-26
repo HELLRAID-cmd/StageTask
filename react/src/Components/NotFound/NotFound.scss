@@ -1,0 +1,23 @@
+.sect-notfound {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+
+  &-img {
+    margin: 0 0 20px 0;
+  }
+
+  &-title {
+    font-size: 56px;
+    margin: 0;
+  }
+}
