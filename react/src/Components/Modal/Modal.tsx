@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { Input, Modal, Space } from "antd";
+import { Input, Modal } from "antd";
 import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
 import { useProjects } from "../Context/Context";
 import Colors from "./Colors";
+import TextArea from "antd/es/input/TextArea";
 
-const ModalWindow: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+type ModalWindowProps = {
+  open: boolean;
+  onClose: () => void;
+};
+
+const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
   const [inputValueName, setInputValueName] = useState("");
   const [inputValueDesc, setInputValueDesc] = useState("");
   const [color, setColor] = useState("");
@@ -17,30 +22,21 @@ const ModalWindow: React.FC = () => {
     createProject(inputValueName, inputValueDesc, color);
     setInputValueName("");
     setInputValueDesc("");
-    setIsOpen(false);
+    onClose();
   };
 
   return (
     <>
-      <Space>
-        <button
-          className="task-button"
-          onClick={() => setIsOpen(true)}
-        >
-          <PlusCircleOutlined style={{ fontSize: "40px" }}/>
-        </button>
-      </Space>
-
       <Modal
         title="Создание проекта"
-        open={isOpen}
+        open={open}
         cancelButtonProps={{ style: { display: "none" } }}
         centered
         okText="Создать"
         className="task-modal"
         style={{ fontWeight: 500, marginBottom: 20 }}
         width={400}
-        onCancel={() => setIsOpen(false)}
+        onCancel={onClose}
         onOk={() => {
           handleOk();
         }}
@@ -63,12 +59,13 @@ const ModalWindow: React.FC = () => {
         <label htmlFor="desc" className="mb-2">
           Описание
         </label>
-        <Input
+        <TextArea
           id="desc"
           placeholder="Введите название"
           value={inputValueDesc}
           className="mb-3"
           onChange={(e) => setInputValueDesc(e.target.value)}
+          maxLength={200}
         />
         <label htmlFor="color" className="mb-2">
           Цвет
