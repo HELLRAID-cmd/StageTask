@@ -13,21 +13,33 @@
     transform: scale(1.015);
   }
 
+  &-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; 
+  }
+
   &-title {
     font-size: 26px;
     margin: 0 0 20px 0;
     color: #fff;
+
   }
 
-  &-text {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+  &-data {
     margin: auto 0 0 0;
   }
-  
-  &__btn {
-    margin: auto 0 0 0;
-    align-self: flex-end;
+
+  &-delete {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+
+    &:hover {
+      svg {
+        color: red;
+      }
+    }
   }
 }

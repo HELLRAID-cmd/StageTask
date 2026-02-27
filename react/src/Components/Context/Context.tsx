@@ -4,12 +4,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { Project } from "../Utils/Type";
-
-type ProjectContextType = {
-  projects: Project[];
-  createProject: (title: string, desc: string, colorCode: string) => void;
-};
+import type { Project, ProjectContextType } from "../Utils/type";
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
@@ -36,7 +31,7 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <ProjectContext.Provider value={{ projects, createProject }}>
+    <ProjectContext.Provider value={{ projects, createProject, setProjects }}>
       {children}
     </ProjectContext.Provider>
   );

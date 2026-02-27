@@ -1,8 +1,9 @@
-import type { CardProps } from "../Utils/Type";
-import { DeleteOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import DeleteProject from "../DeleteProject/DeleteProject";
+import type { CardProps } from "../Utils/type";
+import "./Card.scss";
 
 const CardComponent: React.FC<CardProps> = ({ project }) => {
-  
   return (
     <div
       className={`card ${project.id}`}
@@ -10,16 +11,15 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
         background: project.colorCode,
       }}
     >
-      <p className="card-title">{project.title}</p>
-
-      <p className="card-desc">{project.desc}</p>
-      <div className="card-text">
-        <p className="card-text__data">
+      <Link className="card-item" to={`/project/${project.id}`}>
+        <p className="card-title">{project.title}</p>
+        <p className="card-desc">{project.desc}</p>
+        <p className="card-data">
           Создано: {new Date(project.createdAt).toLocaleDateString("ru-RU")}
         </p>
-        <button type="button" className="card-title__btn">
-          <DeleteOutlined style={{ fontSize: "24px" }} />
-        </button>
+      </Link>
+      <div className="card-delete">
+        <DeleteProject id={project.id} />
       </div>
     </div>
   );
