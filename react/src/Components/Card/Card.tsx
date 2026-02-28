@@ -19,7 +19,7 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
         </p>
       </Link>
       <div className="card-delete">
-        <DeleteProject id={project.id} />
+        <DeleteProject project={project} />
       </div>
     </div>
   );
