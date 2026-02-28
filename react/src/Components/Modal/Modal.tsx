@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, Modal } from "antd";
-import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 import { useProjects } from "../Context/Context";
 import Colors from "./Colors";
 import TextArea from "antd/es/input/TextArea";
