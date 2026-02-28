@@ -10,7 +10,7 @@ const ProjectsList = () => {
     <section className="sect-project">
       <div className="container">
         <div className="project">
-          <div className="project-top">
+          <div className="project-top bg-primary rounded-3 p-2">
             <h1 className="project-title">Ваши проекты</h1>
             <ButtonCreate/>
           </div>

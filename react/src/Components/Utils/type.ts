@@ -11,7 +11,10 @@ export type Project = {
 };
 
 export type DeleteProps = {
-  id: string;
+  open: boolean;
+  project: Project;
+  onConfirm: () => void;
+  onCancel: () => void;
 }
 
 export type ProjectContextType = {

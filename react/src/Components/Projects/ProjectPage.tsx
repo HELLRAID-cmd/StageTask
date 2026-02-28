@@ -12,7 +12,7 @@ const ProjectPage = () => {
   return (
     <section className="sect-project">
       <div className="container">
-        <div className="project-top">
+        <div className="project-top bg-primary rounded-3 p-2">
           <h1 className="project-title">{project.title}</h1>
         </div>
         <div style={{ padding: "20px" }}>
