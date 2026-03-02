@@ -47,7 +47,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
         }
       >
         <label htmlFor="name" className="mb-2">
-          Название
+          Название*
         </label>
         <Input
           id="name"
@@ -61,7 +61,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
         </label>
         <TextArea
           id="desc"
-          placeholder="Введите название"
+          placeholder="Введите описание"
           value={inputValueDesc}
           className="mb-3"
           onChange={(e) => setInputValueDesc(e.target.value)}
