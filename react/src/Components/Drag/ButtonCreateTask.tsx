@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTasks } from "../Context/ContextTask";
 import { Input, Modal } from "antd";
-import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
 
 const ButtonCreateTask = () => {
   const { setTasks } = useTasks();
@@ -46,7 +46,7 @@ const ButtonCreateTask = () => {
         }}
         closeIcon={
           <span style={{ color: "#000000", fontSize: "18px" }}>
-            <PlusOutlined />
+            <CloseOutlined />
           </span>
         }
       >
