@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { Project, ProjectContextType } from "../Utils/type";
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
@@ -31,7 +26,13 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <ProjectContext.Provider value={{ projects, createProject, setProjects }}>
+    <ProjectContext.Provider
+      value={{
+        projects,
+        createProject,
+        setProjects,
+      }}
+    >
       {children}
     </ProjectContext.Provider>
   );
