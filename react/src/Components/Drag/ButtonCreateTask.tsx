@@ -1,0 +1,68 @@
+import { useState } from "react";
+import { useTasks } from "../Context/ContextTask";
+import { Input, Modal } from "antd";
+import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+
+const ButtonCreateTask = () => {
+  const { setTasks } = useTasks();
+  const [open, setOpen] = useState(false);
+  const [inputValueName, setInputValueName] = useState("");
+
+  const handleCreate = () => {
+    if (!inputValueName.trim()) return;
+
+    setTasks((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), title: inputValueName.trim() },
+    ]);
+
+    setInputValueName("");
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <button
+        className="project-item__button"
+        type="button"
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <PlusCircleOutlined style={{ fontSize: "24px" }} />
+      </button>
+      <Modal
+        title="Введите название задачи"
+        open={open}
+        cancelButtonProps={{ style: { display: "none" } }}
+        centered
+        okText="Создать"
+        className="task-modal"
+        style={{ fontWeight: 500, marginBottom: 20 }}
+        width={400}
+        onCancel={() => setOpen(false)}
+        onOk={() => {
+          handleCreate();
+        }}
+        closeIcon={
+          <span style={{ color: "#000000", fontSize: "18px" }}>
+            <PlusOutlined />
+          </span>
+        }
+      >
+        <label htmlFor="name" className="mb-2">
+          Название*
+        </label>
+        <Input
+          id="name"
+          placeholder="Введите название"
+          value={inputValueName}
+          className="mb-3"
+          onChange={(e) => setInputValueName(e.target.value)}
+        />
+      </Modal>
+    </>
+  );
+};
+
+export default ButtonCreateTask;
