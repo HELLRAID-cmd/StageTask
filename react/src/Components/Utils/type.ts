@@ -30,14 +30,30 @@ export type TaskContextType = {
   setActiveId: React.Dispatch<React.SetStateAction<string | null>>;
   buttonCreate: string[];
   setButtonCreate: React.Dispatch<React.SetStateAction<string[]>>;
-}
+  grabTask: boolean;
+  setGrabTask: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export type Task = {
   id: string;
   title: string;
-}
+  status: string;
+  projectId: string;
+};
 
 export type ButtonType = {
   id: string;
   title: string;
+};
+
+export type ModalWindowProps = {
+  open: boolean;
+  onClose: () => void;
+};
+
+export type TaskStatusType = {
+  id: string;
+  title: string;
+  status: "planned" | "progress" | "stopped" | "completed";
+  projectId: string;
 };
