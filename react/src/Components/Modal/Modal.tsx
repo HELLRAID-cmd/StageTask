@@ -4,11 +4,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { useProjects } from "../Context/Context";
 import Colors from "./Colors";
 import TextArea from "antd/es/input/TextArea";
-
-type ModalWindowProps = {
-  open: boolean;
-  onClose: () => void;
-};
+import type { ModalWindowProps } from "../Utils/type";
 
 const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
   const [inputValueName, setInputValueName] = useState("");
