@@ -1,4 +1,17 @@
 .task {
+  min-height: 100px;
+
+  &-completed {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &-item {
+    flex: 0 0 auto;
+    height: auto;
+  }
+
   &-title {
     font-size: 56px;
     margin: 0 0 20px 0;
