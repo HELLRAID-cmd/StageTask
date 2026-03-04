@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import { useProjects } from "../Context/Context";
 import NotFound from "../NotFound/NotFound";
 import ButtonCreateTask from "../Drag/ButtonCreateTask";
-import TaskPlanned from "../Task/Tasks/TaskPlanned";
-import TaskProgress from "../Task/Tasks/TaskProgress";
+import TaskColumn from "../Task/Tasks/TaskColumn";
 
 // Открывает проект
 const ProjectPage = () => {
@@ -30,7 +29,7 @@ const ProjectPage = () => {
               </p>
               <ButtonCreateTask projectId={project.id} />
             </div>
-            <TaskPlanned projectId={project.id} status="planned" />
+            <TaskColumn projectId={project.id} status="planned"/>
           </li>
           <li
             className="project-item project-item--progress rounded-3 p-3"
@@ -39,7 +38,7 @@ const ProjectPage = () => {
             <p className="project-item__title title-progress mb-4">
               В процессе
             </p>
-            <TaskProgress projectId={project.id} status="progress" />
+            <TaskColumn projectId={project.id} status="progress"/>
           </li>
           <li
             className="project-item project-item--stopped rounded-3 p-3"
@@ -48,6 +47,7 @@ const ProjectPage = () => {
             <p className="project-item__title title-stopped mb-4">
               Остановленно
             </p>
+            <TaskColumn projectId={project.id} status="stopped"/>
           </li>
           <li
             className="project-item project-item--completed size-xl rounded-3 p-3"
@@ -56,6 +56,7 @@ const ProjectPage = () => {
             <p className="project-item__title title-completed mb-4">
               Выполнено
             </p>
+            <TaskColumn projectId={project.id} status="completed"/>
           </li>
         </ul>
       </div>
