@@ -6,9 +6,23 @@ const TaskContext = createContext<TaskContextType | undefined>(undefined);
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>(() => {
     // загрузка задач из LS
-    const saved = localStorage.getItem("Tasks");
+    const saved = localStorage.getItem("tasks");
     return saved ? JSON.parse(saved) : [];
   });
+
+  const createTask = (title: string, projectId: string) => {
+    const newTask = {
+      id: crypto.randomUUID(),
+      title,
+      status: "planned",
+      projectId
+    };
+    setTasks((prev) => {
+      const updated = [...prev, newTask];
+      localStorage.setItem("tasks", JSON.stringify(updated));
+      return updated;
+    })
+  }
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [buttonCreate, setButtonCreate] = useState<string[]>([]);
@@ -25,6 +39,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         setButtonCreate,
         grabTask,
         setGrabTask,
+        createTask
       }}
     >
       {children}
