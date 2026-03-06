@@ -4,23 +4,16 @@ import { Input, Modal } from "antd";
 import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
 
 const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
-  const { setTasks } = useTasks();
   const [open, setOpen] = useState(false);
   const [inputValueName, setInputValueName] = useState("");
+
+  const { createTask } = useTasks();
 
   const handleCreate = () => {
     if (!inputValueName.trim()) return;
 
-    // Создание задачи со статусом
-    setTasks((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        title: inputValueName.trim(),
-        status: "planned",
-        projectId: projectId,
-      },
-    ]);
+    // Создание задачи
+    createTask(inputValueName.trim(), projectId);
 
     setInputValueName("");
     setOpen(false);
