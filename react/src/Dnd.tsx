@@ -17,7 +17,6 @@ const DndContextWrapper = () => {
       onDragStart={(event) => {
         setActiveId(event.active.id as string);
         setGrabTask(true);
-        console.log("asd");
       }}
       onDragEnd={(event) => {
         const { active, over } = event;
@@ -25,7 +24,6 @@ const DndContextWrapper = () => {
         if (!over) return;
 
         const newStatus = over.id as string;
-        console.log(over);
 
         setTasks((prev) => {
           const updated = prev.map((t) =>

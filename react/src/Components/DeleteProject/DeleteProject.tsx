@@ -26,7 +26,6 @@ const DeleteProject: React.FC<{ project: Project }> = ({ project }) => {
           setOpen(true);
           e.stopPropagation();
           e.preventDefault();
-          console.log("asd");
         }}
       >
         <DeleteOutlined style={{ fontSize: "24px" }} />
