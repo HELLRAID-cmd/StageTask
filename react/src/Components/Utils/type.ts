@@ -23,6 +23,13 @@ export type ProjectContextType = {
   setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
 };
 
+export type Task = {
+  id: string;
+  title: string;
+  status: string;
+  projectId: string;
+};
+
 export type TaskContextType = {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
@@ -32,13 +39,7 @@ export type TaskContextType = {
   setButtonCreate: React.Dispatch<React.SetStateAction<string[]>>;
   grabTask: boolean;
   setGrabTask: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export type Task = {
-  id: string;
-  title: string;
-  status: string;
-  projectId: string;
+  createTask: (title: string, projectId: string) => void;
 };
 
 export type ButtonType = {
