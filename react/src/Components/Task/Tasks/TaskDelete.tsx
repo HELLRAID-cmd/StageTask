@@ -14,7 +14,7 @@ const TaskDelete: React.FC<{ task: Task }> = ({ task }) => {
   };
 
   return (
-    <button className="task-item__button" type="button" onClick={handleDelete}>
+    <button className="task-item__btns-delete" type="button" onClick={handleDelete}>
       <DeleteOutlined />
     </button>
   );
