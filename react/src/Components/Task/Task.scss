@@ -12,15 +12,23 @@
     height: auto;
     position: relative;
 
-    &__button {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      padding: 2px;
-      transform: translateY(-50%);
+    &__btns {
+      position: relative;
 
-      &:hover {
-        color: red;
+      &-btn {
+        padding-right: 30px;
+      }
+      
+      &-delete {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        padding: 2px;
+        transform: translateY(-50%);
+
+        &:hover {
+          color: red;
+        }
       }
     }
   }
