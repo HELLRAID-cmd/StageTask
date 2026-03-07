@@ -30,7 +30,7 @@ const TaskButton = ({
         ref={setNodeRef}
         {...attributes}
         {...listeners}
-        className="btn btn-primary w-100 text-start"
+        className="task-item__btns-btn btn btn-primary w-100 text-start"
         style={{ ...style, backgroundColor: statusColors[status] }}
       >
         {title}

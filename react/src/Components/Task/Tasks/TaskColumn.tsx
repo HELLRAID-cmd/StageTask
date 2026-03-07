@@ -23,8 +23,14 @@ const TaskColumn = ({
         )
         .map((task) => (
           <li className={`task-item task-item__${status}`} key={task.id}>
-            <TaskButton id={task.id} title={task.title} status={task.status} />
-            <TaskDelete task={task}/>
+            <div className="task-item__btns">
+              <TaskButton
+                id={task.id}
+                title={task.title}
+                status={task.status}
+              />
+              <TaskDelete task={task} />
+            </div>
           </li>
         ))}
     </ul>
