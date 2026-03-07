@@ -10,7 +10,7 @@ function App() {
 
   return (
     <ProjectProvider>
-      <Router>
+      <Router basename="/StageTask">
         <DndContextWrapper/>
       </Router>
     </ProjectProvider>
