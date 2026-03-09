@@ -1,4 +1,5 @@
 import "./NotFound.scss";
+import notFoundImg from "../../assets/notFound/notFound.png";
 
 const NotFound = () => {
   return (
@@ -7,7 +8,7 @@ const NotFound = () => {
         <div className="notfound">
           <img
             className="notfound-img"
-            src="/notFound/notFound.png"
+            src={notFoundImg}
             width={300}
             height={300}
             alt="Страница не найдена"
