@@ -15,7 +15,7 @@ const TaskColumn = ({
   });
 
   return (
-    <ul className={`task task-column task-${status}`} ref={setNodeRef}>
+    <ul className={`task-column task-${status}`} ref={setNodeRef}>
       {tasks
         .filter(
           (task) => task.projectId === projectId && task.status === status,
