@@ -1,7 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { useTasks } from "../../Context/ContextTask";
 import TaskButton from "../TaskButton";
-import TaskDelete from "./TaskDelete";
 
 const TaskColumn = ({
   projectId,
@@ -24,12 +23,7 @@ const TaskColumn = ({
         .map((task) => (
           <li className={`task-item task-item__${status}`} key={task.id}>
             <div className="task-item__btns">
-              <TaskButton
-                id={task.id}
-                title={task.title}
-                status={task.status}
-              />
-              <TaskDelete task={task} />
+              <TaskButton task={task}/>
             </div>
           </li>
         ))}

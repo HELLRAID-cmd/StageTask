@@ -6,11 +6,14 @@ import ProjectsList from "./Components/Projects/ProjectsList";
 import Task from "./Components/Task/Task";
 import { useTasks } from "./Components/Context/ContextTask";
 import TaskButton from "./Components/Task/TaskButton";
+import NotFound from "./Components/NotFound/NotFound";
 
 const DndContextWrapper = () => {
   const { setActiveId, tasks, setTasks, activeId, setGrabTask } = useTasks();
 
   const activeTask = tasks.find((t) => t.id === activeId);
+
+  if(!activeTask && activeId) return <NotFound />;
 
   return (
     <DndContext
@@ -34,6 +37,7 @@ const DndContextWrapper = () => {
 
           return updated;
         });
+        setGrabTask(false);
       }}
       onDragCancel={() => {
         setActiveId(null);
@@ -48,11 +52,7 @@ const DndContextWrapper = () => {
       <DragOverlay>
         {activeTask ? (
           <div style={{ opacity: 0.9 }}>
-            <TaskButton
-              id={activeTask.id}
-              title={activeTask.title}
-              status={activeTask.status}
-            />
+            <TaskButton task={activeTask} />
           </div>
         ) : null}
       </DragOverlay>
