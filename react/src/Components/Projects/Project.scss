@@ -12,10 +12,13 @@
 
   &-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
-    justify-content: space-between;
     min-height: 400px;
+
+    &--task {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   &-item {
