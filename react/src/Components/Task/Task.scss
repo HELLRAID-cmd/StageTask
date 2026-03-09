@@ -1,10 +1,14 @@
 .task {
-  min-height: 100px;
-
+  height: 100vh;
+  
   &-completed {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+  }
+  
+  &-column {
+    min-height: 100px;
   }
 
   &-item {
