@@ -1,15 +1,15 @@
 import { useDraggable } from "@dnd-kit/core";
+import type { Task } from "../Utils/type";
+import TaskDelete from "./Tasks/TaskDelete";
+import { useTasks } from "../Context/ContextTask";
 
-const TaskButton = ({
-  id,
-  title,
-  status,
-}: {
-  id: string;
-  title: string;
-  status: string;
-}) => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
+const TaskButton = ({ task }: { task: Task }) => {
+  const {grabTask} = useTasks();
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task.id,
+  });
+  
+  if (!task) return null;
 
   const style = {
     transform: transform
@@ -25,17 +25,18 @@ const TaskButton = ({
   };
 
   return (
-    <>
+    <div className="task-item">
       <button
         ref={setNodeRef}
         {...attributes}
         {...listeners}
         className="task-item__btns-btn btn btn-primary w-100 text-start"
-        style={{ ...style, backgroundColor: statusColors[status] }}
+        style={{ ...style, backgroundColor: statusColors[task.status] }}
       >
-        {title}
+        {task.title}
       </button>
-    </>
+      {!grabTask && <TaskDelete task={task} />}
+    </div>
   );
 };
 
