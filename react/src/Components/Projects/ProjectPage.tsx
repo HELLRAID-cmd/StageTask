@@ -22,7 +22,7 @@ const ProjectPage = () => {
           </Link>
           <h1 className="project-title">{project.title}</h1>
         </div>
-        <ul className="project-list">
+        <ul className="project-list project-list--task">
           <li
             className="project-item project-item--planned rounded-3 p-3"
             id={`planned-${project.id}`}
