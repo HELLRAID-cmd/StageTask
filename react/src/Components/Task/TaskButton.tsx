@@ -4,11 +4,11 @@ import TaskDelete from "./Tasks/TaskDelete";
 import { useTasks } from "../Context/ContextTask";
 
 const TaskButton = ({ task }: { task: Task }) => {
-  const {grabTask} = useTasks();
+  const { grabTask } = useTasks();
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
-  
+
   if (!task) return null;
 
   const style = {
@@ -18,10 +18,10 @@ const TaskButton = ({ task }: { task: Task }) => {
   };
 
   const statusColors: Record<string, string> = {
-    progress: "#ffd966",
-    planned: "#6fa8dc",
-    stopped: "#e06666",
-    completed: "#93c47d",
+    planned: "#474747",
+    progress: "#4338dd",
+    stopped: "#9c0d0d",
+    completed: "#068633",
   };
 
   return (
