@@ -27,6 +27,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [buttonCreate, setButtonCreate] = useState<string[]>([]);
   const [grabTask, setGrabTask] = useState<boolean>(false);
+  const [editTaskId, setEditTaskId] = useState<string | null>(null);
 
   return (
     <TaskContext.Provider
@@ -39,7 +40,9 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         setButtonCreate,
         grabTask,
         setGrabTask,
-        createTask
+        createTask,
+        editTaskId,
+        setEditTaskId,
       }}
     >
       {children}
