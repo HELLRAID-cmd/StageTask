@@ -2,8 +2,17 @@ import { useDraggable } from "@dnd-kit/core";
 import type { Task } from "../Utils/type";
 import TaskDelete from "./Tasks/TaskDelete";
 import { useTasks } from "../Context/ContextTask";
+import TaskChange from "./Tasks/TaskChange";
 
-const TaskButton = ({ task }: { task: Task }) => {
+const TaskButton = ({
+  task,
+  editTaskId,
+  setEditTaskId,
+}: {
+  task: Task;
+  editTaskId: string | null;
+  setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
+}) => {
   const { grabTask } = useTasks();
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
@@ -24,6 +33,11 @@ const TaskButton = ({ task }: { task: Task }) => {
     completed: "#068633",
   };
 
+  const handleDoubleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setEditTaskId((prev: string | null) => (prev === task.id ? null : task.id));
+  };
+
   return (
     <div className="task-item">
       <button
@@ -32,8 +46,13 @@ const TaskButton = ({ task }: { task: Task }) => {
         {...listeners}
         className="task-item__btns-btn btn text-light w-100 text-start"
         style={{ ...style, backgroundColor: statusColors[task.status] }}
+        onDoubleClick={handleDoubleClick}
       >
-        {task.title}
+        {editTaskId === task.id ? (
+          <TaskChange input={task.title} />
+        ) : (
+          task.title
+        )}
       </button>
       {!grabTask && <TaskDelete task={task} />}
     </div>
