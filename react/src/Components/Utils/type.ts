@@ -40,6 +40,8 @@ export type TaskContextType = {
   grabTask: boolean;
   setGrabTask: React.Dispatch<React.SetStateAction<boolean>>;
   createTask: (title: string, projectId: string) => void;
+  editTaskId: string | null;
+  setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export type ButtonType = {
