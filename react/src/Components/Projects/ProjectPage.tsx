@@ -16,7 +16,7 @@ const ProjectPage = () => {
   return (
     <section className="sect-project">
       <div className="container">
-        <div className="project-top justify-content-start gap-2 bg-primary rounded-3 p-2">
+        <div className="project-top justify-content-start gap-2 rounded-3 p-2">
           <Link to={"/"}>
             <LeftCircleOutlined style={{ fontSize: "34px", color: "#fff" }} />
           </Link>

@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 40px 0 100px 0;
+    background-color: gray;
   }
 
   &-title {
@@ -26,11 +27,11 @@
     height: 100%;
 
     &--progress {
-      background-color: rgba(255, 255, 0, 0.2);
+      background-color: rgba(0, 0, 255, 0.2);
     }
 
     &--planned {
-      background-color: rgba(0, 0, 255, 0.2);
+      background-color: rgba(92, 92, 92, 0.2);
     }
 
     &--stopped {
@@ -64,13 +65,13 @@
 
       &.title-progress {
         &::before {
-          background-color: yellow;
+          background-color: blue;
         }
       }
 
       &.title-planned {
         &::before {
-          background-color: blue;
+          background-color: gray;
         }
       }
 
