@@ -3,16 +3,16 @@ import "../styles/global/_reset.scss";
 import "../styles/global/_antd.scss";
 import "../styles/global/_container.scss";
 import { ProjectProvider } from "./Components/Context/Context";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import DndContextWrapper from "./Dnd";
 
 function App() {
 
   return (
     <ProjectProvider>
-      <HashRouter basename="/StageTask">
+      <BrowserRouter basename="/StageTask">
         <DndContextWrapper/>
-      </HashRouter>
+      </BrowserRouter>
     </ProjectProvider>
   );
 }
