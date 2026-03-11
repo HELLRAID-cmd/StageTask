@@ -33,27 +33,32 @@ const TaskButton = ({
     completed: "#068633",
   };
 
-  const handleDoubleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDoubleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setEditTaskId((prev: string | null) => (prev === task.id ? null : task.id));
   };
 
   return (
     <div className="task-item">
-      <button
+      <div
         ref={setNodeRef}
-        {...attributes}
-        {...listeners}
         className="task-item__btns-btn btn text-light w-100 text-start"
         style={{ ...style, backgroundColor: statusColors[task.status] }}
         onDoubleClick={handleDoubleClick}
       >
+        <span
+          {...listeners}
+          {...attributes}
+          style={{ cursor: "grab", marginRight: 8 }}
+        >
+          ☰
+        </span>
         {editTaskId === task.id ? (
           <TaskChange input={task.title} />
         ) : (
           task.title
         )}
-      </button>
+      </div>
       {!grabTask && <TaskDelete task={task} />}
     </div>
   );
