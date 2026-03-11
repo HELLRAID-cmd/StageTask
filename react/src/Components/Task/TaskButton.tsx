@@ -35,7 +35,10 @@ const TaskButton = ({
 
   const handleDoubleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setEditTaskId((prev: string | null) => (prev === task.id ? null : task.id));
+
+    if (task.status === "completed") return;
+
+    setEditTaskId((prev) => (prev === task.id ? null : task.id));
   };
 
   return (
@@ -54,7 +57,7 @@ const TaskButton = ({
           ☰
         </span>
         {editTaskId === task.id ? (
-          <TaskChange input={task.title} />
+          <TaskChange input={task.title} taskId={task.id} />
         ) : (
           task.title
         )}
