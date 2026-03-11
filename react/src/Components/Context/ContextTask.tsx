@@ -10,19 +10,32 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  // Функция по созданию задачи
   const createTask = (title: string, projectId: string) => {
     const newTask = {
       id: crypto.randomUUID(),
       title,
       status: "planned",
-      projectId
+      projectId,
     };
     setTasks((prev) => {
       const updated = [...prev, newTask];
       localStorage.setItem("tasks", JSON.stringify(updated));
       return updated;
-    })
-  }
+    });
+  };
+
+  // функция по изменению текста задачи
+  const updateTaskTitle = (id: string, newTitle: string) => {
+    setTasks((prev) => {
+      const updated = prev.map((task) =>
+        task.id === id ? { ...task, title: newTitle } : task,
+      );
+
+      localStorage.setItem("tasks", JSON.stringify(updated));
+      return updated;
+    });
+  };
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [buttonCreate, setButtonCreate] = useState<string[]>([]);
@@ -43,6 +56,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         createTask,
         editTaskId,
         setEditTaskId,
+        updateTaskTitle,
       }}
     >
       {children}
@@ -52,7 +66,6 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
 
 export const useTasks = () => {
   const context = useContext(TaskContext);
-  if (!context)
-    throw new Error("useTasks must be used within TaskProvider");
+  if (!context) throw new Error("useTasks must be used within TaskProvider");
   return context;
 };
