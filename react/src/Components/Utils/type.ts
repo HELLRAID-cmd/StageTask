@@ -42,6 +42,7 @@ export type TaskContextType = {
   createTask: (title: string, projectId: string) => void;
   editTaskId: string | null;
   setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
+  updateTaskTitle: (id: string, newTitle: string) => void;
 };
 
 export type ButtonType = {
