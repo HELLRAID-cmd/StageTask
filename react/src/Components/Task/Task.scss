@@ -12,14 +12,16 @@
   }
 
   &-item {
-    flex: 0 0 auto;
+    display: flex;
     height: auto;
     position: relative;
 
     &__btns {
       position: relative;
+      width: 100%;
 
       &-btn {
+        display: flex;
         padding-right: 30px;
       }
       
