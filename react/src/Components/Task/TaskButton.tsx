@@ -40,7 +40,7 @@ const TaskButton = ({
 
   return (
     <div className="task-item">
-      <button
+      <div
         ref={setNodeRef}
         {...attributes}
         {...listeners}
@@ -48,12 +48,8 @@ const TaskButton = ({
         style={{ ...style, backgroundColor: statusColors[task.status] }}
         onDoubleClick={handleDoubleClick}
       >
-        {editTaskId === task.id ? (
-          <TaskChange input={task.title} />
-        ) : (
-          task.title
-        )}
-      </button>
+        {task.title}
+      </div>
       {!grabTask && <TaskDelete task={task} />}
     </div>
   );
