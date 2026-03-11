@@ -26,7 +26,7 @@ const TaskButton = ({ task }: { task: Task }) => {
 
   return (
     <div className="task-item">
-      <button
+      <div
         ref={setNodeRef}
         {...attributes}
         {...listeners}
@@ -34,7 +34,7 @@ const TaskButton = ({ task }: { task: Task }) => {
         style={{ ...style, backgroundColor: statusColors[task.status] }}
       >
         {task.title}
-      </button>
+      </div>
       {!grabTask && <TaskDelete task={task} />}
     </div>
   );
