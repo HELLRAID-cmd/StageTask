@@ -12,6 +12,7 @@ import ProjectsList from "./Components/Projects/ProjectsList";
 import Task from "./Components/Task/Task";
 import { useTasks } from "./Components/Context/ContextTask";
 import TaskButton from "./Components/Task/TaskButton";
+import type { TaskHistory } from "./Components/Utils/type";
 
 const DndContextWrapper = () => {
   const {
@@ -29,7 +30,7 @@ const DndContextWrapper = () => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        delay: 100,
+        delay: 0,
         tolerance: 5,
       },
     }),
@@ -50,12 +51,25 @@ const DndContextWrapper = () => {
         const newStatus = over.id as string;
 
         setTasks((prev) => {
-          const updated = prev.map((t) =>
-            t.id === active.id ? { ...t, status: newStatus } : t,
-          );
+          const updated = prev.map((t) => {
+            if (t.id !== active.id) return t;
+
+            const historyItem: TaskHistory = {
+              id: crypto.randomUUID(),
+              type: "moved",
+              date: Date.now(),
+              from: t.status,
+              to: newStatus,
+            };
+
+            return {
+              ...t,
+              status: newStatus,
+              history: [...t.history, historyItem],
+            };
+          });
 
           localStorage.setItem("tasks", JSON.stringify(updated));
-
           return updated;
         });
         setGrabTask(false);

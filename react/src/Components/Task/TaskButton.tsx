@@ -3,6 +3,7 @@ import type { Task } from "../Utils/type";
 import TaskDelete from "./Tasks/TaskDelete";
 import { useTasks } from "../Context/ContextTask";
 import TaskChange from "./Tasks/TaskChange";
+import HistoryBtn from "../History/HistoryBtn";
 
 const TaskButton = ({
   task,
@@ -62,7 +63,10 @@ const TaskButton = ({
           task.title
         )}
       </div>
-      {!grabTask && <TaskDelete task={task} />}
+      <div className="task-item__btns-inner">
+        <HistoryBtn taskId={task.id} />
+        {!grabTask && <TaskDelete task={task} />}
+      </div>
     </div>
   );
 };
