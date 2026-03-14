@@ -7,8 +7,14 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   const [open, setOpen] = useState(false);
   const [inputValueName, setInputValueName] = useState("");
   const [errLength, setErrLength] = useState(false);
+  const [createdData, setCreatedData] = useState<number | null>(null);
 
   const { createTask } = useTasks();
+
+  const openModal = () => {
+    setCreatedData(Date.now());
+    setOpen(true);
+  };
 
   const handleCreate = () => {
     if (!inputValueName.trim()) return;
@@ -18,8 +24,10 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
       return;
     }
 
+    const createdAt = Date.now();
+
     // Создание задачи
-    createTask(inputValueName.trim(), projectId);
+    createTask(inputValueName.trim(), projectId, createdAt);
 
     setInputValueName("");
     setErrLength(false);
@@ -31,9 +39,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
       <button
         className="project-item__button"
         type="button"
-        onClick={() => {
-          setOpen(true);
-        }}
+        onClick={openModal}
       >
         <PlusCircleOutlined style={{ fontSize: "24px" }} />
       </button>
@@ -67,6 +73,10 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
           className="mb-3"
           onChange={(e) => setInputValueName(e.target.value)}
         />
+        <p className="task-modal__data text-dark fw-light">
+          Дата создания будет:{" "}
+          {createdData ? new Date(createdData).toLocaleString("ru-RU") : "-"}
+        </p>
       </Modal>
     </>
   );
