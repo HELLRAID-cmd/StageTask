@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { Task, TaskContextType } from "../Utils/type";
+import type { Task, TaskContextType, TaskHistory } from "../Utils/type";
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
@@ -11,12 +11,20 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   });
 
   // Функция по созданию задачи
-  const createTask = (title: string, projectId: string) => {
-    const newTask = {
+  const createTask = (title: string, projectId: string, createdAt: number) => {
+    const newTask: Task = {
       id: crypto.randomUUID(),
       title,
       status: "planned",
       projectId,
+      createdAt,
+      history: [
+        {
+          id: crypto.randomUUID(),
+          type: "created",
+          date: createdAt,
+        },
+      ],
     };
     setTasks((prev) => {
       const updated = [...prev, newTask];
@@ -28,9 +36,23 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   // функция по изменению текста задачи
   const updateTaskTitle = (id: string, newTitle: string) => {
     setTasks((prev) => {
-      const updated = prev.map((task) =>
-        task.id === id ? { ...task, title: newTitle } : task,
-      );
+      const updated = prev.map((task) => {
+        if (task.id !== id) return task;
+
+        const historyItem: TaskHistory = {
+          id: crypto.randomUUID(),
+          type: "renamed",
+          date: Date.now(),
+          oldTitle: task.title,
+          newTitle,
+        };
+
+        return {
+          ...task,
+          title: newTitle,
+          history: [...task.history, historyItem],
+        };
+      });
 
       localStorage.setItem("tasks", JSON.stringify(updated));
       return updated;
