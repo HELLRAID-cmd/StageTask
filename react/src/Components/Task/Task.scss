@@ -1,12 +1,12 @@
 .task {
   height: 100vh;
-  
+
   &-completed {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
   }
-  
+
   &-column {
     min-height: 100px;
   }
@@ -22,19 +22,26 @@
 
       &-btn {
         display: flex;
-        padding-right: 30px;
+        padding-right: 60px;
       }
-      
-      &-delete {
+
+      &-inner {
+        display: flex;
+        align-items: center;
         position: absolute;
+        gap: 5px;
         top: 50%;
         right: 5px;
         padding: 2px;
         transform: translateY(-50%);
+      }
 
-        &:hover {
-          color: red;
-        }
+      &-delete:hover {
+        color: red;
+      }
+
+      &-info:hover {
+        color: rgb(62, 224, 230);
       }
     }
   }
