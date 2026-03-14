@@ -4,6 +4,8 @@ import type { CardProps } from "../Utils/type";
 import "./Card.scss";
 
 const CardComponent: React.FC<CardProps> = ({ project }) => {
+  if (!project) return null;
+
   return (
     <div
       className={`card ${project.id}`}
