@@ -1,9 +1,9 @@
 import { useDraggable } from "@dnd-kit/core";
-import type { Task } from "../Utils/type";
-import TaskDelete from "./Tasks/TaskDelete";
-import { useTasks } from "../Context/ContextTask";
-import TaskChange from "./Tasks/TaskChange";
-import HistoryBtn from "../History/HistoryBtn";
+import type { Task } from "../../Utils/type";
+import { useTasks } from "../../Context/ContextTask";
+import TaskChange from "../Tasks/TaskChange";
+import TaskHistoryBtn from "./TaskHistoryBtn";
+import TaskDelete from "./TaskDelete";
 
 const TaskButton = ({
   task,
@@ -64,7 +64,7 @@ const TaskButton = ({
         )}
       </div>
       <div className="task-item__btns-inner">
-        <HistoryBtn taskId={task.id} />
+        <TaskHistoryBtn taskId={task.id} />
         {!grabTask && <TaskDelete task={task} />}
       </div>
     </div>
