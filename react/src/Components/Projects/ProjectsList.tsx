@@ -1,6 +1,6 @@
 import "./Project.scss";
 import { useProjects } from "../Context/Context";
-import CardComponent from "../Card/Card";
+import CardComponent from "../Cards/Card";
 import ButtonCreate from "./ButtonCreate";
 
 const ProjectsList = () => {

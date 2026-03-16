@@ -2,8 +2,18 @@ import { useDraggable } from "@dnd-kit/core";
 import type { Task } from "../Utils/type";
 import TaskDelete from "./Tasks/TaskDelete";
 import { useTasks } from "../Context/ContextTask";
+import TaskChange from "./Tasks/TaskChange";
+import HistoryBtn from "../History/HistoryBtn";
 
-const TaskButton = ({ task }: { task: Task }) => {
+const TaskButton = ({
+  task,
+  editTaskId,
+  setEditTaskId,
+}: {
+  task: Task;
+  editTaskId: string | null;
+  setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
+}) => {
   const { grabTask } = useTasks();
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
@@ -24,18 +34,39 @@ const TaskButton = ({ task }: { task: Task }) => {
     completed: "#068633",
   };
 
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (task.status === "completed") return;
+
+    setEditTaskId((prev) => (prev === task.id ? null : task.id));
+  };
+
   return (
     <div className="task-item">
       <div
         ref={setNodeRef}
-        {...attributes}
-        {...listeners}
         className="task-item__btns-btn btn text-light w-100 text-start"
         style={{ ...style, backgroundColor: statusColors[task.status] }}
+        onDoubleClick={handleDoubleClick}
       >
-        {task.title}
+        <span
+          {...listeners}
+          {...attributes}
+          style={{ cursor: "grab", marginRight: 8 }}
+        >
+          ☰
+        </span>
+        {editTaskId === task.id ? (
+          <TaskChange input={task.title} taskId={task.id} />
+        ) : (
+          task.title
+        )}
       </div>
-      {!grabTask && <TaskDelete task={task} />}
+      <div className="task-item__btns-inner">
+        <HistoryBtn taskId={task.id} />
+        {!grabTask && <TaskDelete task={task} />}
+      </div>
     </div>
   );
 };

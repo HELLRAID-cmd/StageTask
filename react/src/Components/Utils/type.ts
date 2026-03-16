@@ -1,5 +1,6 @@
 export type CardProps = {
-  project: Project;
+  project?: Project;
+  task?: Task;
 };
 
 export type Project = {
@@ -28,6 +29,8 @@ export type Task = {
   title: string;
   status: string;
   projectId: string;
+  createdAt: number;
+  history: TaskHistory[];
 };
 
 export type TaskContextType = {
@@ -39,7 +42,10 @@ export type TaskContextType = {
   setButtonCreate: React.Dispatch<React.SetStateAction<string[]>>;
   grabTask: boolean;
   setGrabTask: React.Dispatch<React.SetStateAction<boolean>>;
-  createTask: (title: string, projectId: string) => void;
+  createTask: (title: string, projectId: string, createdAt: number) => void;
+  editTaskId: string | null;
+  setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
+  updateTaskTitle: (id: string, newTitle: string) => void;
 };
 
 export type ButtonType = {
@@ -57,4 +63,14 @@ export type TaskStatusType = {
   title: string;
   status: "planned" | "progress" | "stopped" | "completed";
   projectId: string;
+};
+
+export type TaskHistory = {
+  id: string;
+  type: "created" | "moved" | "renamed";
+  date: number;
+  from?: string;
+  to?: string;
+  oldTitle?: string;
+  newTitle?: string;
 };

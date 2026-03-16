@@ -1,4 +1,10 @@
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { useProjects } from "./Components/Context/Context";
 import { Route, Routes } from "react-router-dom";
 import ProjectPage from "./Components/Projects/ProjectPage";
@@ -6,14 +12,33 @@ import ProjectsList from "./Components/Projects/ProjectsList";
 import Task from "./Components/Task/Task";
 import { useTasks } from "./Components/Context/ContextTask";
 import TaskButton from "./Components/Task/TaskButton";
+import type { TaskHistory } from "./Components/Utils/type";
 
 const DndContextWrapper = () => {
-  const { setActiveId, tasks, setTasks, activeId, setGrabTask } = useTasks();
+  const {
+    setActiveId,
+    tasks,
+    setTasks,
+    activeId,
+    setGrabTask,
+    editTaskId,
+    setEditTaskId,
+  } = useTasks();
 
   const activeTask = tasks.find((t) => t.id === activeId);
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        delay: 0,
+        tolerance: 5,
+      },
+    }),
+  );
+
   return (
     <DndContext
+      sensors={sensors}
       onDragStart={(event) => {
         setActiveId(event.active.id as string);
         setGrabTask(true);
@@ -26,12 +51,25 @@ const DndContextWrapper = () => {
         const newStatus = over.id as string;
 
         setTasks((prev) => {
-          const updated = prev.map((t) =>
-            t.id === active.id ? { ...t, status: newStatus } : t,
-          );
+          const updated = prev.map((t) => {
+            if (t.id !== active.id) return t;
+
+            const historyItem: TaskHistory = {
+              id: crypto.randomUUID(),
+              type: "moved",
+              date: Date.now(),
+              from: t.status,
+              to: newStatus,
+            };
+
+            return {
+              ...t,
+              status: newStatus,
+              history: [...t.history, historyItem],
+            };
+          });
 
           localStorage.setItem("tasks", JSON.stringify(updated));
-
           return updated;
         });
         setGrabTask(false);
@@ -49,7 +87,11 @@ const DndContextWrapper = () => {
       <DragOverlay>
         {activeTask ? (
           <div style={{ opacity: 0.9 }}>
-            <TaskButton task={activeTask} />
+            <TaskButton
+              task={activeTask}
+              editTaskId={editTaskId}
+              setEditTaskId={setEditTaskId}
+            />
           </div>
         ) : null}
       </DragOverlay>
