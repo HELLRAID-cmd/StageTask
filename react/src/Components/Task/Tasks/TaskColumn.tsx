@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import { useTasks } from "../../Context/ContextTask";
-import TaskButton from "../TaskButton";
+import TaskButton from "../TaskButtons/TaskButton";
 
 const TaskColumn = ({
   projectId,
