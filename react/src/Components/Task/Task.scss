@@ -13,8 +13,11 @@
 
   &-item {
     display: flex;
+    flex-direction: column;
     height: auto;
     position: relative;
+    background-color: var(--c-white);
+    border-radius: 10px;
 
     &__btns {
       position: relative;
@@ -25,22 +28,26 @@
         padding-right: 60px;
       }
 
+      &-text {
+        color: var(--c-black);
+      }
+
       &-inner {
         display: flex;
         align-items: center;
-        position: absolute;
-        gap: 5px;
-        top: 50%;
-        right: 5px;
-        padding: 2px;
-        transform: translateY(-50%);
+        gap: 10px;
+        padding: 5px 10px;
       }
+    }
 
-      &-delete:hover {
+    &__icon {
+      color: var(--c-black);
+
+      &--delete:hover {
         color: red;
       }
 
-      &-info:hover {
+      &--info:hover {
         color: rgb(62, 224, 230);
       }
     }
