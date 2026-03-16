@@ -20,7 +20,7 @@ const CardHistory: React.FC<CardProps> = ({ task }) => {
           if (item.type === "moved") {
             return (
               <p className="card-history__info" key={item.id}>
-                Перемещено: {item.from} в {item.to} <br/>
+                Перемещено из "{item.from}" в "{item.to}" <br/>
                 {new Date(item.date).toLocaleString("ru-RU")}
               </p>
             );
