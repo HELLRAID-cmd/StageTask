@@ -18,7 +18,7 @@ const TaskHistoryBtn = ({ taskId }: { taskId: string }) => {
           setOpen(true);
         }}
       >
-        <ClockCircleOutlined />
+        <ClockCircleOutlined className="task-item__icon task-item__icon--info"/>
       </button>
       <Modal
         title="История задачи"
