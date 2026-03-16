@@ -15,7 +15,7 @@ const TaskDelete: React.FC<{ task: Task }> = ({ task }) => {
 
   return (
     <button className="task-item__btns-delete" type="button" onClick={handleDelete}>
-      <DeleteOutlined />
+      <DeleteOutlined className="task-item__icon task-item__icon--delete"/>
     </button>
   );
 };
