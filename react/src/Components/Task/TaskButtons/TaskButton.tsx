@@ -27,13 +27,6 @@ const TaskButton = ({
       : undefined,
   };
 
-  const statusColors: Record<string, string> = {
-    planned: "#474747",
-    progress: "#4338dd",
-    stopped: "#9c0d0d",
-    completed: "#068633",
-  };
-
   const handleDoubleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
 
@@ -47,20 +40,20 @@ const TaskButton = ({
       <div
         ref={setNodeRef}
         className="task-item__btns-btn btn text-light w-100 text-start"
-        style={{ ...style, backgroundColor: statusColors[task.status] }}
+        style={{ ...style }}
         onDoubleClick={handleDoubleClick}
       >
         <span
           {...listeners}
           {...attributes}
-          style={{ cursor: "grab", marginRight: 8 }}
+          style={{ cursor: "grab", marginRight: 8, color: "#000" }}
         >
           ☰
         </span>
         {editTaskId === task.id ? (
           <TaskChange input={task.title} taskId={task.id} />
         ) : (
-          task.title
+          <p className="task-item__btns-text">{task.title}</p>
         )}
       </div>
       <div className="task-item__btns-inner">
