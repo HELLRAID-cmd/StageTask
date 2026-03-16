@@ -1,10 +1,10 @@
 import { ClockCircleOutlined, CloseOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
-import { useTasks } from "../Context/ContextTask";
-import CardHistory from "../Cards/CardHistory";
+import { useTasks } from "../../Context/ContextTask";
+import CardHistory from "../../Cards/CardHistory";
 
-const HistoryBtn = ({ taskId }: { taskId: string }) => {
+const TaskHistoryBtn = ({ taskId }: { taskId: string }) => {
   const [open, setOpen] = useState(false);
   const { tasks } = useTasks();
 
@@ -36,7 +36,7 @@ const HistoryBtn = ({ taskId }: { taskId: string }) => {
           </span>
         }
       >
-        <ul className="task-history">
+        <ul className="task-history" style={{maxHeight: "400px", overflowY: "auto"}}>
           {task ? (
             <li className="task-history__item">
               <div className="task-history__page">
@@ -52,4 +52,4 @@ const HistoryBtn = ({ taskId }: { taskId: string }) => {
   );
 };
 
-export default HistoryBtn;
+export default TaskHistoryBtn;
