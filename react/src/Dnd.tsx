@@ -11,7 +11,7 @@ import ProjectPage from "./Components/Projects/ProjectPage";
 import ProjectsList from "./Components/Projects/ProjectsList";
 import Task from "./Components/Task/Task";
 import { useTasks } from "./Components/Context/ContextTask";
-import TaskButton from "./Components/Task/TaskButton";
+import TaskButton from "./Components/Task/TaskButtons/TaskButton";
 import type { TaskHistory } from "./Components/Utils/type";
 
 const DndContextWrapper = () => {
