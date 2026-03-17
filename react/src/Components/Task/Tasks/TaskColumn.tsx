@@ -9,7 +9,7 @@ const TaskColumn = ({
   projectId: string;
   status: string;
 }) => {
-  const { tasks, editTaskId, setEditTaskId } = useTasks();
+  const { tasks, editTaskId } = useTasks();
   const { setNodeRef } = useDroppable({
     id: status,
   });
@@ -21,13 +21,12 @@ const TaskColumn = ({
           (task) => task.projectId === projectId && task.status === status,
         )
         .map((task) => (
-          <li className={`task-item task-item__${status}`} key={task.id}>
+          <li
+            className={`task-column__item task-column__item-${status}`}
+            key={task.id}
+          >
             <div className="task-item__btns">
-              <TaskButton
-                task={task}
-                editTaskId={editTaskId}
-                setEditTaskId={setEditTaskId}
-              />
+              <TaskButton task={task} editTaskId={editTaskId} />
             </div>
           </li>
         ))}
