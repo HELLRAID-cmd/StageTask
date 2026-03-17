@@ -16,6 +16,7 @@
     flex-direction: column;
     height: auto;
     position: relative;
+    margin: 0 0 10px 0;
     background-color: var(--c-white);
     border-radius: 10px;
 
@@ -25,7 +26,6 @@
 
       &-btn {
         display: flex;
-        padding-right: 60px;
       }
 
       &-text {
@@ -49,6 +49,10 @@
 
       &--info:hover {
         color: rgb(62, 224, 230);
+      }
+
+      &--edit:hover{
+        color: green;
       }
     }
   }
