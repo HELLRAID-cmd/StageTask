@@ -5,14 +5,14 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { useProjects } from "./Components/Context/Context";
 import { Route, Routes } from "react-router-dom";
 import ProjectPage from "./Components/Projects/ProjectPage";
 import ProjectsList from "./Components/Projects/ProjectsList";
-import Task from "./Components/Task/Task";
 import { useTasks } from "./Components/Context/ContextTask";
 import TaskButton from "./Components/Task/TaskButtons/TaskButton";
 import type { TaskHistory } from "./Components/Utils/type";
+import MainScreen from "./Components/Main/MainScreen";
+import ProjectCreate from "./Components/Projects/ProjectCreate";
 
 const DndContextWrapper = () => {
   const {
@@ -22,7 +22,6 @@ const DndContextWrapper = () => {
     activeId,
     setGrabTask,
     editTaskId,
-    setEditTaskId,
   } = useTasks();
 
   const activeTask = tasks.find((t) => t.id === activeId);
@@ -80,9 +79,13 @@ const DndContextWrapper = () => {
     >
       <Routes>
         {/* Главная страница */}
-        <Route path="/" element={<AppContent />} />
+        <Route path="/" element={<MainScreen />} />
         {/* Страница отдельного проекта */}
         <Route path="/project/:id" element={<ProjectPage />} />
+        {/* Страница создание проекта */}
+        <Route path="/create" element={<ProjectCreate />} />
+        {/* Страница моих проектов */}
+        <Route path="/myProject" element={<ProjectsList />} />
       </Routes>
       <DragOverlay>
         {activeTask ? (
@@ -90,18 +93,12 @@ const DndContextWrapper = () => {
             <TaskButton
               task={activeTask}
               editTaskId={editTaskId}
-              setEditTaskId={setEditTaskId}
             />
           </div>
         ) : null}
       </DragOverlay>
     </DndContext>
   );
-};
-
-const AppContent = () => {
-  const { projects } = useProjects();
-  return projects.length > 0 ? <ProjectsList /> : <Task />;
 };
 
 export default DndContextWrapper;
