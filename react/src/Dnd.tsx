@@ -22,7 +22,6 @@ const DndContextWrapper = () => {
     activeId,
     setGrabTask,
     editTaskId,
-    setEditTaskId,
   } = useTasks();
 
   const activeTask = tasks.find((t) => t.id === activeId);
@@ -90,7 +89,6 @@ const DndContextWrapper = () => {
             <TaskButton
               task={activeTask}
               editTaskId={editTaskId}
-              setEditTaskId={setEditTaskId}
             />
           </div>
         ) : null}
