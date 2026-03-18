@@ -1,0 +1,29 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  &-text {
+    &__title,
+    &__subtitle {
+      color: var(--c-black);
+    }
+
+    &__btn {
+      padding: 10px;
+      border-radius: 10px;
+      background-color: var(--c-light-blue);
+      color: var(--c-white);
+
+      &:hover {
+        background-color: green;
+      }
+    }
+  }
+
+  &-image {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+}
