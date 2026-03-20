@@ -8,7 +8,7 @@ const MainScreen = () => {
   return (
     <>
       <Layout>
-        <Header>
+        <Header className="header">
           <HeaderMain />
         </Header>
         <Content>
