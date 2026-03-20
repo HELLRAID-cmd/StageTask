@@ -22,8 +22,8 @@ const ProjectChecker = ({
   return (
     <>
       <Modal
-        title="Мы увидели что у вас уже есть проекты, хотите перейти к ним?"
-        closable={{ "aria-label": "Custom Close Button" }}
+        title="У вас уже есть проекты, хотите перейти к ним?"
+        closable={false}
         open={openModal}
         onOk={handleOk}
         onCancel={handleCancel}
