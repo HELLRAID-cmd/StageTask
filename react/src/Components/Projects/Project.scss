@@ -1,4 +1,17 @@
 .project {
+  &-create {
+    height: 100vh;
+    &__title {
+      font-size: 56px;
+      margin: 0 0 20px 0;
+    }
+
+    &__subtitle {
+      font-size: 50px;
+      margin: 0 0 50px 0;
+    }
+  }
+
   &-top {
     display: flex;
     align-items: center;
