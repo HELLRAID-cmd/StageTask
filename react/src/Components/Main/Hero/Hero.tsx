@@ -35,15 +35,21 @@ const Hero = () => {
               Выполняй задачи с&nbsp;Stage Task
             </h1>
             <h2 className="hero-text__subtitle heading-secondary">
-              Организуй проекты. Управляй процессом. <br />
+              Организуй проекты. <br /> Управляй процессом.
               Достигай результата.
             </h2>
             {projects.length === 0 ? (
-              <Link className="hero-text__btn" to="/create">
+              <Link
+                className="hero-text__btn btn rounded-2 text-light"
+                to="/create"
+              >
                 Создать проект
               </Link>
             ) : (
-              <Link className="hero-text__btn" to="myProject">
+              <Link
+                className="hero-text__btn btn rounded-2 text-light"
+                to="myProject"
+              >
                 Мои проекты
               </Link>
             )}
