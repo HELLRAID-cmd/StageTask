@@ -23,6 +23,8 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("projects", JSON.stringify(updated));
       return updated;
     });
+
+    return newProject.id;
   };
 
   return (
