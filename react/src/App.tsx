@@ -12,7 +12,7 @@ function App() {
 
   return (
     <ProjectProvider>
-      <BrowserRouter basename="/StageTask">
+      <BrowserRouter basename="/StageTask/">
         <DndContextWrapper/>
       </BrowserRouter>
     </ProjectProvider>
