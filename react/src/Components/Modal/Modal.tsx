@@ -5,6 +5,7 @@ import { useProjects } from "../Context/Context";
 import Colors from "./Colors";
 import TextArea from "antd/es/input/TextArea";
 import type { ModalWindowProps } from "../Utils/type";
+import { useNavigate } from "react-router-dom";
 
 const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
   const [inputValueName, setInputValueName] = useState("");
@@ -12,12 +13,14 @@ const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
   const [color, setColor] = useState("");
 
   const { createProject } = useProjects();
+  const navigate = useNavigate();
 
   const handleOk = () => {
     if (!inputValueName.trim() || !color) return;
     createProject(inputValueName, inputValueDesc, color);
     setInputValueName("");
     setInputValueDesc("");
+    navigate("/myProject")
     onClose();
   };
 
