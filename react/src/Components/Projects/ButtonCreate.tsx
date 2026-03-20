@@ -1,10 +1,9 @@
 import { useState } from "react";
 import ModalWindow from "../Modal/Modal";
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 const ButtonCreate = () => {
   const [open, setOpen] = useState(false);
-  
   return (
     <>
       <button
@@ -13,7 +12,10 @@ const ButtonCreate = () => {
         type="button"
         onClick={() => setOpen(true)}
       >
-        <PlusCircleOutlined style={{ fontSize: "40px" }} />
+        <PlusCircleOutlined
+          className="project-top__icon"
+          style={{ fontSize: "40px" }}
+        />
       </button>
       <ModalWindow open={open} onClose={() => setOpen(false)} />
     </>

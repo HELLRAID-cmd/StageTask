@@ -17,8 +17,8 @@ const ProjectPage = () => {
     <section className="sect-project">
       <div className="container">
         <div className="project-top justify-content-start gap-2 rounded-3 p-2">
-          <Link to={"/"}>
-            <LeftCircleOutlined style={{ fontSize: "34px", color: "#fff" }} />
+          <Link to={"/myProject"}>
+            <LeftCircleOutlined style={{ fontSize: "40px", color: "#fff" }} />
           </Link>
           <h1 className="project-title">{project.title}</h1>
         </div>

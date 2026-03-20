@@ -48,7 +48,7 @@ const Hero = () => {
             ) : (
               <Link
                 className="hero-text__btn btn rounded-2 text-light"
-                to="myProject"
+                to="/myProject"
               >
                 Мои проекты
               </Link>
