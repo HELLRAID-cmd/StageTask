@@ -6,7 +6,7 @@ import { LeftCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const ProjectsList = () => {
-  const { projects } = useProjects();
+  const { projects, isProjectsEmpty } = useProjects();
 
   return (
     <section className="sect-project">
@@ -24,7 +24,7 @@ const ProjectsList = () => {
             <ButtonCreate />
           </div>
           <ul className="project-list">
-            {projects.length === 0 ? (
+            {isProjectsEmpty ? (
               <h1 className="project-list__text text-dark heading-primary">
                 Похоже у вас еще нет проекта, поскорее создайте его!
               </h1>
