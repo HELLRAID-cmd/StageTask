@@ -22,6 +22,7 @@ export type ProjectContextType = {
   projects: Project[];
   createProject: (title: string, desc: string, colorCode: string) => void;
   setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
+  isProjectsEmpty: boolean;
 };
 
 export type Task = {
