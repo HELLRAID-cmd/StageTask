@@ -26,6 +26,8 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 
     return newProject.id;
   };
+  
+  const isProjectsEmpty = !projects.length;
 
   return (
     <ProjectContext.Provider
@@ -33,6 +35,7 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
         projects,
         createProject,
         setProjects,
+        isProjectsEmpty
       }}
     >
       {children}
