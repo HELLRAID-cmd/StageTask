@@ -10,13 +10,19 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const createProject = (title: string, desc: string, colorCode: string) => {
+  const createProject = (
+    title: string,
+    desc: string,
+    colorCode: string,
+    preview: string,
+  ) => {
     const newProject = {
       id: crypto.randomUUID(),
       title,
       desc,
       colorCode,
       createdAt: Date.now(),
+      preview,
     };
     setProjects((prev) => {
       const updated = [...prev, newProject];
@@ -26,7 +32,7 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 
     return newProject.id;
   };
-  
+
   const isProjectsEmpty = !projects.length;
 
   return (
@@ -35,7 +41,7 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
         projects,
         createProject,
         setProjects,
-        isProjectsEmpty
+        isProjectsEmpty,
       }}
     >
       {children}
