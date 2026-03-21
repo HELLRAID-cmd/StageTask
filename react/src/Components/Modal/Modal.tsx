@@ -6,10 +6,12 @@ import Colors from "./Colors";
 import TextArea from "antd/es/input/TextArea";
 import type { ModalWindowProps } from "../Utils/type";
 import { useNavigate } from "react-router-dom";
+import { MAX_PROJECT_DESC, MAX_PROJECT_NAME } from "../Utils/Settings";
 
-const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
+const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
   const [inputValueName, setInputValueName] = useState("");
   const [inputValueDesc, setInputValueDesc] = useState("");
+  const [errLength, setErrLength] = useState(false);
   const [color, setColor] = useState("");
 
   const { createProject } = useProjects();
@@ -17,10 +19,17 @@ const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
 
   const handleOk = () => {
     if (!inputValueName.trim() || !color) return;
+
+    if (
+      inputValueName.length >= MAX_PROJECT_NAME ||
+      inputValueDesc.length >= MAX_PROJECT_DESC
+    )
+      return;
+
     createProject(inputValueName, inputValueDesc, color);
     setInputValueName("");
     setInputValueDesc("");
-    navigate("/myProject")
+    navigate("/myProject");
     onClose();
   };
 
@@ -48,23 +57,35 @@ const ModalWindow: React.FC<ModalWindowProps> = ({open, onClose}) => {
         <label htmlFor="name" className="mb-2">
           Название*
         </label>
+        {inputValueName.length >= MAX_PROJECT_NAME && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
         <Input
           id="name"
           placeholder="Введите название"
           value={inputValueName}
           className="mb-3"
-          onChange={(e) => setInputValueName(e.target.value)}
+          onChange={(e) => {
+            setInputValueName(e.target.value);
+            if (errLength) setErrLength(false);
+          }}
         />
         <label htmlFor="desc" className="mb-2">
           Описание
         </label>
+        {inputValueDesc.length >= MAX_PROJECT_DESC && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
         <TextArea
           id="desc"
           placeholder="Введите описание"
           value={inputValueDesc}
           className="mb-3"
-          onChange={(e) => setInputValueDesc(e.target.value)}
-          maxLength={200}
+          onChange={(e) => {
+            setInputValueDesc(e.target.value);
+            if (errLength) setErrLength(false);
+          }}
+          maxLength={100}
         />
         <label htmlFor="color" className="mb-2">
           Цвет

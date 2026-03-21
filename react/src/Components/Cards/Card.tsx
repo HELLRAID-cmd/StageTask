@@ -14,6 +14,7 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
       }}
     >
       <Link className="card-item" to={`/project/${project.id}`}>
+        <img className="card-img" src={project.preview} alt="Фото проекта" />
         <p className="card-title">{project.title}</p>
         <p className="card-desc">{project.desc}</p>
         <p className="card-data">
