@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--c-black);
   height: 100vh;
 }
 
@@ -11,13 +12,28 @@
   flex-direction: column;
   text-align: center;
   align-items: center;
+  border-radius: 20px;
+  gap: 50px;
+  padding: 50px;
 
-  &-img {
-    margin: 0 0 20px 0;
+  &-top {
+    &__img {
+      margin: 0 0 20px 0;
+    }
+
+    &__title {
+      font-size: 56px;
+      margin: 0;
+    }
   }
 
-  &-title {
-    font-size: 56px;
-    margin: 0;
+  &-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+
+    &__link {
+      padding: 10px;
+    }
   }
 }
