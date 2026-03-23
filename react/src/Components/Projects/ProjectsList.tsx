@@ -21,23 +21,25 @@ const ProjectsList = () => {
               </Link>
               <h1 className="project-title">Ваши проекты</h1>
             </div>
-            <ButtonCreate />
+            <div className="project-top__right">
+              <ButtonCreate />
+            </div>
           </div>
-          <ul className="project-list">
-            {isProjectsEmpty ? (
-              <h1 className="project-list__text text-dark heading-primary">
-                Похоже у вас еще нет проекта, поскорее создайте его!
-              </h1>
-            ) : (
-              <>
+          {isProjectsEmpty ? (
+            <h1 className="project-list__text text-dark heading-primary">
+              Похоже у вас еще нет проекта, поскорее создайте его!
+            </h1>
+          ) : (
+            <>
+              <ul className="project-list">
                 {projects.map((project) => (
                   <li className="project-item" key={project.id}>
                     <CardComponent key={project.id} project={project} />
                   </li>
                 ))}
-              </>
-            )}
-          </ul>
+              </ul>
+            </>
+          )}
         </div>
       </div>
     </section>
