@@ -14,13 +14,15 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
     title: string,
     desc: string,
     colorCode: string,
-    preview: string,
+    colorCodeDark?: string,
+    preview?: string,
   ) => {
     const newProject = {
       id: crypto.randomUUID(),
       title,
       desc,
       colorCode,
+      colorCodeDark,
       createdAt: Date.now(),
       preview,
     };

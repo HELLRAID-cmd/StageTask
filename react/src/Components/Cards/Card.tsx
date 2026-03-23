@@ -14,15 +14,35 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
       }}
     >
       <Link className="card-item" to={`/project/${project.id}`}>
-        <img className="card-img" src={project.preview} alt="Фото проекта" />
-        <p className="card-title">{project.title}</p>
-        <p className="card-desc">{project.desc}</p>
-        <p className="card-data">
+        {!project.preview ? (
+          <span
+            className="card-item__span w-100 text-center rounded-2"
+            style={{ background: project.colorCodeDark }}
+          >
+            Нет фото
+          </span>
+        ) : (
+          <img
+            className="card-item__img rounded-2"
+            src={project.preview}
+            alt="Фото проекта"
+          />
+        )}
+        <div className="card-item__text">
+          <p className="card-item__title">{project.title}</p>
+          <p className="card-item__desc">{project.desc}</p>
+        </div>
+      </Link>
+      <div
+        className="card-bottom"
+        style={{ background: project.colorCodeDark }}
+      >
+        <p className="card-bottom__data">
           Создано: {new Date(project.createdAt).toLocaleDateString("ru-RU")}
         </p>
-      </Link>
-      <div className="card-delete">
-        <DeleteProject project={project} />
+        <div className="card-bottom__delete">
+          <DeleteProject project={project} />
+        </div>
       </div>
     </div>
   );
