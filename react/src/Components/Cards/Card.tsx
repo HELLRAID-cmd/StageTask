@@ -9,9 +9,12 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
   return (
     <div
       className={`card ${project.id}`}
-      style={{
-        background: project.colorCode,
-      }}
+      style={
+        {
+          background: project.colorCode,
+          "--hover-shadow": `0 0 15px 5px ${project.colorCodeDark}`,
+        } as React.CSSProperties
+      }
     >
       <Link className="card-item" to={`/project/${project.id}`}>
         {!project.preview ? (
