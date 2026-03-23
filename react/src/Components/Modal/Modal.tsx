@@ -26,7 +26,14 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
     )
       return;
 
-    createProject(inputValueName, inputValueDesc, color);
+    const selectedColor = Colors.find((c) => c.colorCode === color);
+
+    createProject(
+      inputValueName,
+      inputValueDesc,
+      selectedColor?.colorCode || "",
+      selectedColor?.colorCodeDark || selectedColor?.colorCode,
+    );
     setInputValueName("");
     setInputValueDesc("");
     navigate("/myProject");
