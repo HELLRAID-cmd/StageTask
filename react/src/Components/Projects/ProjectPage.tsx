@@ -1,6 +1,5 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { useProjects } from "../Context/Context";
-import NotFound from "../NotFound/NotFound";
 import ButtonCreateTask from "../Drag/ButtonCreateTask";
 import TaskColumn from "../Task/Tasks/TaskColumn";
 import { LeftCircleOutlined } from "@ant-design/icons";
@@ -14,8 +13,13 @@ const ProjectPage = () => {
   const previewRef = useRef<HTMLDivElement | null>(null);
 
   const project = projects.find((p) => p.id === id);
-  if (!project) return <NotFound />;
 
+  // Если нет проекта открывается страница notFound
+  if (!project) {
+    return <Navigate to="/notFound" />;
+  }
+
+  // Функция по сохранению фото проекта и записью в LC
   const handleScreenshot = async () => {
     const img = await makeScreenShot(previewRef.current);
     if (!img) return null;
