@@ -16,12 +16,6 @@
     font-size: 36px;
   }
 
-  @media (max-width: 520px) {
-    font-size: 24px;
-    line-height: 40px;
-    margin: 0 0 15px 0;
-  }
-
   &--accent {
     color: var(--c-light-blue);
   }
@@ -43,9 +37,9 @@
   }
 
   @include vp-767 {
-    font-size: 32px;
-    line-height: 44px;
-    margin: 0 0 50px 0;
+    font-size: 24px;
+    line-height: 28px;
+    margin: 0 0 20px 0;
   }
 }
 
