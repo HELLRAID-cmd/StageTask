@@ -19,7 +19,7 @@ const ProjectsList = () => {
                   style={{ fontSize: "40px", color: "#fff" }}
                 />
               </Link>
-              <h1 className="project-title">Ваши проекты</h1>
+              <h1 className="project-title">Мои проекты</h1>
             </div>
             <div className="project-top__right">
               <ButtonCreate />
