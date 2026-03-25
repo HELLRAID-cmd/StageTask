@@ -2,6 +2,7 @@ import { Input, Modal } from "antd";
 import { useState } from "react";
 import { useTasks } from "../../Context/ContextTask";
 import { EditOutlined, CloseOutlined } from "@ant-design/icons";
+import { MAX_TASK_TEXT } from "../../Utils/Settings";
 
 const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
   const [inputTask, setInputTask] = useState(input);
@@ -14,10 +15,7 @@ const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
   };
 
   const handleSave = () => {
-    if (inputTask.length >= 80) {
-      setErrLength(true);
-      return;
-    }
+    if (inputTask.length >= MAX_TASK_TEXT) return;
 
     updateTaskTitle(taskId, inputTask);
     setEditTaskId(null);
@@ -52,12 +50,17 @@ const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
           </span>
         }
       >
-        {errLength && <p className=" text-danger">Слишком большой текст!</p>}
+        {inputTask.length >= MAX_TASK_TEXT && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
         <Input
           id="name"
           placeholder="Введите название"
           value={inputTask}
-          onChange={(e) => setInputTask(e.target.value)}
+          onChange={(e) => {
+            setInputTask(e.target.value);
+            if (errLength) setErrLength(false);
+          }}
           onPressEnter={handleSave}
           onBlur={handleSave}
         />

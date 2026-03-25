@@ -13,6 +13,7 @@ import TaskButton from "./Components/Task/TaskButtons/TaskButton";
 import type { TaskHistory } from "./Components/Utils/type";
 import MainScreen from "./Components/Main/MainScreen";
 import ProjectCreate from "./Components/Projects/ProjectCreate";
+import NotFound from "./Components/NotFound/NotFound";
 
 const DndContextWrapper = () => {
   const {
@@ -86,6 +87,8 @@ const DndContextWrapper = () => {
         <Route path="/create" element={<ProjectCreate />} />
         {/* Страница моих проектов */}
         <Route path="/myProject" element={<ProjectsList />} />
+        {/* Страница не найдена */}
+        <Route path="/notFound" element={<NotFound />} />
       </Routes>
       <DragOverlay>
         {activeTask ? (

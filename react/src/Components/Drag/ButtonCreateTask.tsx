@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTasks } from "../Context/ContextTask";
 import { Input, Modal } from "antd";
 import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
+import { MAX_TASK_TEXT } from "../Utils/Settings";
 
 const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   const [open, setOpen] = useState(false);
@@ -19,10 +20,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   const handleCreate = () => {
     if (!inputValueName.trim()) return;
 
-    if (inputValueName.length >= 50) {
-      setErrLength(true);
-      return;
-    }
+    if (inputValueName.length >= 40) return;
 
     const createdAt = Date.now();
 
@@ -65,13 +63,18 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
         <label htmlFor="name" className="mb-2">
           Название*
         </label>
-        {errLength && <p className=" text-danger">Слишком большой текст!</p>}
+        {inputValueName.length >= MAX_TASK_TEXT && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
         <Input
           id="name"
           placeholder="Введите название"
           value={inputValueName}
           className="mb-3"
-          onChange={(e) => setInputValueName(e.target.value)}
+          onChange={(e) => {
+            setInputValueName(e.target.value);
+            if (errLength) setErrLength(false);
+          }}
         />
         <p className="task-modal__data text-dark fw-light">
           Дата создания будет:{" "}

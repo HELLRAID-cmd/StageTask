@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import ProjectChecker from "../ProjectsChecker/ProjectsChecker";
 
 const Hero = () => {
-  const { projects } = useProjects();
+  const { projects, isProjectsEmpty } = useProjects();
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Hero = () => {
               Организуй проекты. <br /> Управляй процессом.
               Достигай результата.
             </h2>
-            {projects.length === 0 ? (
+            {isProjectsEmpty ? (
               <Link
                 className="hero-text__btn btn rounded-2 text-light"
                 to="/create"
@@ -48,7 +48,7 @@ const Hero = () => {
             ) : (
               <Link
                 className="hero-text__btn btn rounded-2 text-light"
-                to="myProject"
+                to="/myProject"
               >
                 Мои проекты
               </Link>
