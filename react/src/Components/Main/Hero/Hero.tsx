@@ -35,8 +35,8 @@ const Hero = () => {
               Выполняй задачи с&nbsp;Stage Task
             </h1>
             <h2 className="hero-text__subtitle heading-secondary">
-              Организуй проекты. <br /> Управляй процессом.
-              Достигай результата.
+              Cоздавай задачи. <br /> Управляй процессом.
+              Организуй проекты и держи всё под контролем.
             </h2>
             {isProjectsEmpty ? (
               <Link
