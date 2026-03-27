@@ -16,6 +16,10 @@
 
     &__title {
       margin: 0 0 10px 0;
+
+      @include vp-767 {
+        line-height: 40px;
+      }
     }
     
     &__title,
