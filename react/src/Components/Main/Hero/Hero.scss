@@ -1,10 +1,27 @@
+@use "../../../../styles/global/mixins" as *;
+
 .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 
+  @include vp-1023 {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
   &-text {
+
+    &__title {
+      margin: 0 0 10px 0;
+
+      @include vp-767 {
+        line-height: 40px;
+      }
+    }
+    
     &__title,
     &__subtitle {
       color: var(--c-black);
@@ -23,5 +40,10 @@
   &-image {
     border-radius: 20px;
     overflow: hidden;
+
+    @include vp-767 {
+      width: 100%;
+      max-width: 500px;
+    }
   }
 }
