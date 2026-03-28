@@ -1,7 +1,7 @@
 import {
   DndContext,
   DragOverlay,
-  PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -16,19 +16,13 @@ import ProjectCreate from "./Components/Projects/ProjectCreate";
 import NotFound from "./Components/NotFound/NotFound";
 
 const DndContextWrapper = () => {
-  const {
-    setActiveId,
-    tasks,
-    setTasks,
-    activeId,
-    setGrabTask,
-    editTaskId,
-  } = useTasks();
+  const { setActiveId, tasks, setTasks, activeId, setGrabTask, editTaskId } =
+    useTasks();
 
   const activeTask = tasks.find((t) => t.id === activeId);
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
+    useSensor(TouchSensor, {
       activationConstraint: {
         delay: 0,
         tolerance: 5,
@@ -93,10 +87,7 @@ const DndContextWrapper = () => {
       <DragOverlay>
         {activeTask ? (
           <div style={{ opacity: 0.9 }}>
-            <TaskButton
-              task={activeTask}
-              editTaskId={editTaskId}
-            />
+            <TaskButton task={activeTask} editTaskId={editTaskId} />
           </div>
         ) : null}
       </DragOverlay>
