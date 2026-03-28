@@ -26,6 +26,7 @@ body {
   line-height: 24px;
   font-family: "Manrope", sans-serif;
   background: var(--c-white);
+  overscroll-behavior: none;
 }
 
 a {
