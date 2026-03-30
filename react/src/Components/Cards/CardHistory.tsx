@@ -20,7 +20,15 @@ const CardHistory: React.FC<CardProps> = ({ task }) => {
           if (item.type === "moved") {
             return (
               <p className="card-history__info" key={item.id}>
-                Перемещено из "{item.from}" в "{item.to}" <br/>
+                Перемещено из "
+                <span className={`card-history__text-${item.from} card-history__text-uppercase`}>
+                  {item.from}
+                </span>
+                " в "
+                <span className={`card-history__text-${item.to} card-history__text-uppercase`}>
+                  {item.to}
+                </span>
+                " <br />
                 {new Date(item.date).toLocaleString("ru-RU")}
               </p>
             );
@@ -29,7 +37,7 @@ const CardHistory: React.FC<CardProps> = ({ task }) => {
           if (item.type === "renamed") {
             return (
               <p className="card-history__info" key={item.id}>
-                Название изменено "{item.oldTitle}" на "{item.newTitle}" <br/>
+                Название изменено "{item.oldTitle}" на "{item.newTitle}" <br />
                 {new Date(item.date).toLocaleString("ru-RU")}
               </p>
             );
