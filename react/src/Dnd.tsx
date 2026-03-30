@@ -1,6 +1,7 @@
 import {
   DndContext,
   DragOverlay,
+  PointerSensor,
   TouchSensor,
   useSensor,
   useSensors,
@@ -14,6 +15,7 @@ import type { TaskHistory } from "./Components/Utils/type";
 import MainScreen from "./Components/Main/MainScreen";
 import ProjectCreate from "./Components/Projects/ProjectCreate";
 import NotFound from "./Components/NotFound/NotFound";
+import { useEffect, useState } from "react";
 
 const DndContextWrapper = () => {
   const { setActiveId, tasks, setTasks, activeId, setGrabTask, editTaskId } =
@@ -21,14 +23,37 @@ const DndContextWrapper = () => {
 
   const activeTask = tasks.find((t) => t.id === activeId);
 
-  const sensors = useSensors(
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 0,
-        tolerance: 5,
-      },
-    }),
-  );
+  // функция считывания размера экрана
+  const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(
+      window.matchMedia("(max-width: 768px)").matches,
+    );
+
+    useEffect(() => {
+      const media = window.matchMedia("(max-width: 768px)");
+
+      const listener = () => setIsMobile(media.matches);
+      media.addEventListener("change", listener);
+
+      return () => media.removeEventListener("change", listener);
+    }, []);
+
+    return isMobile;
+  };
+
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 0,
+      tolerance: 5,
+    },
+  });
+  
+  const pointerSensor = useSensor(PointerSensor);
+  
+  const isMobile = useIsMobile();
+
+  // Менять сенсор в зависимости от разрешение экрана
+  const sensors = useSensors(isMobile ? touchSensor : pointerSensor);
 
   return (
     <DndContext
