@@ -30,6 +30,29 @@
       background: rgba(128, 128, 128, 0.3);
       border-radius: 10px;
     }
+
+    &__text {
+
+      &-uppercase {
+        text-transform: uppercase;
+      }
+      
+      &-planned {
+        color: var(--c-planned);
+      }
+
+      &-progress {
+        color: var(--c-progress);
+      }
+
+      &-stopped {
+        color: var(--c-stopped);
+      }
+
+      &-completed {
+        color: var(--c-completed);
+      }
+    }
   }
 
   &-item {
@@ -72,7 +95,7 @@
 
       &:hover {
         svg {
-          color: red;
+          color: var(--c-stopped-dark);
         }
       }
     }
