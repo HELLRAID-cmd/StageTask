@@ -44,15 +44,15 @@
       color: var(--c-black);
 
       &--delete:hover {
-        color: red;
+        color: var(--c-stopped-dark);
       }
 
       &--info:hover {
-        color: rgb(62, 224, 230);
+        color: var(--c-light-blue);
       }
 
       &--edit:hover{
-        color: green;
+        color: var(--c-completed);
       }
     }
   }

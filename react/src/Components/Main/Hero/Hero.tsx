@@ -34,10 +34,10 @@ const Hero = () => {
             <h1 className="hero-text__title heading-primary">
               Выполняй задачи с&nbsp;Stage Task
             </h1>
-            <h2 className="hero-text__subtitle heading-secondary">
-              Организуй проекты. <br /> Управляй процессом.
-              Достигай результата.
-            </h2>
+            <p className="hero-text__subtitle heading-secondary">
+              Cоздавай задачи. <br /> Управляй процессом.
+              Организуй проекты и держи всё под контролем.
+            </p>
             {isProjectsEmpty ? (
               <Link
                 className="hero-text__btn btn rounded-2 text-light"
