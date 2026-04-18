@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import heroImg50 from "../../../assets/Hero/hero-img-50.png";
-import { useProjects } from "../../Context/Context";
 import "./Hero.scss";
-import { Link } from "react-router-dom";
 import ProjectChecker from "../ProjectsChecker/ProjectsChecker";
+import { useProject } from "../../Context/Project/ProjectContext";
+import Button from "../../../shared/ui/button";
 
 const Hero = () => {
-  const { projects, isProjectsEmpty } = useProjects();
+  const { projects, isProjectsEmpty } = useProject();
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -35,23 +35,17 @@ const Hero = () => {
               Выполняй задачи с&nbsp;Stage Task
             </h1>
             <p className="hero-text__subtitle heading-secondary">
-              Cоздавай задачи. <br /> Управляй процессом.
-              Организуй проекты и держи всё под контролем.
+              Cоздавай задачи. <br /> Управляй процессом. Организуй проекты и
+              держи всё под контролем.
             </p>
             {isProjectsEmpty ? (
-              <Link
-                className="hero-text__btn btn rounded-2 text-light"
-                to="/create"
-              >
+              <Button variant="link" href={"/create"}>
                 Создать проект
-              </Link>
+              </Button>
             ) : (
-              <Link
-                className="hero-text__btn btn rounded-2 text-light"
-                to="/myProject"
-              >
+              <Button variant="link" href={"/myProject"}>
                 Мои проекты
-              </Link>
+              </Button>
             )}
           </div>
           <div className="hero-image">
