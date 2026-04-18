@@ -1,4 +1,4 @@
-import type { CardProps } from "../Utils/type";
+import type { CardProps } from "../../shared/props/type";
 import "./Card.scss";
 
 const CardHistory: React.FC<CardProps> = ({ task }) => {

@@ -1,7 +1,7 @@
 import { Input, Modal } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import type { DeleteProps } from "../Utils/type";
+import type { DeleteProps } from "../../shared/props/type";
 
 const ModalDelete: React.FC<DeleteProps> = ({ open, onConfirm, onCancel, project }) => {
   const [valueDelete, setValueDelete] = useState("");
