@@ -1,9 +1,9 @@
 import { useDraggable } from "@dnd-kit/core";
-import type { Task } from "../../Utils/type";
-import { useTasks } from "../../Context/ContextTask";
+import type { Task } from "../../../shared/props/type";
 import TaskHistoryBtn from "./TaskHistoryBtn";
 import TaskDelete from "./TaskDelete";
 import TaskEdit from "./TaskEdit";
+import { useTask } from "../../Context/Task/TaskContext";
 
 const TaskButton = ({
   task,
@@ -12,7 +12,7 @@ const TaskButton = ({
   task: Task;
   editTaskId: string | null;
 }) => {
-  const { grabTask } = useTasks();
+  const { grabTask } = useTask();
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });

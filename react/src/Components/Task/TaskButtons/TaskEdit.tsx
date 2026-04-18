@@ -1,13 +1,13 @@
 import { Input, Modal } from "antd";
 import { useState } from "react";
-import { useTasks } from "../../Context/ContextTask";
 import { EditOutlined, CloseOutlined } from "@ant-design/icons";
 import { MAX_TASK_TEXT } from "../../Utils/Settings";
+import { useTask } from "../../Context/Task/TaskContext";
 
 const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
   const [inputTask, setInputTask] = useState(input);
   const [open, setOpen] = useState(false);
-  const { updateTaskTitle, setEditTaskId } = useTasks();
+  const { updateTaskTitle, setEditTaskId } = useTask();
   const [errLength, setErrLength] = useState(false);
 
   const openModal = () => {

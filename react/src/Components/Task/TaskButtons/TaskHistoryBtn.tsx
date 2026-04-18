@@ -1,12 +1,12 @@
 import { ClockCircleOutlined, CloseOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useState } from "react";
-import { useTasks } from "../../Context/ContextTask";
 import CardHistory from "../../Cards/CardHistory";
+import { useTask } from "../../Context/Task/TaskContext";
 
 const TaskHistoryBtn = ({ taskId }: { taskId: string }) => {
   const [open, setOpen] = useState(false);
-  const { tasks } = useTasks();
+  const { tasks } = useTask();
 
   const task = tasks.find((t) => t.id === taskId);
 

@@ -1,12 +1,12 @@
 import "./Project.scss";
-import { useProjects } from "../Context/Context";
 import CardComponent from "../Cards/Card";
 import ButtonCreate from "./ButtonCreate";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useProject } from "../Context/Project/ProjectContext";
 
 const ProjectsList = () => {
-  const { projects, isProjectsEmpty } = useProjects();
+  const { projects, isProjectsEmpty } = useProject();
 
   return (
     <section className="sect-project">

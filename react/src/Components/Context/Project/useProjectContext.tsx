@@ -1,9 +1,7 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { Project, ProjectContextType } from "../Utils/type";
+import { useState } from "react";
+import type { Project } from "../../../shared/props/type";
 
-const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
-
-export const ProjectProvider = ({ children }: { children: ReactNode }) => {
+const useProjectContext = () => {
   const [projects, setProjects] = useState<Project[]>(() => {
     // загрузка проектов из LS
     const saved = localStorage.getItem("projects");
@@ -37,23 +35,12 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 
   const isProjectsEmpty = !projects.length;
 
-  return (
-    <ProjectContext.Provider
-      value={{
-        projects,
-        createProject,
-        setProjects,
-        isProjectsEmpty,
-      }}
-    >
-      {children}
-    </ProjectContext.Provider>
-  );
+  return {
+    projects,
+    createProject,
+    setProjects,
+    isProjectsEmpty,
+  };
 };
 
-export const useProjects = () => {
-  const context = useContext(ProjectContext);
-  if (!context)
-    throw new Error("useProjects must be used within ProjectProvider");
-  return context;
-};
+export default useProjectContext;

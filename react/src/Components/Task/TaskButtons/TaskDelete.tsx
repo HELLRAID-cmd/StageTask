@@ -1,9 +1,9 @@
-import { useTasks } from "../../Context/ContextTask";
-import type { Task } from "../../Utils/type";
+import { useTask } from "../../Context/Task/TaskContext";
+import type { Task } from "../../../shared/props/type";
 import { DeleteOutlined } from "@ant-design/icons";
 
 const TaskDelete: React.FC<{ task: Task }> = ({ task }) => {
-  const { setTasks } = useTasks();
+  const { setTasks } = useTask();
 
   const handleDelete = () => {
     setTasks((prev) => {
