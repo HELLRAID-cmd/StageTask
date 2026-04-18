@@ -1,9 +1,9 @@
-import { useProjects } from "../Context/Context";
+import { useProject } from "../Context/Project/ProjectContext";
 import "../Task/Task.scss";
 import ButtonCreate from "./ButtonCreate";
 
 const ProjectCreate = () => {
-  const { projects } = useProjects();
+  const { projects } = useProject();
 
   if (projects.length) return;
 

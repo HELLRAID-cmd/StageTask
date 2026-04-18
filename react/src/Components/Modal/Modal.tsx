@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Input, Modal } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
-import { useProjects } from "../Context/Context";
 import Colors from "./Colors";
 import TextArea from "antd/es/input/TextArea";
-import type { ModalWindowProps } from "../Utils/type";
+import type { ModalWindowProps } from "../../shared/props/type";
 import { useNavigate } from "react-router-dom";
 import { MAX_PROJECT_DESC, MAX_PROJECT_NAME } from "../Utils/Settings";
+import { useProject } from "../Context/Project/ProjectContext";
 
 const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
   const [inputValueName, setInputValueName] = useState("");
@@ -14,7 +14,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
   const [errLength, setErrLength] = useState(false);
   const [color, setColor] = useState("");
 
-  const { createProject } = useProjects();
+  const { createProject } = useProject();
   const navigate = useNavigate();
 
   const handleOk = () => {

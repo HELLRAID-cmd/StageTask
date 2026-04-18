@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
-import { useTasks } from "../../Context/ContextTask";
 import TaskButton from "../TaskButtons/TaskButton";
+import { useTask } from "../../Context/Task/TaskContext";
 
 const TaskColumn = ({
   projectId,
@@ -9,7 +9,7 @@ const TaskColumn = ({
   projectId: string;
   status: string;
 }) => {
-  const { tasks, editTaskId } = useTasks();
+  const { tasks, editTaskId } = useTask();
   const { setNodeRef } = useDroppable({
     id: status,
   });

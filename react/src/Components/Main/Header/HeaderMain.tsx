@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { useProjects } from "../../Context/Context";
 import "./HeaderMain.scss";
+import { useProject } from "../../Context/Project/ProjectContext";
+import Button from "../../../shared/ui/button";
 
 const HeaderMain = () => {
-  const { projects } = useProjects();
+  const { projects } = useProject();
 
   const project = projects.length === 0;
 
@@ -22,12 +23,9 @@ const HeaderMain = () => {
           </div>
           {/* Если нет проектов убрать кнопку */}
           {!project && (
-            <Link
-              className="header-project btn rounded-2 text-light"
-              to="myProject"
-            >
+            <Button variant="link" href={"/myProject"}>
               Мои проекты
-            </Link>
+            </Button>
           )}
         </div>
       </div>

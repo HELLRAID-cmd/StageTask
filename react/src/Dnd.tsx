@@ -9,17 +9,17 @@ import {
 import { Route, Routes } from "react-router-dom";
 import ProjectPage from "./Components/Projects/ProjectPage";
 import ProjectsList from "./Components/Projects/ProjectsList";
-import { useTasks } from "./Components/Context/ContextTask";
 import TaskButton from "./Components/Task/TaskButtons/TaskButton";
-import type { TaskHistory } from "./Components/Utils/type";
+import type { TaskHistory } from "./shared/props/type";
 import MainScreen from "./Components/Main/MainScreen";
 import ProjectCreate from "./Components/Projects/ProjectCreate";
 import NotFound from "./Components/NotFound/NotFound";
 import { useEffect, useState } from "react";
+import { useTask } from "./Components/Context/Task/TaskContext";
 
 const DndContextWrapper = () => {
   const { setActiveId, tasks, setTasks, activeId, setGrabTask, editTaskId } =
-    useTasks();
+    useTask();
 
   const activeTask = tasks.find((t) => t.id === activeId);
 
