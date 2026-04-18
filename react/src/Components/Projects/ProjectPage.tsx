@@ -1,15 +1,15 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { useProjects } from "../Context/Context";
 import ButtonCreateTask from "../Drag/ButtonCreateTask";
 import TaskColumn from "../Task/Tasks/TaskColumn";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { useRef } from "react";
 import makeScreenShot from "../Utils/MakeScreenShot";
+import { useProject } from "../Context/Project/ProjectContext";
 
 // Открывает проект
 const ProjectPage = () => {
   const { id } = useParams();
-  const { projects, setProjects } = useProjects();
+  const { projects, setProjects } = useProject();
   const previewRef = useRef<HTMLDivElement | null>(null);
 
   const project = projects.find((p) => p.id === id);

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import DeleteProject from "../DeleteProject/DeleteProject";
-import type { CardProps } from "../Utils/type";
+import type { CardProps } from "../../shared/props/type";
 import "./Card.scss";
 
 const CardComponent: React.FC<CardProps> = ({ project }) => {

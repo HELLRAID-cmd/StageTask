@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useTasks } from "../Context/ContextTask";
 import { Input, Modal } from "antd";
 import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
 import { MAX_TASK_TEXT } from "../Utils/Settings";
+import { useTask } from "../Context/Task/TaskContext";
+import Button from "../../shared/ui/button/Button";
 
 const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   const [open, setOpen] = useState(false);
@@ -10,7 +11,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   const [errLength, setErrLength] = useState(false);
   const [createdData, setCreatedData] = useState<number | null>(null);
 
-  const { createTask } = useTasks();
+  const { createTask } = useTask();
 
   const openModal = () => {
     setCreatedData(Date.now());
@@ -34,13 +35,13 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
 
   return (
     <>
-      <button
+      <Button
         className="project-item__button"
-        type="button"
         onClick={openModal}
+        variant="modal"
       >
         <PlusCircleOutlined style={{ fontSize: "24px" }} />
-      </button>
+      </Button>
       <Modal
         title="Введите название задачи"
         open={open}
