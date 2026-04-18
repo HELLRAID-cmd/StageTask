@@ -4,18 +4,18 @@ import "../styles/global/_typography.scss";
 import "../styles/global/style.scss";
 import "../styles/global/_antd.scss";
 import "../styles/global/_container.scss";
-import { ProjectProvider } from "./Components/Context/Context";
 import { BrowserRouter } from "react-router-dom";
 import DndContextWrapper from "./Dnd";
+import { Provider } from "./Components/Context/Provider";
 
 function App() {
 
   return (
-    <ProjectProvider>
+    <Provider>
       <BrowserRouter basename="/StageTask/">
         <DndContextWrapper/>
       </BrowserRouter>
-    </ProjectProvider>
+    </Provider>
   );
 }
 
