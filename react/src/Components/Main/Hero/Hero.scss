@@ -27,6 +27,13 @@
       color: var(--c-black);
     }
 
+    &__loading {
+      font-weight: var(--fw-bold);
+      font-size: var(--f-size-20);
+      // Паддин 11 стоит чтобы экран не дергался при переходе в кнопку
+      padding: 11px;
+    }
+
     &__btn {
       padding: 10px;
       background-color: var(--c-light-blue);
