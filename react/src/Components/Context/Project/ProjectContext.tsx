@@ -1,8 +1,7 @@
 import { createContext, useContext } from "react";
 import type useProjectContext from "./useProjectContext";
-import type { ProjectContextType } from "../../../shared/props/type";
 
-export type ProjectsContextType = ReturnType<typeof useProjectContext>;
+export type ProjectContextType = ReturnType<typeof useProjectContext>;
 
 export const ProjectContext = createContext<ProjectContextType | null>(null);
 
