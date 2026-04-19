@@ -6,8 +6,28 @@ import { useProject } from "../../Context/Project/ProjectContext";
 import Button from "../../../shared/ui/button";
 
 const Hero = () => {
-  const { projects, isProjectsEmpty } = useProject();
+  const { projects, isProjectsEmpty, errorAPI, loading } = useProject();
   const [showModal, setShowModal] = useState(false);
+  let content;
+
+  //* Если ошибка с сервером показать ошибку
+  if (errorAPI) {
+    content = <Button variant="errorAPI">{errorAPI}</Button>;
+    //* Если нет проекта(ов) показать кнопку с созданием
+  } else if (isProjectsEmpty) {
+    content = (
+      <Button variant="link" href={"/create"}>
+        Создать проект
+      </Button>
+    );
+    //* Если есть проекты показать кнопку с проектами
+  } else {
+    content = (
+      <Button variant="link" href={"/myProject"}>
+        Мои проекты
+      </Button>
+    );
+  }
 
   useEffect(() => {
     const showAt = localStorage.getItem("projectCheckerShown");
@@ -38,15 +58,7 @@ const Hero = () => {
               Cоздавай задачи. <br /> Управляй процессом. Организуй проекты и
               держи всё под контролем.
             </p>
-            {isProjectsEmpty ? (
-              <Button variant="link" href={"/create"}>
-                Создать проект
-              </Button>
-            ) : (
-              <Button variant="link" href={"/myProject"}>
-                Мои проекты
-              </Button>
-            )}
+            {loading ? <p className="hero-text__loading">Загрузка...</p> : content}
           </div>
           <div className="hero-image">
             <img src={heroImg50} alt="Фото проекта" />
