@@ -6,7 +6,7 @@ type Props = {
   type?: "button";
   children?: ReactNode;
   onClick?: () => void;
-  variant: "modal" | "errorAPI" | "link";
+  variant: "modal" | "errorAPI" | "link" | "add";
   href?: string;
 };
 
@@ -18,6 +18,18 @@ const Button = ({
   variant,
   href,
 }: Props) => {
+  if (variant === "add") {
+    return (
+      <button
+        className={`project-item__button ${className} `}
+        type={type}
+        onClick={onClick}
+      >
+        {children ? children : "Добавить"}
+      </button>
+    );
+  }
+
   if (variant === "errorAPI") {
     return (
       <button

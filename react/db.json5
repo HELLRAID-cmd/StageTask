@@ -1,12 +1,14 @@
 {
   project: [
     {
-      id: "1",
-      title: "Project",
-      desc: "abc",
-      colorCode: "#0d6efd",
-      colorCodeDark: "#0f4596",
-      preview: "a",
+      title: "w",
+      desc: "w",
+      colorCode: "#6ea0ff",
+      createdAt: 1776685934802,
+      colorCodeDark: "#4263aa",
+      preview: "",
+      id: "0DBN0bcRKrs",
     },
   ],
+  $schema: "./node_modules/json-server/schema.json",
 }

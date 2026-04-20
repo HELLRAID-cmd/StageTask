@@ -20,7 +20,6 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
 
   const handleCreate = () => {
     if (!inputValueName.trim()) return;
-
     if (inputValueName.length >= 40) return;
 
     const createdAt = Date.now();
@@ -38,7 +37,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
       <Button
         className="project-item__button"
         onClick={openModal}
-        variant="modal"
+        variant="add"
       >
         <PlusCircleOutlined style={{ fontSize: "24px" }} />
       </Button>
