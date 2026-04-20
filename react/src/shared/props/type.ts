@@ -9,7 +9,7 @@ export type Project = {
   desc: string;
   colorCode: string;
   createdAt: number;
-  preview?: string;
+  preview?: string | null;
   colorCodeDark?: string;
 };
 
@@ -22,13 +22,7 @@ export type DeleteProps = {
 
 export type ProjectContextType = {
   projects: Project[];
-  createProject: (
-    title: string,
-    desc: string,
-    colorCode: string,
-    colorCodeDark?: string,
-    preview?: string,
-  ) => void;
+  createProject: (data: Omit<Project, "id">) => void;
   setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
   isProjectsEmpty: boolean;
 };

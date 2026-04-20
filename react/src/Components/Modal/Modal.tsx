@@ -17,23 +17,18 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
   const { createProject } = useProject();
   const navigate = useNavigate();
 
-  const handleOk = () => {
-    if (!inputValueName.trim() || !color) return;
-
-    if (
-      inputValueName.length >= MAX_PROJECT_NAME ||
-      inputValueDesc.length >= MAX_PROJECT_DESC
-    )
-      return;
-
+  const handleCreate = () => {
     const selectedColor = Colors.find((c) => c.colorCode === color);
 
-    createProject(
-      inputValueName,
-      inputValueDesc,
-      selectedColor?.colorCode || "",
-      selectedColor?.colorCodeDark || selectedColor?.colorCode,
-    );
+    createProject({
+      title: inputValueName,
+      desc: inputValueDesc,
+      colorCode: color,
+      createdAt: Date.now(),
+      colorCodeDark: selectedColor?.colorCodeDark,
+      preview: ""
+    });
+
     setInputValueName("");
     setInputValueDesc("");
     navigate("/myProject");
@@ -53,7 +48,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
         width={400}
         onCancel={onClose}
         onOk={() => {
-          handleOk();
+          handleCreate();
         }}
         closeIcon={
           <span style={{ color: "#000000", fontSize: "18px" }}>
