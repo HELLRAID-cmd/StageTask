@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Project } from "../../../shared/props/type";
 import projectsApi from "../../../shared/api/project";
 import { API_MODE, INTERVAL_TIME } from "../../Utils/Settings";
@@ -6,36 +6,12 @@ import { API_MODE, INTERVAL_TIME } from "../../Utils/Settings";
 const useProjectContext = () => {
   const [errorAPI, setErrorAPI] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [projects, setProjects] = useState<Project[]>(() => {
-    // загрузка проектов из LS
-    const saved = localStorage.getItem("projects");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [projects, setProjects] = useState<Project[]>([]);
 
-  const createProject = (
-    title: string,
-    desc: string,
-    colorCode: string,
-    colorCodeDark?: string,
-    preview?: string,
-  ) => {
-    const newProject = {
-      id: crypto.randomUUID(),
-      title,
-      desc,
-      colorCode,
-      colorCodeDark,
-      createdAt: Date.now(),
-      preview,
-    };
-    setProjects((prev) => {
-      const updated = [...prev, newProject];
-      localStorage.setItem("projects", JSON.stringify(updated));
-      return updated;
-    });
-
-    return newProject.id;
-  };
+  const createProject = useCallback(async (data: Omit<Project, "id">) => {
+    const addedProject = await projectsApi.add(data);
+    setProjects((prev) => [...prev, addedProject]);
+  }, []);
 
   useEffect(() => {
     // Вот так выглядит получение данных через GET
