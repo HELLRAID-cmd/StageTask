@@ -6,6 +6,10 @@ import "./Card.scss";
 const CardComponent: React.FC<CardProps> = ({ project }) => {
   if (!project) return null;
 
+  const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+  const projectPreview = projects.find((p: any) => p.id === project.id);
+  const preview = projectPreview?.preview;
+
   return (
     <div
       className={`card ${project.id}`}
@@ -17,7 +21,7 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
       }
     >
       <Link className="card-item" to={`/project/${project.id}`}>
-        {!project.preview ? (
+        {!preview ? (
           <span
             className="card-item__span w-100 text-center rounded-2"
             style={{ background: project.colorCodeDark }}
@@ -27,7 +31,7 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
         ) : (
           <img
             className="card-item__img rounded-2"
-            src={project.preview}
+            src={preview}
             alt="Фото проекта"
           />
         )}
