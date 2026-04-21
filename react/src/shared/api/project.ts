@@ -14,6 +14,12 @@ const projectsApi = {
     }).then((response) => response.json());
   },
 
+  delete: (id: string) => {
+    return fetch(`${URL_PROJECT}/${id}`, {
+      method: "DELETE",
+    });
+  },
+
   update: (id: string, data: Partial<Project>) => {
     return fetch(`${URL_PROJECT}/${id}`, {
       method: "PATCH",
