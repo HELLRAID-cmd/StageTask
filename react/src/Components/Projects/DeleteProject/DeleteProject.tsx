@@ -1,27 +1,17 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import type { Project } from "../../shared/props/type";
+import type { Project } from "../../../shared/props/type";
 import ModalDelete from "./ModalDelete";
 import { useState } from "react";
-import { useProject } from "../Context/Project/ProjectContext";
+import { useProject } from "../../Context/Project/ProjectContext";
+import ButtonProject from "../ButtonProject";
 
 const DeleteProject: React.FC<{ project: Project }> = ({ project }) => {
-  const { setProjects } = useProject();
+  const { deleteProject } = useProject();
   const [open, setOpen] = useState(false);
-
-  const handleDelete = () => {
-    setProjects((prev) => {
-      const updated = prev.filter((p) => p.id !== project.id);
-      localStorage.setItem("projects", JSON.stringify(updated));
-      return updated;
-    });
-    setOpen(false);
-  };
 
   return (
     <>
-      <button
-        type="button"
-        className="card-title__btn p-1"
+      <ButtonProject
         onClick={(e) => {
           setOpen(true);
           e.stopPropagation();
@@ -29,12 +19,12 @@ const DeleteProject: React.FC<{ project: Project }> = ({ project }) => {
         }}
       >
         <DeleteOutlined style={{ fontSize: "24px" }} />
-      </button>
+      </ButtonProject>
       <ModalDelete
         open={open}
         project={project}
         onCancel={() => setOpen(false)}
-        onConfirm={handleDelete}
+        onConfirm={() => deleteProject(project.id)}
       />
     </>
   );
