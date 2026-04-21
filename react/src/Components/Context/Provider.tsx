@@ -4,7 +4,7 @@ import { TaskProvider } from "./Task/TaskProvider";
 const providersArr = [ProjectProvider, TaskProvider];
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
-  return providersArr.reduce(
+  return providersArr.reduceRight(
     (acc, Provider) => <Provider>{acc}</Provider>,
     children,
   );
