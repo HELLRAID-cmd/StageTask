@@ -6,7 +6,7 @@ type Props = {
   type?: "button";
   children?: ReactNode;
   onClick?: () => void;
-  variant: "modal" | "errorAPI" | "link" | "add";
+  variant: "button" | "errorAPI" | "link" | "add";
   href?: string;
 };
 
@@ -30,20 +30,7 @@ const Button = ({
     );
   }
 
-  if (variant === "errorAPI") {
-    return (
-      <button
-        className={`button hero-text__btn btn rounded-2 text-light bg-danger`}
-        type={type}
-        aria-label="Ошибка сервера"
-        disabled={true}
-      >
-        {children ? children : "Ошибка сервера"}
-      </button>
-    );
-  }
-
-  if (variant === "modal") {
+  if (variant === "button") {
     return (
       <button
         className={`button hero-text__btn btn rounded-2 text-light ${className} `}

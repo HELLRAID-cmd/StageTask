@@ -1,22 +1,21 @@
 import { useState } from "react";
 import ModalWindow from "../Modal/Modal";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import ButtonProject from "./ButtonProject";
 
 const ButtonCreate = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <button
+      <ButtonProject
         className="project-top__create"
-        aria-label="Создать проект"
-        type="button"
         onClick={() => setOpen(true)}
       >
         <PlusCircleOutlined
           className="project-top__icon"
           style={{ fontSize: "40px" }}
         />
-      </button>
+      </ButtonProject>
       <ModalWindow open={open} onClose={() => setOpen(false)} />
     </>
   );

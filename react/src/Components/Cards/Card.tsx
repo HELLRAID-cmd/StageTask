@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import DeleteProject from "../DeleteProject/DeleteProject";
+import DeleteProject from "../Projects/DeleteProject/DeleteProject";
 import type { CardProps } from "../../shared/props/type";
 import "./Card.scss";
 

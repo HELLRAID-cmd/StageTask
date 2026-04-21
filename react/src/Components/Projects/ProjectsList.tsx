@@ -6,7 +6,41 @@ import { Link } from "react-router-dom";
 import { useProject } from "../Context/Project/ProjectContext";
 
 const ProjectsList = () => {
-  const { projects, isProjectsEmpty } = useProject();
+  const { projects, isProjectsEmpty, errorAPI, loading } = useProject();
+  let content;
+  let btnCreate;
+
+  //* Если ошибка с сервером показать ошибку
+  if (errorAPI) {
+    content = (
+      <h1 className="project-list__text text-danger heading-primary">
+        Похоже неполадки с сервером, повторите попытку позже!
+      </h1>
+    );
+    //* Если нет проекта(ов) показать кнопку с созданием
+  } else if (isProjectsEmpty) {
+    content = (
+      <h1 className="project-list__text text-dark heading-primary">
+        Похоже у вас еще нет проекта, поскорее создайте его!
+      </h1>
+    );
+  } else {
+    content = (
+      <ul className="project-list">
+        {projects.map((project) => (
+          <li className="project-item" key={project.id}>
+            <CardComponent key={project.id} project={project} />
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  if (errorAPI) {
+    btnCreate = <span className="text-light"></span>;
+  } else {
+    btnCreate = <ButtonCreate />;
+  }
 
   return (
     <section className="sect-project">
@@ -22,23 +56,19 @@ const ProjectsList = () => {
               <h1 className="project-title">Мои проекты</h1>
             </div>
             <div className="project-top__right">
-              <ButtonCreate />
+              {loading ? (
+                <span className="text-light">Загрузка...</span>
+              ) : (
+                btnCreate
+              )}
             </div>
           </div>
-          {isProjectsEmpty ? (
+          {loading ? (
             <h1 className="project-list__text text-dark heading-primary">
-              Похоже у вас еще нет проекта, поскорее создайте его!
+              Загрузка...
             </h1>
           ) : (
-            <>
-              <ul className="project-list">
-                {projects.map((project) => (
-                  <li className="project-item" key={project.id}>
-                    <CardComponent key={project.id} project={project} />
-                  </li>
-                ))}
-              </ul>
-            </>
+            content
           )}
         </div>
       </div>

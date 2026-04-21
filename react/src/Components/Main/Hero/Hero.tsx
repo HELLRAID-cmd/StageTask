@@ -4,6 +4,7 @@ import "./Hero.scss";
 import ProjectChecker from "../ProjectsChecker/ProjectsChecker";
 import { useProject } from "../../Context/Project/ProjectContext";
 import Button from "../../../shared/ui/button";
+import ButtonApi from "../../../shared/ui/ButtonApi";
 
 const Hero = () => {
   const { projects, isProjectsEmpty, errorAPI, loading } = useProject();
@@ -12,7 +13,7 @@ const Hero = () => {
 
   //* Если ошибка с сервером показать ошибку
   if (errorAPI) {
-    content = <Button variant="errorAPI">{errorAPI}</Button>;
+    content = <ButtonApi>{errorAPI}</ButtonApi>;
     //* Если нет проекта(ов) показать кнопку с созданием
   } else if (isProjectsEmpty) {
     content = (
@@ -58,7 +59,11 @@ const Hero = () => {
               Cоздавай задачи. <br /> Управляй процессом. Организуй проекты и
               держи всё под контролем.
             </p>
-            {loading ? <p className="hero-text__loading">Загрузка...</p> : content}
+            {loading ? (
+              <p className="hero-text__loading">Загрузка...</p>
+            ) : (
+              content
+            )}
           </div>
           <div className="hero-image">
             <img src={heroImg50} alt="Фото проекта" />
