@@ -7,6 +7,7 @@ const useProjectContext = () => {
   const [errorAPI, setErrorAPI] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
 
   // Функция создание проекта
   const createProject = useCallback(async (data: Omit<Project, "id">) => {
@@ -56,6 +57,8 @@ const useProjectContext = () => {
     loading,
     setLoading,
     deleteProject,
+    activeProjectId,
+    setActiveProjectId,
   };
 };
 
