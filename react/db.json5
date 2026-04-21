@@ -10,5 +10,15 @@
       id: "0DBN0bcRKrs",
     },
   ],
+  task: [
+    {
+      title: "sdaw",
+      status: "planned",
+      projectId: "0DBN0bcRKrs",
+      createdAt: 1776799587077,
+      history: [],
+      id: "fG5XW61OD_E",
+    },
+  ],
   $schema: "./node_modules/json-server/schema.json",
 }
