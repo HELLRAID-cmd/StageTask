@@ -25,7 +25,13 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
     const createdAt = Date.now();
 
     // Создание задачи
-    createTask(inputValueName.trim(), projectId, createdAt);
+    createTask({
+      title: inputValueName,
+      status: "planned",
+      projectId: projectId,
+      createdAt: createdAt,
+      history: [],
+    });
 
     setInputValueName("");
     setErrLength(false);
@@ -34,11 +40,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
 
   return (
     <>
-      <Button
-        className="project-item__button"
-        onClick={openModal}
-        variant="add"
-      >
+      <Button className="project-item__task" onClick={openModal} variant="add">
         <PlusCircleOutlined style={{ fontSize: "24px" }} />
       </Button>
       <Modal
