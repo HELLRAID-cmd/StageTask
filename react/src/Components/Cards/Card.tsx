@@ -2,10 +2,16 @@ import { Link } from "react-router-dom";
 import DeleteProject from "../Projects/DeleteProject/DeleteProject";
 import type { CardProps } from "../../shared/props/type";
 import "./Card.scss";
+import { useProject } from "../Context/Project/ProjectContext";
 
 const CardComponent: React.FC<CardProps> = ({ project }) => {
+  const { setActiveProjectId, activeProjectId } = useProject();
+
   if (!project) return null;
 
+  console.log(activeProjectId)
+
+  // Эта часть нужно для сохранения превью в LocalStorage
   const projects = JSON.parse(localStorage.getItem("projects") || "[]");
   const projectPreview = projects.find((p: any) => p.id === project.id);
   const preview = projectPreview?.preview;
@@ -20,7 +26,11 @@ const CardComponent: React.FC<CardProps> = ({ project }) => {
         } as React.CSSProperties
       }
     >
-      <Link className="card-item" to={`/project/${project.id}`}>
+      <Link
+        className="card-item"
+        to={`/project/${project.id}`}
+        onClick={() => setActiveProjectId(project.id)}
+      >
         {!preview ? (
           <span
             className="card-item__span w-100 text-center rounded-2"
