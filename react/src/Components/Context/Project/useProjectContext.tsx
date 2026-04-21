@@ -8,13 +8,21 @@ const useProjectContext = () => {
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
 
+  // Функция создание проекта
   const createProject = useCallback(async (data: Omit<Project, "id">) => {
     const addedProject = await projectsApi.add(data);
     setProjects((prev) => [...prev, addedProject]);
   }, []);
 
+  // Функция удаления проекта
+  const deleteProject = useCallback((projectId: string) => {
+    projectsApi.delete(projectId).then(() => {
+      setProjects((prev) => prev.filter((project) => project.id !== projectId));
+    });
+  }, []);
+
+  // Вот так выглядит получение данных через GET
   useEffect(() => {
-    // Вот так выглядит получение данных через GET
     const checkServer = async () => {
       try {
         const data = await projectsApi.getProject();
@@ -47,6 +55,7 @@ const useProjectContext = () => {
     setErrorAPI,
     loading,
     setLoading,
+    deleteProject,
   };
 };
 
