@@ -5,11 +5,9 @@ import "./Card.scss";
 import { useProject } from "../Context/Project/ProjectContext";
 
 const CardComponent: React.FC<CardProps> = ({ project }) => {
-  const { setActiveProjectId, activeProjectId } = useProject();
+  const { setActiveProjectId } = useProject();
 
   if (!project) return null;
-
-  console.log(activeProjectId)
 
   // Эта часть нужно для сохранения превью в LocalStorage
   const projects = JSON.parse(localStorage.getItem("projects") || "[]");

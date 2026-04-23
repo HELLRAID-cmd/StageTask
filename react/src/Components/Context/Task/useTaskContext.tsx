@@ -27,31 +27,46 @@ const useTaskContext = () => {
     [activeProjectId],
   );
 
-  // функция по изменению текста задачи
-  const updateTaskTitle = (id: string, newTitle: string) => {
-    setTasks((prev) => {
-      const updated = prev.map((task) => {
-        if (task.id !== id) return task;
-
-        const historyItem: TaskHistory = {
-          id: crypto.randomUUID(),
-          type: "renamed",
-          date: Date.now(),
-          oldTitle: task.title,
-          newTitle,
-        };
-
-        return {
-          ...task,
-          title: newTitle,
-          history: [...task.history, historyItem],
-        };
-      });
-
-      localStorage.setItem("tasks", JSON.stringify(updated));
-      return updated;
+  // Функция по удалению задачи
+  const deleteTask = useCallback(async (taskId: string) => {
+    tasksApi.deleteTask(taskId).then(() => {
+      setTasks((prev) => prev.filter((task) => task.id !== taskId));
     });
-  };
+  }, []);
+
+  const saveHistoryTask = useCallback(
+    (taskId: string, history: Omit<TaskHistory, "id">) => {
+      tasksApi.historyTask(taskId, history).then(() => {
+        setTasks((prev) =>
+          prev.map((task) =>
+            task.id === taskId
+              ? {
+                  ...task,
+                  history: [
+                    ...task.history,
+                    { ...history, id: crypto.randomUUID() },
+                  ],
+                }
+              : task,
+          ),
+        );
+      });
+    },
+    [],
+  );
+
+  // функция по изменению текста задачи
+  const updateTaskTitle = useCallback((taskId: string, newTitle: string) => {
+    tasksApi.editNameTask(taskId, newTitle).then(() => {
+      setTasks((prev) => {
+        const update = prev.map((task) =>
+          task.id === taskId ? { ...task, title: newTitle } : task,
+        );
+
+        return update;
+      });
+    });
+  }, []);
 
   // Вот так выглядит получение данных через GET
   useEffect(() => {
@@ -95,6 +110,8 @@ const useTaskContext = () => {
     setErrorAPITask,
     loadingTask,
     setLoadingTask,
+    deleteTask,
+    saveHistoryTask,
   };
 };
 
