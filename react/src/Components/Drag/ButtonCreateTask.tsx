@@ -30,9 +30,14 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
       status: "planned",
       projectId: projectId,
       createdAt: createdAt,
-      history: [],
+      history: [
+        {
+          id: crypto.randomUUID(),
+          type: "created",
+          date: createdAt,
+        },
+      ],
     });
-
     setInputValueName("");
     setErrLength(false);
     setOpen(false);
