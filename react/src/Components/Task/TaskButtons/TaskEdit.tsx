@@ -7,7 +7,7 @@ import { useTask } from "../../Context/Task/TaskContext";
 const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
   const [inputTask, setInputTask] = useState(input);
   const [open, setOpen] = useState(false);
-  const { updateTaskTitle, setEditTaskId } = useTask();
+  const { updateTaskTitle, setEditTaskId, saveHistoryTask } = useTask();
   const [errLength, setErrLength] = useState(false);
 
   const openModal = () => {
@@ -18,6 +18,12 @@ const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
     if (inputTask.length >= MAX_TASK_TEXT) return;
 
     updateTaskTitle(taskId, inputTask);
+    saveHistoryTask(taskId, {
+      type: "renamed",
+      date: Date.now(),
+      oldTitle: input,
+      newTitle: inputTask,
+    });
     setEditTaskId(null);
     setErrLength(false);
     setOpen(false);
