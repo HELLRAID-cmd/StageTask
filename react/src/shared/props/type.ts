@@ -45,7 +45,12 @@ export type TaskContextType = {
   setButtonCreate: React.Dispatch<React.SetStateAction<string[]>>;
   grabTask: boolean;
   setGrabTask: React.Dispatch<React.SetStateAction<boolean>>;
-  createTask: (title: string, projectId: string, createdAt: number) => void;
+  createTask: (
+    title: string,
+    projectId: string,
+    createdAt: number,
+    history: [],
+  ) => void;
   editTaskId: string | null;
   setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
   updateTaskTitle: (id: string, newTitle: string) => void;
