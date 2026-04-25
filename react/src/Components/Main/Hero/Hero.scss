@@ -33,15 +33,6 @@
       // Паддин 11 стоит чтобы экран не дергался при переходе в кнопку
       padding: 11px;
     }
-
-    &__btn {
-      padding: 10px;
-      background-color: var(--c-light-blue);
-
-      &:hover {
-        background-color: green;
-      }
-    }
   }
 
   &-image {

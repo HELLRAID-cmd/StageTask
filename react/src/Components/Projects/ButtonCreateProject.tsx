@@ -3,7 +3,7 @@ import ModalWindow from "../Modal/Modal";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import ButtonProject from "./ButtonProject";
 
-const ButtonCreate = () => {
+const ButtonCreateProject = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -21,4 +21,4 @@ const ButtonCreate = () => {
   );
 };
 
-export default ButtonCreate;
+export default ButtonCreateProject;
