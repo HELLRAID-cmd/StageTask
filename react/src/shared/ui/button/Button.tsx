@@ -4,13 +4,14 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "button" | "add";
 }
 
-const Button = ({ className, type, children, onClick, variant }: Props) => {
+const Button = ({ className, type, children, onClick, variant, ...props }: Props) => {
   if (variant === "add") {
     return (
       <button
         className={`project-item__button ${className} `}
         type={type}
         onClick={onClick}
+        {...props}
       >
         {children ? children : "Добавить"}
       </button>
@@ -23,9 +24,9 @@ const Button = ({ className, type, children, onClick, variant }: Props) => {
         className={`button hero-text__btn btn rounded-2 text-light ${className} `}
         type={type}
         onClick={onClick}
-        aria-label="Создать"
+        {...props}
       >
-        {children ? children : "Создать"}
+        {children ? children : "Кнопка"}
       </button>
     );
   }
