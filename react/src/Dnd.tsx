@@ -10,7 +10,6 @@ import { Route, Routes } from "react-router-dom";
 import ProjectPage from "./Components/Projects/ProjectPage";
 import ProjectsList from "./Components/Projects/ProjectsList";
 import TaskButton from "./Components/Task/TaskButtons/TaskButton";
-import type { TaskHistory } from "./shared/props/type";
 import MainScreen from "./Components/Main/MainScreen";
 import ProjectCreate from "./Components/Projects/ProjectCreate";
 import NotFound from "./Components/NotFound/NotFound";
@@ -18,8 +17,15 @@ import { useEffect, useState } from "react";
 import { useTask } from "./Components/Context/Task/TaskContext";
 
 const DndContextWrapper = () => {
-  const { setActiveId, tasks, setTasks, activeId, setGrabTask, editTaskId } =
-    useTask();
+  const {
+    setActiveId,
+    tasks,
+    setTasks,
+    activeId,
+    setGrabTask,
+    editTaskId,
+    saveHistoryTask,
+  } = useTask();
 
   const activeTask = tasks.find((t) => t.id === activeId);
 
@@ -47,9 +53,9 @@ const DndContextWrapper = () => {
       tolerance: 5,
     },
   });
-  
+
   const pointerSensor = useSensor(PointerSensor);
-  
+
   const isMobile = useIsMobile();
 
   // Менять сенсор в зависимости от разрешение экрана
@@ -69,26 +75,35 @@ const DndContextWrapper = () => {
 
         const newStatus = over.id as string;
 
+        const task = tasks.find((t) => t.id === active.id);
+        if (!task) return;
+
+        saveHistoryTask(task.id, {
+          type: "moved",
+          date: Date.now(),
+          from: task.status,
+          to: newStatus,
+        });
+
+        console.log(
+          "TASKS UPDATED:",
+          tasks.map((t) => ({
+            id: t.id,
+            status: t.status,
+          })),
+        );
+
         setTasks((prev) => {
           const updated = prev.map((t) => {
             if (t.id !== active.id) return t;
 
-            const historyItem: TaskHistory = {
-              id: crypto.randomUUID(),
-              type: "moved",
-              date: Date.now(),
-              from: t.status,
-              to: newStatus,
-            };
-
             return {
               ...t,
               status: newStatus,
-              history: [...t.history, historyItem],
+              history: [...t.history],
             };
           });
 
-          localStorage.setItem("tasks", JSON.stringify(updated));
           return updated;
         });
         setGrabTask(false);
