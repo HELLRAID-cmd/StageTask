@@ -3,8 +3,8 @@ import heroImg50 from "../../../assets/Hero/hero-img-50.png";
 import "./Hero.scss";
 import ProjectChecker from "../ProjectsChecker/ProjectsChecker";
 import { useProject } from "../../Context/Project/ProjectContext";
-import Button from "../../../shared/ui/button";
 import ButtonApi from "../../../shared/ui/ButtonApi";
+import CustomLink from "../../../shared/ui/Link";
 
 const Hero = () => {
   const { projects, isProjectsEmpty, errorAPI, loading } = useProject();
@@ -17,16 +17,16 @@ const Hero = () => {
     //* Если нет проекта(ов) показать кнопку с созданием
   } else if (isProjectsEmpty) {
     content = (
-      <Button variant="link" href={"/create"}>
+      <CustomLink to={"/create"} className="hero-text__btn" size="primary">
         Создать проект
-      </Button>
+      </CustomLink>
     );
     //* Если есть проекты показать кнопку с проектами
   } else {
     content = (
-      <Button variant="link" href={"/myProject"}>
+      <CustomLink to={"/myProject"} className="hero-text__btn" size="primary">
         Мои проекты
-      </Button>
+      </CustomLink>
     );
   }
 
