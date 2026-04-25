@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Task, TaskHistory } from "../../../shared/props/type";
 import tasksApi from "../../../shared/api/task";
-import { API_MODE, INTERVAL_TIME } from "../../Utils/Settings";
 import { useProject } from "../Project/ProjectContext";
 
 const useTaskContext = () => {
@@ -85,12 +84,6 @@ const useTaskContext = () => {
     };
 
     checkServer();
-
-    if (API_MODE) {
-      const interval = setInterval(checkServer, INTERVAL_TIME);
-
-      return () => clearInterval(interval);
-    }
   }, [activeProjectId]);
 
   return {
