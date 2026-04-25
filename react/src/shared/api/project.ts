@@ -2,30 +2,54 @@ import { HEADERS, URL_PROJECT } from "../../Components/Utils/Settings";
 import type { Project } from "../props/type";
 
 const projectsApi = {
-  getProject: () => {
-    return fetch(URL_PROJECT).then((response) => response.json());
+  getProject: async () => {
+    const response = await fetch(URL_PROJECT);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    return response.json();
   },
 
-  add: (project: Omit<Project, "id">) => {
-    return fetch(URL_PROJECT, {
+  add: async (project: Omit<Project, "id">) => {
+    const response = await fetch(URL_PROJECT, {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify(project),
-    }).then((response) => response.json());
+    });
+
+    if (!response.ok) {
+      throw new Error(`ADD error: ${response.status}`);
+    }
+
+    return await response.json();
   },
 
-  delete: (id: string) => {
-    return fetch(`${URL_PROJECT}/${id}`, {
+  delete: async (id: string) => {
+    const response = await fetch(`${URL_PROJECT}/${id}`, {
       method: "DELETE",
     });
+
+    if (!response.ok) {
+      throw new Error(`DELETE error: ${response.status}`);
+    }
+
+    return await response.json();
   },
 
-  update: (id: string, data: Partial<Project>) => {
-    return fetch(`${URL_PROJECT}/${id}`, {
+  update: async (id: string, data: Partial<Project>) => {
+    const response = await fetch(`${URL_PROJECT}/${id}`, {
       method: "PATCH",
       headers: HEADERS,
       body: JSON.stringify(data),
-    }).then((res) => res.json());
+    });
+
+    if (!response.ok) {
+      throw new Error(`UPDATE error: ${response.status}`);
+    }
+    
+    return await response.json();
   },
 };
 
