@@ -1,23 +1,10 @@
-import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import type { ButtonHTMLAttributes } from "react";
 
-type Props = {
-  className?: string;
-  type?: "button";
-  children?: ReactNode;
-  onClick?: () => void;
-  variant: "button" | "errorAPI" | "link" | "add";
-  href?: string;
-};
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: "button" | "add";
+}
 
-const Button = ({
-  className,
-  type,
-  children,
-  onClick,
-  variant,
-  href,
-}: Props) => {
+const Button = ({ className, type, children, onClick, variant }: Props) => {
   if (variant === "add") {
     return (
       <button
@@ -40,18 +27,6 @@ const Button = ({
       >
         {children ? children : "Создать"}
       </button>
-    );
-  }
-
-  if (variant === "link") {
-    return (
-      <Link
-        to={`${href}`}
-        className={`hero-text__btn btn rounded-2 text-light ${className}`}
-        aria-label="Мои проекты"
-      >
-        {children ? children : "Мои проекты"}
-      </Link>
     );
   }
 

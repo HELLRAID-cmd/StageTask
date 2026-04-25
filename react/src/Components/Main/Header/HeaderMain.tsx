@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./HeaderMain.scss";
 import { useProject } from "../../Context/Project/ProjectContext";
-import Button from "../../../shared/ui/button";
+import CustomLink from "../../../shared/ui/Link";
 
 const HeaderMain = () => {
   const { projects } = useProject();
@@ -9,7 +9,7 @@ const HeaderMain = () => {
   const project = projects.length === 0;
 
   return (
-    <header className="header-main">
+    <header className="header">
       <div className="container">
         <div className="header-wrapper">
           <div className="header-logo">
@@ -23,9 +23,9 @@ const HeaderMain = () => {
           </div>
           {/* Если нет проектов убрать кнопку */}
           {!project && (
-            <Button variant="link" href={"/myProject"}>
+            <CustomLink to={"/myProject"} className="header-project" size="mini">
               Мои проекты
-            </Button>
+            </CustomLink>
           )}
         </div>
       </div>

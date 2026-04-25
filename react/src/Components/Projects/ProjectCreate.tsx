@@ -1,6 +1,6 @@
 import { useProject } from "../Context/Project/ProjectContext";
 import "../Task/Task.scss";
-import ButtonCreate from "./ButtonCreate";
+import ButtonCreateProject from "./ButtonCreateProject";
 
 const ProjectCreate = () => {
   const { projects } = useProject();
@@ -15,7 +15,7 @@ const ProjectCreate = () => {
       <h2 className="project-create__subtitle heading-secondary text-dark">
         Создайте его
       </h2>
-      <ButtonCreate />
+      <ButtonCreateProject />
     </div>
   );
 };
