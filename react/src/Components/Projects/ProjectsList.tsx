@@ -1,12 +1,13 @@
 import "./Project.scss";
 import CardComponent from "../Cards/Card";
-import ButtonCreate from "./ButtonCreate";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useProject } from "../Context/Project/ProjectContext";
+import ButtonCreateProject from "./ButtonCreateProject";
 
 const ProjectsList = () => {
   const { projects, isProjectsEmpty, errorAPI, loading } = useProject();
+
   let content;
   let btnCreate;
 
@@ -39,7 +40,7 @@ const ProjectsList = () => {
   if (errorAPI) {
     btnCreate = <span className="text-light"></span>;
   } else {
-    btnCreate = <ButtonCreate />;
+    btnCreate = <ButtonCreateProject />;
   }
 
   return (
