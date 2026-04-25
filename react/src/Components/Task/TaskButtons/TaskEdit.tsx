@@ -3,6 +3,7 @@ import { useState } from "react";
 import { EditOutlined, CloseOutlined } from "@ant-design/icons";
 import { MAX_TASK_TEXT } from "../../Utils/Settings";
 import { useTask } from "../../Context/Task/TaskContext";
+import Button from "../../../shared/ui/button";
 
 const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
   const [inputTask, setInputTask] = useState(input);
@@ -31,12 +32,14 @@ const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
 
   return (
     <>
-      <button
-        className="task-item__btns-infotask-item__icon task-item__icon-edit"
+      <Button
+        className="task-item__btns-infotask-item__icon task-item__icon-edit p-0"
         onClick={openModal}
+        variant="button"
+        aria-label="Изменить задачу"
       >
         <EditOutlined className="task-item__icon task-item__icon--edit" />
-      </button>
+      </Button>
       <Modal
         title="Изменение задачи"
         open={open}

@@ -3,6 +3,7 @@ import { Modal } from "antd";
 import { useState } from "react";
 import CardHistory from "../../Cards/CardHistory";
 import { useTask } from "../../Context/Task/TaskContext";
+import Button from "../../../shared/ui/button";
 
 const TaskHistoryBtn = ({ taskId }: { taskId: string }) => {
   const [open, setOpen] = useState(false);
@@ -12,14 +13,15 @@ const TaskHistoryBtn = ({ taskId }: { taskId: string }) => {
 
   return (
     <>
-      <button
-        className="task-item__btns-info"
+      <Button
+        variant="button"
+        className="task-item__btns-info p-0"
         onClick={() => {
           setOpen(true);
         }}
       >
-        <ClockCircleOutlined className="task-item__icon task-item__icon--info"/>
-      </button>
+        <ClockCircleOutlined className="task-item__icon task-item__icon--info" />
+      </Button>
       <Modal
         title="История задачи"
         open={open}
@@ -36,7 +38,10 @@ const TaskHistoryBtn = ({ taskId }: { taskId: string }) => {
           </span>
         }
       >
-        <ul className="task-history" style={{maxHeight: "400px", overflowY: "auto"}}>
+        <ul
+          className="task-history"
+          style={{ maxHeight: "400px", overflowY: "auto" }}
+        >
           {task ? (
             <li className="task-history__item">
               <div className="task-history__page">
