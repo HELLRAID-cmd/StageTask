@@ -2,10 +2,14 @@ import { HEADERS, URL_TASK } from "../../Components/Utils/Settings";
 import type { Task, TaskHistory } from "../props/type";
 
 const tasksApi = {
-  getTaskByProjectId: (projectId: string) => {
-    return fetch(`${URL_TASK}?projectId=${projectId}`).then((response) =>
-      response.json(),
-    );
+  getTaskByProjectId: async (projectId: string) => {
+    const response = await fetch(`${URL_TASK}?projectId=${projectId}`);
+
+    if (!response.ok) {
+      throw new Error(`getTaskByProjectId error: ${response.status}`);
+    }
+
+    return await response.json();
   },
 
   historyTask: async (taskId: string, history: Omit<TaskHistory, "id">) => {
@@ -17,36 +21,60 @@ const tasksApi = {
       { ...history, id: crypto.randomUUID() },
     ];
 
-    return fetch(`${URL_TASK}/${taskId}`, {
+    const response = await fetch(`${URL_TASK}/${taskId}`, {
       method: "PATCH",
       headers: HEADERS,
       body: JSON.stringify({
         history: updatedHistory,
-        status: history.to
+        status: history.to,
       }),
     });
+
+    if (!response.ok) {
+      throw new Error(`historyTask error: ${response.status}`);
+    }
+
+    return response.json();
   },
 
-  addTask: (task: Omit<Task, "id">) => {
-    return fetch(URL_TASK, {
+  addTask: async (task: Omit<Task, "id">) => {
+    const response = await fetch(URL_TASK, {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify(task),
-    }).then((response) => response.json());
+    });
+
+    if (!response.ok) {
+      throw new Error(`addTask error: ${response.status}`);
+    }
+
+    return await response.json();
   },
 
-  deleteTask: (taskId: string) => {
-    return fetch(`${URL_TASK}/${taskId}`, {
+  deleteTask: async (taskId: string) => {
+    const response = await fetch(`${URL_TASK}/${taskId}`, {
       method: "DELETE",
     });
+
+    if (!response.ok) {
+      throw new Error(`deleteTask error: ${response.status}`);
+    }
+
+    return await response.json();
   },
 
-  editNameTask: (id: string, title: string) => {
-    return fetch(`${URL_TASK}/${id}`, {
+  editNameTask: async (id: string, title: string) => {
+    const response = await fetch(`${URL_TASK}/${id}`, {
       method: "PATCH",
       headers: HEADERS,
       body: JSON.stringify({ title }),
     });
+
+    if (!response.ok) {
+      throw new Error(`editNameTask error: ${response.status}`);
+    }
+
+    return await response.json();
   },
 };
 
