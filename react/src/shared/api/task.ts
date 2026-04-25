@@ -22,6 +22,7 @@ const tasksApi = {
       headers: HEADERS,
       body: JSON.stringify({
         history: updatedHistory,
+        status: history.to
       }),
     });
   },

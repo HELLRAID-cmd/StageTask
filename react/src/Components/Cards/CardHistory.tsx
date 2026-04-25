@@ -37,7 +37,7 @@ const CardHistory: React.FC<CardProps> = ({ task }) => {
           if (item.type === "renamed") {
             return (
               <p className="card-history__info" key={item.id}>
-                Название изменено "{item.oldTitle}" на "{item.newTitle}" <br />
+                Название изменено с "{item.oldTitle}" на "{item.newTitle}" <br />
                 {new Date(item.date).toLocaleString("ru-RU")}
               </p>
             );
