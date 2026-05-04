@@ -1,5 +1,9 @@
 // Task
 export const MAX_TASK_TEXT = 40;
+export const DATE_UTILS = {
+  todayISO: () => new Date().toISOString().split("T")[0],
+  now: () => Date.now(),
+};
 
 // Project
 export const MAX_PROJECT_NAME = 30;
