@@ -62,6 +62,12 @@
       &--deadline:hover {
         color: var(--c-stopped-dark);
       }
+
+      &--time {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
     }
   }
 
