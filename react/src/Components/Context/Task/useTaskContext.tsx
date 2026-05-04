@@ -10,10 +10,11 @@ const useTaskContext = () => {
   const [editTaskId, setEditTaskId] = useState<string | null>(null);
   const [errorAPITask, setErrorAPITask] = useState<string | null>(null);
   const [loadingTask, setLoadingTask] = useState(true);
-
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const { activeProjectId } = useProject();
+
+  const now = Date.now();
 
   // Функция по созданию задачи
   const createTask = useCallback(
@@ -105,6 +106,7 @@ const useTaskContext = () => {
     setLoadingTask,
     deleteTask,
     saveHistoryTask,
+    now,
   };
 };
 
