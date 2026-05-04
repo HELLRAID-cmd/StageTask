@@ -4,6 +4,7 @@ import TaskHistoryBtn from "./TaskHistoryBtn";
 import TaskDelete from "./TaskDelete";
 import TaskEdit from "./TaskEdit";
 import { useTask } from "../../Context/Task/TaskContext";
+import TaskDeadline from "./TaskDeadline";
 
 const TaskButton = ({
   task,
@@ -50,6 +51,7 @@ const TaskButton = ({
           <>
             <TaskEdit input={task.title} taskId={task.id} />
             <TaskHistoryBtn taskId={task.id} />
+            <TaskDeadline taskId={task.id} />
             <TaskDelete task={task} />
           </>
         )}
