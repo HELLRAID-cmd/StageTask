@@ -34,6 +34,7 @@ export type Task = {
   projectId: string;
   createdAt: number;
   history: TaskHistory[];
+  dueData?: string;
 };
 
 export type TaskContextType = {
@@ -50,6 +51,7 @@ export type TaskContextType = {
     projectId: string,
     createdAt: number,
     history: [],
+    dueData?: string,
   ) => void;
   editTaskId: string | null;
   setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
@@ -77,6 +79,7 @@ export type TaskHistory = {
   id: string;
   type: "created" | "moved" | "renamed";
   date: number;
+  dueData?: string;
   from?: string;
   to?: string;
   oldTitle?: string;
