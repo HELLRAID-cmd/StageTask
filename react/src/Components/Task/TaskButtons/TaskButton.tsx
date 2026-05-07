@@ -6,6 +6,7 @@ import TaskEdit from "./TaskEdit";
 import { useTask } from "../../Context/Task/TaskContext";
 import TaskDeadline from "./TaskDeadline";
 import { FieldTimeOutlined } from "@ant-design/icons";
+import { isExpired } from "../../Utils/Date";
 
 const TaskButton = ({
   task,
@@ -14,12 +15,14 @@ const TaskButton = ({
   task: Task;
   editTaskId: string | null;
 }) => {
-  const { grabTask } = useTask();
+  const { grabTask, currentDate } = useTask();
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
 
   if (!task) return null;
+
+  const expired = isExpired(task.dueData, currentDate);
 
   const style = {
     transform: transform
@@ -28,8 +31,13 @@ const TaskButton = ({
   };
 
   return (
-    <div className="task-item">
-      {task.dueData ? <FieldTimeOutlined style={{ fontSize: "30px", color: "red" }} className="task-item__icon task-item__icon--time"/> : ""}
+    <div className={`task-item ${expired ? "task-item--expired" : ""}`}>
+      {task.dueData ? (
+        <FieldTimeOutlined
+          style={{ fontSize: "30px", color: expired ? "white" : "red" }}
+          className="task-item__icon task-item__icon--time"
+        />
+      ) : null}
       <div
         ref={setNodeRef}
         className="task-item__btns-btn btn text-light w-100 text-start"

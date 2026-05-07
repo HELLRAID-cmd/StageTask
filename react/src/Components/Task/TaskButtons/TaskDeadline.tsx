@@ -3,14 +3,16 @@ import Button from "../../../shared/ui/button";
 import { HourglassOutlined, CloseOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useTask } from "../../Context/Task/TaskContext";
-import { newDate } from "../../Utils/Date";
+import { isExpired, newDate } from "../../Utils/Date";
 
 const TaskDeadline = ({ taskId }: { taskId: string }) => {
   const [open, setOpen] = useState(false);
 
-  const { tasks } = useTask();
+  const { currentDate, getTask } = useTask();
 
-  const task = tasks.find((t) => t.id === taskId);
+  const task = getTask(taskId);
+
+  const expired = isExpired(task?.dueData, currentDate);
 
   const handleClick = () => {
     setOpen((prev) => !prev);
@@ -46,10 +48,13 @@ const TaskDeadline = ({ taskId }: { taskId: string }) => {
       >
         {task?.dueData ? (
           <p className="card-history__info" key={task?.id}>
-            Необходимо выполнить задачу до "{newDate(task.dueData)}"
+            {expired
+              ? `Задача была просрочена нужно было выполнить до "
+                ${newDate(task.dueData)}"`
+              : `Необходимо выполнить задачу до "${newDate(task.dueData)}"`}
           </p>
         ) : (
-          <p className="card-history__info" key={task?.id}>
+          <p className="card-history" key={task?.id}>
             У этой задачи нет дедлайна
           </p>
         )}
