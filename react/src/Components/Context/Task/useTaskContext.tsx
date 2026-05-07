@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Task, TaskHistory } from "../../../shared/props/type";
 import tasksApi from "../../../shared/api/task";
 import { useProject } from "../Project/ProjectContext";
@@ -14,7 +14,12 @@ const useTaskContext = () => {
 
   const { activeProjectId } = useProject();
 
-  const now = Date.now();
+  const now = Date.now().toLocaleString("ru-RU");
+  const currentDate = new Date();
+
+  const getTask = (id: string) => {
+    return tasks.find((t) => t.id === id);
+  }
 
   // Функция по созданию задачи
   const createTask = useCallback(
@@ -107,6 +112,8 @@ const useTaskContext = () => {
     deleteTask,
     saveHistoryTask,
     now,
+    currentDate,
+    getTask
   };
 };
 
