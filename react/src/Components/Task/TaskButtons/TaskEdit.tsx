@@ -1,4 +1,4 @@
-import { Input, Modal } from "antd";
+import { Dropdown, Input, Modal, type MenuProps } from "antd";
 import { useState } from "react";
 import { EditOutlined, CloseOutlined } from "@ant-design/icons";
 import { MAX_TASK_TEXT } from "../../Utils/Settings";
@@ -10,6 +10,9 @@ const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
   const [open, setOpen] = useState(false);
   const { updateTaskTitle, setEditTaskId, saveHistoryTask } = useTask();
   const [errLength, setErrLength] = useState(false);
+  const [activeAction, setActiveAction] = useState<"edit" | "deadline" | null>(
+    null,
+  );
 
   const openModal = () => {
     setOpen(true);
@@ -28,6 +31,33 @@ const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
     setEditTaskId(null);
     setErrLength(false);
     setOpen(false);
+  };
+
+  const onBlur = () => {
+    setActiveAction(null);
+    setEditTaskId(null);
+    setErrLength(false);
+    setOpen(false);
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "edit",
+      label: "Изменить задачу",
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "deadline",
+      label: "Изменить срок задачи",
+    },
+  ];
+
+  const openItemDropdown: MenuProps["onClick"] = (e) => {
+    const key = e.key as "edit" | "deadline";
+
+    setActiveAction((prev) => (prev === key ? null : key));
   };
 
   return (
@@ -59,20 +89,33 @@ const TaskEdit = ({ input, taskId }: { input: string; taskId: string }) => {
           </span>
         }
       >
-        {inputTask.length >= MAX_TASK_TEXT && (
-          <p className="text-danger">Слишком большой текст!</p>
-        )}
-        <Input
-          id="name"
-          placeholder="Введите название"
-          value={inputTask}
-          onChange={(e) => {
-            setInputTask(e.target.value);
-            if (errLength) setErrLength(false);
-          }}
-          onPressEnter={handleSave}
-          onBlur={handleSave}
-        />
+        <Dropdown
+          menu={{ items, onClick: openItemDropdown }}
+          className=" text-black"
+        >
+          <a onClick={() => openItemDropdown}>
+            <p className="task-item__dropdown-text text-black">Выберите что хотите изменить</p>
+          </a>
+        </Dropdown>
+        {activeAction === "edit" ? (
+          <>
+            {inputTask.length >= MAX_TASK_TEXT && (
+              <p className="text-danger">Слишком большой текст!</p>
+            )}
+            <Input
+              id="name"
+              placeholder="Введите название"
+              value={inputTask}
+              onChange={(e) => {
+                setInputTask(e.target.value);
+                if (errLength) setErrLength(false);
+              }}
+              onPressEnter={handleSave}
+              onBlur={onBlur}
+            />
+          </>
+        ) : null}
+        {activeAction === "deadline" ? <p>NULL</p> : null}
       </Modal>
     </>
   );
