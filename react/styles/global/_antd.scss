@@ -6,3 +6,39 @@
   max-height: 230px;
   padding: 0;
 }
+
+.and-space {
+  &-item {
+    color: var(--c-black);
+  }
+}
+
+.ant-dropdown {
+  &-menu {
+    &-title {
+      &-content {
+        color: var(--c-black);
+      }
+    }
+  }
+}
+
+.ant-menu {
+  &-title {
+    &-content {
+      display: block;
+      color: var(--c-black);
+      border: 1px solid var(--c-black);
+      padding: 5px;
+      width: 100%;
+    }
+  }
+
+  &-item {
+    &-group {
+      &-title {
+        display: none;
+      }
+    }
+  }
+}

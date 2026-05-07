@@ -20,6 +20,10 @@
     background-color: var(--c-white);
     border-radius: 10px;
 
+    &--expired {
+      background-color: var(--c-stopped);
+    }
+
     &__btns {
       position: relative;
       width: 100%;
@@ -67,6 +71,19 @@
         position: absolute;
         top: 0px;
         right: 0px;
+      }
+    }
+
+    &__menu {
+      color: var(--c-black);
+    }
+
+    &__dropdown {
+      &-text {
+        padding: 5px;
+        border: 1px solid var(--c-black);
+        border-radius: 10px;
+        margin: 0 0 20px 0;
       }
     }
   }
