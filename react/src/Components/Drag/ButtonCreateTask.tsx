@@ -11,20 +11,20 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   const [inputValueName, setInputValueName] = useState("");
   const [inputDate, setInputDate] = useState<string>("");
   const [errLength, setErrLength] = useState(false);
-  const [createdData, setCreatedData] = useState<number | null>(null);
+  const [createdData, setCreatedData] = useState<Date | null>(null);
 
   const { createTask, now } = useTask();
 
   const selectedDate = new Date(inputDate).getTime();
 
   const openModal = () => {
-    setCreatedData(Date.now());
+    setCreatedData(new Date());
     setOpen(true);
   };
 
   const handleCreate = () => {
-    if (!inputValueName.trim()) return;
-    if (inputValueName.length >= 40) return;
+    if (!inputValueName.trim() || inputValueName.length >= 40) return;
+    if (selectedDate < now) return;
 
     const createdAt = Date.now();
 
@@ -92,9 +92,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
         <label htmlFor="date" className="mb-2">
           Срок задачи
         </label>
-        {selectedDate < now && (
-          <p className="text-danger">Неккоректная дата</p>
-        )}
+        {selectedDate < now && <p className="text-danger">Неккоректная дата</p>}
         <Input
           id="date"
           type={"date"}
