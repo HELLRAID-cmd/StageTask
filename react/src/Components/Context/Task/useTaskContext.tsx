@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Task, TaskHistory } from "../../../shared/props/type";
 import tasksApi from "../../../shared/api/task";
 import { useProject } from "../Project/ProjectContext";
@@ -14,7 +14,7 @@ const useTaskContext = () => {
 
   const { activeProjectId } = useProject();
 
-  const now = Date.now().toLocaleString("ru-RU");
+  const now = Date.now();
   const currentDate = new Date();
 
   const getTask = (id: string) => {
