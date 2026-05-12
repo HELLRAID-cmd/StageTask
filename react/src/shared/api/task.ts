@@ -76,6 +76,20 @@ const tasksApi = {
 
     return await response.json();
   },
+
+  editDateTask: async (id: string, date: string) => {
+    const response = await fetch(`${URL_TASK}/${id}`, {
+      method: "PATCH",
+      headers: HEADERS,
+      body: JSON.stringify({ date }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`editDateTask error: ${response.status}`);
+    }
+
+    return await response.json();
+  },
 };
 
 export default tasksApi;
