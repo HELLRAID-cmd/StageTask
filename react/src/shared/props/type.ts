@@ -77,7 +77,7 @@ export type TaskStatusType = {
 
 export type TaskHistory = {
   id: string;
-  type: "created" | "moved" | "renamed";
+  type: "created" | "moved" | "renamed" | "deadline";
   date: number;
   dueData?: string;
   from?: string;

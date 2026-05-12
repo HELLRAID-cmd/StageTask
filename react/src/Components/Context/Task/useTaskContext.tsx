@@ -19,7 +19,7 @@ const useTaskContext = () => {
 
   const getTask = (id: string) => {
     return tasks.find((t) => t.id === id);
-  }
+  };
 
   // Функция по созданию задачи
   const createTask = useCallback(
@@ -59,6 +59,17 @@ const useTaskContext = () => {
     },
     [],
   );
+
+  const updateTaskDate = useCallback((taskId: string, date: string) => {
+    tasksApi.editDateTask(taskId, date).then(() => {
+      setTasks((prev) => {
+        const update = prev.map((task) =>
+          task.id === taskId ? { ...task, dueData: date } : task,
+        );
+        return update;
+      });
+    });
+  }, []);
 
   // функция по изменению текста задачи
   const updateTaskTitle = useCallback((taskId: string, newTitle: string) => {
@@ -113,7 +124,8 @@ const useTaskContext = () => {
     saveHistoryTask,
     now,
     currentDate,
-    getTask
+    getTask,
+    updateTaskDate,
   };
 };
 
