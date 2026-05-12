@@ -47,6 +47,15 @@ const CardHistory: React.FC<CardProps> = ({ task }) => {
               </p>
             );
           }
+
+          if (item.type === "deadline") {
+            return (
+              <p className="card-history__info" key={item.id}>
+                Срок задачи изменен на "{item.dueData}" <br />
+                {new Date(item.date).toLocaleString("ru-RU")}
+              </p>
+            );
+          }
         })}
     </div>
   );
