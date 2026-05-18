@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: var(--ff-main);
   gap: 20px;
 
   @include vp-1023 {
