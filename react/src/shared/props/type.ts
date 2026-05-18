@@ -7,10 +7,8 @@ export type Project = {
   id: string;
   title: string;
   desc: string;
-  colorCode: string;
   createdAt: number;
   preview?: string | null;
-  colorCodeDark?: string;
 };
 
 export type DeleteProps = {

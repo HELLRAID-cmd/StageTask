@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Input, Modal } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
-import Colors from "./Colors";
 import TextArea from "antd/es/input/TextArea";
 import type { ModalWindowProps } from "../../shared/props/type";
 import { useNavigate } from "react-router-dom";
@@ -12,21 +11,16 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
   const [inputValueName, setInputValueName] = useState("");
   const [inputValueDesc, setInputValueDesc] = useState("");
   const [errLength, setErrLength] = useState(false);
-  const [color, setColor] = useState("");
 
   const { createProject } = useProject();
   const navigate = useNavigate();
 
   const handleCreate = () => {
-    const selectedColor = Colors.find((c) => c.colorCode === color);
-
     createProject({
       title: inputValueName,
       desc: inputValueDesc,
-      colorCode: color,
       createdAt: Date.now(),
-      colorCodeDark: selectedColor?.colorCodeDark,
-      preview: ""
+      preview: "",
     });
 
     setInputValueName("");
@@ -89,23 +83,6 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
           }}
           maxLength={100}
         />
-        <label htmlFor="color" className="mb-2">
-          Цвет
-        </label>
-        <div className="task-list-color d-flex justify-content-between gap-1">
-          {Colors.map((c) => (
-            <span
-              key={c.id}
-              onClick={() => setColor(c.colorCode)}
-              className={`task-color icon-link-hover`}
-              style={{
-                border: `5px solid ${c.colorCode}`,
-                backgroundColor:
-                  color === c.colorCode ? c.colorCode : "transparent",
-              }}
-            ></span>
-          ))}
-        </div>
       </Modal>
     </>
   );
