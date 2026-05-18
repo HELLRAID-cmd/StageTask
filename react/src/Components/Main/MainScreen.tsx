@@ -9,7 +9,7 @@ const MainScreen = () => {
   return (
     <>
       <Layout>
-          <HeaderMain />
+        <HeaderMain />
         <Content>
           <Hero />
           <About />
