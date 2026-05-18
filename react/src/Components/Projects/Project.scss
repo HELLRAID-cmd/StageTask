@@ -1,52 +1,68 @@
 @use "../../../styles/global/mixins" as *;
 
 .project {
-  &-create {
-    height: 100vh;
-    &__title {
-      font-size: 56px;
-      margin: 0 0 20px 0;
+  // &-create {
+  //   height: 100vh;
+  //   &__title {
+  //     font-size: 56px;
+  //     margin: 0 0 20px 0;
 
-      @include vp-767 {
-        text-align: center;
-        line-height: 48px;
-      }
-    }
+  //     @include vp-767 {
+  //       text-align: center;
+  //       line-height: 48px;
+  //     }
+  //   }
 
-    &__subtitle {
-      font-size: 50px;
-      margin: 0 0 50px 0;
-    }
-  }
+  //   &__subtitle {
+  //     font-size: 50px;
+  //     margin: 0 0 50px 0;
+  //   }
+  // }
 
   &-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: 40px 0 100px 0;
-    background-color: gray;
+
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+
+    margin: 63px 0 0 0;
+
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(1px);
+    background-size: cover;
+
+    z-index: 10;
 
     @include vp-767 {
       gap: 20px;
-      margin: 20px 0 50px 0;
       text-align: center;
     }
 
-    &__left {
+    &__info {
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      width: 100%;
+      max-width: 2560px;
+      margin: 0 auto;
+      padding: 0 60px 0;
       gap: 10px;
 
       @media (max-width: 500px) {
         gap: 20px;
       }
+
+      &--page {
+        justify-content: start;
+      }
     }
 
     // Меняет цвет иконки в файле ProjectList
-    &__right {
-      .project-top__icon {
-        color: var(--c-white);
-      }
+    .project-top__icon {
+      color: var(--c-white);
     }
 
     &__icon {
@@ -56,6 +72,7 @@
 
   &-title {
     font-size: 56px;
+    margin: 0;
 
     @include vp-767 {
       font-size: 40px;
@@ -67,7 +84,9 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     position: relative;
+    padding: 200px 0 0 0;
     margin: 0 0 20px 0;
+    z-index: 1;
 
     @media (max-width: 1250px) {
       grid-template-columns: repeat(4, 1fr);

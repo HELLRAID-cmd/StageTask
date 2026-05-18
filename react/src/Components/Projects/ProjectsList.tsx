@@ -4,12 +4,16 @@ import { LeftCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useProject } from "../Context/Project/ProjectContext";
 import ButtonCreateProject from "./ButtonCreateProject";
+import HeaderMain from "../Main/Header/HeaderMain";
+import useBackground from "../../shared/hooks/useBackground";
 
 const ProjectsList = () => {
   const { projects, isProjectsEmpty, errorAPI, loading } = useProject();
 
   let content;
   let btnCreate;
+
+  useBackground();
 
   //* Если ошибка с сервером показать ошибку
   if (errorAPI) {
@@ -45,18 +49,19 @@ const ProjectsList = () => {
 
   return (
     <section className="sect-project">
+      <HeaderMain />
       <div className="container">
         <div className="project">
-          <div className="project-top rounded-3 p-2">
-            <div className="project-top__left">
+          <div className="project-top">
+            <div className="project-top__info">
               <Link to={"/"}>
                 <LeftCircleOutlined
                   style={{ fontSize: "40px", color: "#fff" }}
                 />
               </Link>
+
               <h1 className="project-title">Мои проекты</h1>
-            </div>
-            <div className="project-top__right">
+
               {loading ? (
                 <span className="text-light">Загрузка...</span>
               ) : (

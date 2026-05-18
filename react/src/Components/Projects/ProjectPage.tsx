@@ -5,6 +5,7 @@ import { LeftCircleOutlined } from "@ant-design/icons";
 import { useRef } from "react";
 import makeScreenShot from "../Utils/MakeScreenShot";
 import { useProject } from "../Context/Project/ProjectContext";
+import HeaderMain from "../Main/Header/HeaderMain";
 
 // Открывает проект
 const ProjectPage = () => {
@@ -36,16 +37,19 @@ const ProjectPage = () => {
 
   return (
     <section className="sect-project">
+      <HeaderMain/>
       <div className="container">
         <div ref={previewRef}>
-          <div className="project-top justify-content-start gap-2 rounded-3 p-2">
-            <Link to={"/myProject"}>
-              <LeftCircleOutlined
-                style={{ fontSize: "40px", color: "#fff" }}
-                onClick={handleScreenshot}
-              />
-            </Link>
-            <h1 className="project-title">{project.title}</h1>
+          <div className="project-top">
+            <div className="project-top__info project-top__info--page">
+              <Link to={"/myProject"}>
+                <LeftCircleOutlined
+                  style={{ fontSize: "40px", color: "#fff" }}
+                  onClick={handleScreenshot}
+                />
+              </Link>
+              <h1 className="project-title">{project.title}</h1>
+            </div>
           </div>
           <ul className="project-list project-list--task">
             <li
