@@ -28,6 +28,7 @@ const TaskButton = ({
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : undefined,
+    cursor: "default"
   };
 
   return (
@@ -46,7 +47,7 @@ const TaskButton = ({
         <span
           {...listeners}
           {...attributes}
-          style={{ cursor: "grab", marginRight: 8, color: "#000" }}
+          className="task-item__btns-icon"
         >
           ☰
         </span>
