@@ -25,7 +25,7 @@ const ProjectsList = () => {
     //* Если нет проекта(ов) показать кнопку с созданием
   } else if (isProjectsEmpty) {
     content = (
-      <h1 className="project-list__text text-dark heading-primary">
+      <h1 className="project-list__text text-light heading-primary">
         Похоже у вас еще нет проекта, поскорее создайте его!
       </h1>
     );
@@ -49,7 +49,7 @@ const ProjectsList = () => {
 
   return (
     <section className="sect-project">
-      <HeaderMain />
+      <HeaderMain showProjectBtn={false} />
       <div className="container">
         <div className="project">
           <div className="project-top">
