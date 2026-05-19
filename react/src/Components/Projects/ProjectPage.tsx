@@ -6,6 +6,7 @@ import { useRef } from "react";
 import makeScreenShot from "../Utils/MakeScreenShot";
 import { useProject } from "../Context/Project/ProjectContext";
 import HeaderMain from "../Main/Header/HeaderMain";
+import CreateColumnBtn from "../Task/TaskColumn/CreateColumnBtn";
 
 // Открывает проект
 const ProjectPage = () => {
@@ -37,7 +38,7 @@ const ProjectPage = () => {
 
   return (
     <section className="sect-project">
-      <HeaderMain/>
+      <HeaderMain />
       <div className="container">
         <div ref={previewRef}>
           <div className="project-top">
@@ -49,22 +50,21 @@ const ProjectPage = () => {
                 />
               </Link>
               <h1 className="project-title">{project.title}</h1>
+              <CreateColumnBtn/>
             </div>
           </div>
           <ul className="project-list project-list--task">
             <li
-              className="project-item project-item--planned rounded-3 p-3"
+              className="project-item rounded-3 p-2"
               id={`planned-${project.id}`}
             >
               <div className="project-item__top">
-                <p className="project-item__title title-planned mb-4">
-                  Запланировано
-                </p>
-                <ButtonCreateTask projectId={project.id} />
+                <p className="project-item__title mb-4">Запланировано</p>
               </div>
               <TaskColumn projectId={project.id} status="planned" />
+              <ButtonCreateTask projectId={project.id} />
             </li>
-            <li
+            {/* <li
               className="project-item project-item--progress rounded-3 p-3"
               id={`progress-${project.id}`}
             >
@@ -90,7 +90,7 @@ const ProjectPage = () => {
                 Выполнено
               </p>
               <TaskColumn projectId={project.id} status="completed" />
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

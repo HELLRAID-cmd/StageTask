@@ -1,0 +1,86 @@
+@use "../../../styles/global/mixins" as *;
+
+.project {
+  overflow-y: hidden;
+  
+  &-create {
+    height: 100vh;
+    &__title {
+      font-size: 56px;
+      margin: 0 0 20px 0;
+
+      @include vp-767 {
+        text-align: center;
+        line-height: 48px;
+      }
+    }
+
+    &__subtitle {
+      font-size: 50px;
+      margin: 0 0 50px 0;
+    }
+  }
+
+  &-top {
+    display: flex;
+    align-items: center;
+
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+
+    margin: 56px 0 0 0;
+
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(1px);
+    background-size: cover;
+    z-index: 10;
+
+    @include vp-767 {
+      gap: 20px;
+      text-align: center;
+    }
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 2560px;
+      margin: 0 auto;
+      padding: 0 60px 0;
+      gap: 10px;
+
+      @include vp-767 {
+        padding: 10px 40px;
+      }
+
+      @media (max-width: 500px) {
+        gap: 20px;
+      }
+    }
+
+    // Меняет цвет иконки в файле ProjectList
+    .project-top__icon {
+      color: var(--c-white);
+    }
+
+    &__icon {
+      color: var(--c-black);
+    }
+  }
+
+  &-title {
+    font-size: var(--f-size-h2);
+    margin: 0;
+
+    @include vp-767 {
+      font-size: 40px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 30px;
+    }
+  }
+}

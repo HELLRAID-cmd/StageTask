@@ -1,4 +1,5 @@
-import "./Project.scss";
+import "./Projects.scss";
+import "./ProjectPage.scss";
 import CardComponent from "../Cards/Card";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";

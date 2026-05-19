@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input, Modal } from "antd";
-import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 import { DATE_UTILS, MAX_TASK_TEXT } from "../Utils/Settings";
 import { useTask } from "../Context/Task/TaskContext";
 import Button from "../../shared/ui/button/Button";
@@ -52,7 +52,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   return (
     <>
       <Button className="project-item__task" onClick={openModal} variant="add">
-        <PlusCircleOutlined style={{ fontSize: "24px" }} />
+        Создать новую задачу
       </Button>
       <Modal
         title="Введите название задачи"
