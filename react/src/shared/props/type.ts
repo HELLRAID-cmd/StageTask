@@ -56,6 +56,11 @@ export type TaskContextType = {
   updateTaskTitle: (id: string, newTitle: string) => void;
 };
 
+export type TaskColumnType = {
+  id: string;
+  title: string;
+}
+
 export type ButtonType = {
   id: string;
   title: string;
