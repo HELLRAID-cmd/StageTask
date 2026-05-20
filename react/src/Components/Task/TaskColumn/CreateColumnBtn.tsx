@@ -1,17 +1,25 @@
-import { Modal } from "antd";
+import { Input, Modal } from "antd";
 import Button from "../../../shared/ui/button";
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { MAX_TASK_TEXT } from "../../Utils/Settings";
 
 const CreateColumnBtn = () => {
   const [open, setOpen] = useState(false);
+  const [inputValueName, setInputValueName] = useState("");
+  const [errLength, setErrLength] = useState(false);
+
+  const openModal = () => {
+    setOpen(true);
+  };
+
   return (
     <>
-      <Button variant="add">
+      <Button variant="add" onClick={openModal}>
         <PlusCircleOutlined style={{ fontSize: "40px" }} />
       </Button>
       <Modal
-        title="Изменение задачи"
+        title="Создание колонки"
         open={open}
         cancelButtonProps={{ style: { display: "none" } }}
         centered
@@ -21,14 +29,31 @@ const CreateColumnBtn = () => {
         width={400}
         onCancel={() => setOpen(false)}
         onOk={() => {
-          // handleSave();
+          handleSave();
         }}
         closeIcon={
           <span style={{ color: "#000000", fontSize: "18px" }}>
             <CloseOutlined />
           </span>
         }
-      ></Modal>
+      >
+        <label htmlFor="name" className="mb-2">
+          Название*
+        </label>
+        {inputValueName.length >= MAX_TASK_TEXT && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
+        <Input
+          id="name"
+          placeholder="Введите название"
+          value={inputValueName}
+          className="mb-3"
+          onChange={(e) => {
+            setInputValueName(e.target.value);
+            if (errLength) setErrLength(false);
+          }}
+        />
+      </Modal>
     </>
   );
 };
