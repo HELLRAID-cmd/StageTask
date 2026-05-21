@@ -3,14 +3,25 @@ import Button from "../../../shared/ui/button";
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { MAX_TASK_TEXT } from "../../Utils/Settings";
+import { useColumns } from "../../Context/Columns/ColumnsContext";
 
-const CreateColumnBtn = () => {
+const CreateColumnBtn = ({ projectId }: { projectId: string }) => {
   const [open, setOpen] = useState(false);
   const [inputValueName, setInputValueName] = useState("");
   const [errLength, setErrLength] = useState(false);
+  const { createColumns } = useColumns();
 
   const openModal = () => {
     setOpen(true);
+  };
+
+  const handleCreateColumns = () => {
+    createColumns({
+      title: inputValueName,
+      projectId: projectId,
+    });
+
+    setInputValueName("");
   };
 
   return (
@@ -29,7 +40,7 @@ const CreateColumnBtn = () => {
         width={400}
         onCancel={() => setOpen(false)}
         onOk={() => {
-          handleSave();
+          handleCreateColumns();
         }}
         closeIcon={
           <span style={{ color: "#000000", fontSize: "18px" }}>
