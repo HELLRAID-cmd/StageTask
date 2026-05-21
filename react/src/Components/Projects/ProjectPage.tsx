@@ -6,8 +6,6 @@ import { useProject } from "../Context/Project/ProjectContext";
 import HeaderMain from "../Main/Header/HeaderMain";
 import CreateColumnBtn from "../Task/TaskColumn/CreateColumnBtn";
 import TaskColumns from "../Task/TaskColumn/TaskColumns";
-// import TaskColumn from "../Task/Tasks/TaskColumn";
-// import ButtonCreateTask from "../Drag/ButtonCreateTask";
 
 // Открывает проект
 const ProjectPage = () => {
