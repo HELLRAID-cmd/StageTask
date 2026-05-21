@@ -6,6 +6,8 @@ import { useProject } from "../Context/Project/ProjectContext";
 import HeaderMain from "../Main/Header/HeaderMain";
 import CreateColumnBtn from "../Task/TaskColumn/CreateColumnBtn";
 import TaskColumns from "../Task/TaskColumn/TaskColumns";
+// import TaskColumn from "../Task/Tasks/TaskColumn";
+// import ButtonCreateTask from "../Drag/ButtonCreateTask";
 
 // Открывает проект
 const ProjectPage = () => {
@@ -49,11 +51,11 @@ const ProjectPage = () => {
                 />
               </Link>
               <h1 className="project-title">{project.title}</h1>
-              <CreateColumnBtn />
+              <CreateColumnBtn projectId={project.id} />
             </div>
           </div>
           <ul className="project-list project-list--task">
-            <TaskColumns />
+            <TaskColumns projectId={project.id} />
             {/* <li
               className="project-item rounded-3 p-2"
               id={`planned-${project.id}`}
