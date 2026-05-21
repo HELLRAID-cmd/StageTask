@@ -21,3 +21,6 @@ export const URL_PROJECT = "http://localhost:3001/project";
 
 // API TASK
 export const URL_TASK = "http://localhost:3001/task";
+
+// API COLUMNS
+export const URL_COLUMNS = "http://localhost:3001/columns";
