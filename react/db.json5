@@ -1,24 +1,23 @@
 {
   project: [
     {
-      title: "w",
-      desc: "w",
-      colorCode: "#6ea0ff",
-      createdAt: 1776685934802,
-      colorCodeDark: "#4263aa",
+      title: "ds",
+      desc: "fe",
+      createdAt: 1779389561759,
       preview: "",
-      id: "0DBN0bcRKrs",
+      id: "IeONySNbvR4",
     },
   ],
   task: [
     {
       title: "sdaw",
       status: "planned",
-      projectId: "0DBN0bcRKrs",
+      projectId: null,
       createdAt: 1776799587077,
       history: [],
       id: "fG5XW61OD_E",
     },
   ],
+  columns: [{ title: "fasd", projectId: "IeONySNbvR4", id: "C_BMfjgYqB4" }],
   $schema: "./node_modules/json-server/schema.json",
 }
