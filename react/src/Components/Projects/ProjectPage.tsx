@@ -1,12 +1,11 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import ButtonCreateTask from "../Drag/ButtonCreateTask";
-import TaskColumn from "../Task/Tasks/TaskColumn";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { useRef } from "react";
 import makeScreenShot from "../Utils/MakeScreenShot";
 import { useProject } from "../Context/Project/ProjectContext";
 import HeaderMain from "../Main/Header/HeaderMain";
 import CreateColumnBtn from "../Task/TaskColumn/CreateColumnBtn";
+import TaskColumns from "../Task/TaskColumn/TaskColumns";
 
 // Открывает проект
 const ProjectPage = () => {
@@ -50,11 +49,12 @@ const ProjectPage = () => {
                 />
               </Link>
               <h1 className="project-title">{project.title}</h1>
-              <CreateColumnBtn/>
+              <CreateColumnBtn projectId={project.id} />
             </div>
           </div>
           <ul className="project-list project-list--task">
-            <li
+            <TaskColumns projectId={project.id} />
+            {/* <li
               className="project-item rounded-3 p-2"
               id={`planned-${project.id}`}
             >
@@ -63,7 +63,7 @@ const ProjectPage = () => {
               </div>
               <TaskColumn projectId={project.id} status="planned" />
               <ButtonCreateTask projectId={project.id} />
-            </li>
+            </li> */}
             {/* <li
               className="project-item project-item--progress rounded-3 p-3"
               id={`progress-${project.id}`}

@@ -4,11 +4,18 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "button" | "add";
 }
 
-const Button = ({ className, type, children, onClick, variant, ...props }: Props) => {
+const Button = ({
+  className,
+  type,
+  children,
+  onClick,
+  variant,
+  ...props
+}: Props) => {
   if (variant === "add") {
     return (
       <button
-        className={`project-item__button ${className} `}
+        className={`project-item__button ${className ? className : ""} `}
         type={type}
         onClick={onClick}
         {...props}
@@ -21,7 +28,7 @@ const Button = ({ className, type, children, onClick, variant, ...props }: Props
   if (variant === "button") {
     return (
       <button
-        className={`button hero-text__btn btn rounded-2 text-light ${className} `}
+        className={`button hero-text__btn btn rounded-2 text-light ${className ? className : ""} `}
         type={type}
         onClick={onClick}
         {...props}
