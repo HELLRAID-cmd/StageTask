@@ -59,7 +59,13 @@ export type TaskContextType = {
 export type TaskColumnType = {
   id: string;
   title: string;
-}
+};
+
+export type Columns = {
+  id: string;
+  projectId: string;
+  title: string;
+};
 
 export type ButtonType = {
   id: string;
