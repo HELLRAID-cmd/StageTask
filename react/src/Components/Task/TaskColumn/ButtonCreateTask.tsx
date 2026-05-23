@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Input, Modal } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
-import { DATE_UTILS, MAX_TASK_TEXT } from "../Utils/Settings";
-import { useTask } from "../Context/Task/TaskContext";
-import Button from "../../shared/ui/button/Button";
-import { newDate, newDateWithTime } from "../Utils/Date";
+import { useTask } from "../../Context/Task/TaskContext";
+import Button from "../../../shared/ui/button";
+import { DATE_UTILS, MAX_TASK_TEXT } from "../../Utils/Settings";
+import { newDate, newDateWithTime } from "../../Utils/Date";
 
-const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
+const ButtonCreateTask = ({
+  columnId,
+  projectId,
+}: {
+  columnId: string;
+  projectId: string;
+}) => {
   const [open, setOpen] = useState(false);
   const [inputValueName, setInputValueName] = useState("");
   const [inputDate, setInputDate] = useState<string>("");
@@ -31,9 +37,9 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
     // Создание задачи
     createTask({
       title: inputValueName,
-      status: "planned",
       dueData: inputDate,
       projectId: projectId,
+      columnId: columnId,
       createdAt: createdAt,
       history: [
         {
@@ -43,6 +49,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
         },
       ],
     });
+
     setInputValueName("");
     setInputDate("");
     setErrLength(false);

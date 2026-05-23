@@ -73,7 +73,7 @@ const DndContextWrapper = () => {
 
         if (!over) return;
 
-        const newStatus = over.id as string;
+        const newColumnId = over.id as string;
 
         const task = tasks.find((t) => t.id === active.id);
         if (!task) return;
@@ -81,17 +81,9 @@ const DndContextWrapper = () => {
         saveHistoryTask(task.id, {
           type: "moved",
           date: Date.now(),
-          from: task.status,
-          to: newStatus,
+          from: task.columnId,
+          to: newColumnId,
         });
-
-        console.log(
-          "TASKS UPDATED:",
-          tasks.map((t) => ({
-            id: t.id,
-            status: t.status,
-          })),
-        );
 
         setTasks((prev) => {
           const updated = prev.map((t) => {
@@ -99,7 +91,7 @@ const DndContextWrapper = () => {
 
             return {
               ...t,
-              status: newStatus,
+              columnId: newColumnId,
               history: [...t.history],
             };
           });

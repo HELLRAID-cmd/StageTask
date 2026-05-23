@@ -3,28 +3,25 @@ import TaskButton from "../TaskButtons/TaskButton";
 import { useTask } from "../../Context/Task/TaskContext";
 
 const TaskColumn = ({
+  columnId,
   projectId,
-  status,
 }: {
+  columnId: string;
   projectId: string;
-  status: string;
 }) => {
   const { tasks, editTaskId } = useTask();
   const { setNodeRef } = useDroppable({
-    id: status,
+    id: columnId,
   });
 
   return (
-    <ul className={`task-column task-${status}`} ref={setNodeRef}>
+    <ul className="task-column" ref={setNodeRef}>
       {tasks
         .filter(
-          (task) => task.projectId === projectId && task.status === status,
+          (task) => task.projectId === projectId && task.columnId === columnId,
         )
         .map((task) => (
-          <li
-            className={`task-column__item task-column__item-${status}`}
-            key={task.id}
-          >
+          <li className="task-column__item" key={task.id}>
             <div className="task-item__btns">
               <TaskButton task={task} editTaskId={editTaskId} />
             </div>
