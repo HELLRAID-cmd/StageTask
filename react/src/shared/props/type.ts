@@ -28,8 +28,8 @@ export type ProjectContextType = {
 export type Task = {
   id: string;
   title: string;
-  status: string;
   projectId: string;
+  columnId: string;
   createdAt: number;
   history: TaskHistory[];
   dueData?: string;
@@ -47,6 +47,7 @@ export type TaskContextType = {
   createTask: (
     title: string,
     projectId: string,
+    columnId: string,
     createdAt: number,
     history: [],
     dueData?: string,
