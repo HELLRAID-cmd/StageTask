@@ -22,6 +22,7 @@ const CreateColumnBtn = ({ projectId }: { projectId: string }) => {
     });
 
     setInputValueName("");
+    setOpen(false);
   };
 
   return (
