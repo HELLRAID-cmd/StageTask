@@ -14,13 +14,10 @@ const useColumnsContext = () => {
   };
 
   // Функция создание колонки
-  const createColumns = useCallback(
-    async (data: Omit<Columns, "id">) => {
-      const addedColumns = await columnsApi.add(data);
-      setColumns((prev) => [...prev, addedColumns]);
-    },
-    [],
-  );
+  const createColumns = useCallback(async (data: Omit<Columns, "id">) => {
+    const addedColumns = await columnsApi.add(data);
+    setColumns((prev) => [...prev, addedColumns]);
+  }, []);
 
   useEffect(() => {
     const checkServer = async () => {
@@ -44,10 +41,10 @@ const useColumnsContext = () => {
     }
   }, []);
 
-  const isProjectsEmpty = !columns.length;
+  const isColumnsEmpty = !columns.length;
 
   return {
-    isProjectsEmpty,
+    isColumnsEmpty,
     getColumns,
     columns,
     setColumns,
