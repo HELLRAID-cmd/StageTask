@@ -4,8 +4,9 @@ import { useRef } from "react";
 import makeScreenShot from "../Utils/MakeScreenShot";
 import { useProject } from "../Context/Project/ProjectContext";
 import HeaderMain from "../Main/Header/HeaderMain";
-import CreateColumnBtn from "../Task/TaskColumn/CreateColumnBtn";
-import TaskColumns from "../Task/TaskColumn/TaskColumns";
+import CreateColumnBtn from "../Columns/CreateColumnBtn";
+import TaskColumns from "../Columns/Column";
+import "../Columns/Columns.scss";
 
 // Открывает проект
 const ProjectPage = () => {
@@ -52,45 +53,8 @@ const ProjectPage = () => {
               <CreateColumnBtn projectId={project.id} />
             </div>
           </div>
-          <ul className="project-list project-list--task">
+          <ul className="columns columns--task">
             <TaskColumns projectId={project.id} />
-            {/* <li
-              className="project-item rounded-3 p-2"
-              id={`planned-${project.id}`}
-            >
-              <div className="project-item__top">
-                <p className="project-item__title mb-4">Запланировано</p>
-              </div>
-              <TaskColumn projectId={project.id} status="planned" />
-              <ButtonCreateTask projectId={project.id} />
-            </li> */}
-            {/* <li
-              className="project-item project-item--progress rounded-3 p-3"
-              id={`progress-${project.id}`}
-            >
-              <p className="project-item__title title-progress mb-4">
-                В процессе
-              </p>
-              <TaskColumn projectId={project.id} status="progress" />
-            </li>
-            <li
-              className="project-item project-item--stopped rounded-3 p-3"
-              id={`stopped-${project.id}`}
-            >
-              <p className="project-item__title title-stopped mb-4">
-                Остановленно
-              </p>
-              <TaskColumn projectId={project.id} status="stopped" />
-            </li>
-            <li
-              className="project-item project-item--completed size-xl rounded-3 p-3"
-              id={`completed-${project.id}`}
-            >
-              <p className="project-item__title title-completed mb-4">
-                Выполнено
-              </p>
-              <TaskColumn projectId={project.id} status="completed" />
-            </li> */}
           </ul>
         </div>
       </div>
