@@ -19,6 +19,13 @@ const useColumnsContext = () => {
     setColumns((prev) => [...prev, addedColumns]);
   }, []);
 
+  // Функция по удалению колонки
+  const deleteColumn = useCallback(async (taskId: string) => {
+    columnsApi.deleteColumn(taskId).then(() => {
+      setColumns((prev) => prev.filter((task) => task.id !== taskId));
+    });
+  }, []);
+
   useEffect(() => {
     const checkServer = async () => {
       try {
@@ -55,6 +62,7 @@ const useColumnsContext = () => {
     setLoading,
     errorAPI,
     setErrorAPI,
+    deleteColumn,
   };
 };
 
