@@ -1,8 +1,11 @@
 import { Navigate } from "react-router-dom";
-import { useProject } from "../../Context/Project/ProjectContext";
-import TaskColumn from "../Tasks/TaskColumn";
-import { useColumns } from "../../Context/Columns/ColumnsContext";
-import ButtonCreateTask from "./ButtonCreateTask";
+import { useProject } from "../Context/Project/ProjectContext";
+import TaskColumn from "../Task/Tasks/TaskColumn";
+import { useColumns } from "../Context/Columns/ColumnsContext";
+import ButtonCreateTask from "../Task/Tasks/ButtonCreateTask";
+import DeleteColumn from "./DeleteColumn";
+
+import "./Columns.scss";
 
 function TaskColumns({ projectId }: { projectId: string }) {
   const { getProject } = useProject();
@@ -26,12 +29,13 @@ function TaskColumns({ projectId }: { projectId: string }) {
             .filter((column) => column.projectId === projectId)
             .map((column) => (
               <li
-                className="project-item rounded-3 p-2"
+                className="columns-item rounded-3 p-2"
                 id={`planned-${column.id}`}
                 key={column.id}
               >
-                <div className="project-item__top">
-                  <p className="project-item__title mb-4">{column.title}</p>
+                <div className="columns-item__top">
+                  <p className="columns-item__top-title">{column.title}</p>
+                  <DeleteColumn column={column}/>
                 </div>
                 <TaskColumn columnId={column.id} projectId={projectId} />
                 <ButtonCreateTask columnId={column.id} projectId={projectId} />

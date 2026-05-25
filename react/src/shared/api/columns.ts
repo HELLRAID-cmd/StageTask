@@ -25,6 +25,18 @@ const columnsApi = {
 
     return await response.json();
   },
+
+  deleteColumn: async (columnId: string) => {
+    const response = await fetch(`${URL_COLUMNS}/${columnId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error(`deleteColumn error: ${response.status}`);
+    }
+
+    return await response.json();
+  },
 };
 
 export default columnsApi;
