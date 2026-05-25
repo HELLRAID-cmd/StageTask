@@ -15,6 +15,7 @@ import ProjectCreate from "./Components/Projects/ProjectCreate";
 import NotFound from "./Components/NotFound/NotFound";
 import { useEffect, useState } from "react";
 import { useTask } from "./Components/Context/Task/TaskContext";
+import { useColumns } from "./Components/Context/Columns/ColumnsContext";
 
 const DndContextWrapper = () => {
   const {
@@ -26,6 +27,8 @@ const DndContextWrapper = () => {
     editTaskId,
     saveHistoryTask,
   } = useTask();
+
+  const { columns } = useColumns();
 
   const activeTask = tasks.find((t) => t.id === activeId);
 
@@ -76,13 +79,19 @@ const DndContextWrapper = () => {
         const newColumnId = over.id as string;
 
         const task = tasks.find((t) => t.id === active.id);
+
         if (!task) return;
+
+        const fromColumn = columns.find((c) => c.id === task?.columnId);
+        const toColumn = columns.find((c) => c.id === newColumnId);
+
+        if (!fromColumn || !toColumn) return;
 
         saveHistoryTask(task.id, {
           type: "moved",
           date: Date.now(),
-          from: task.columnId,
-          to: newColumnId,
+          from: fromColumn.title,
+          to: toColumn.title,
         });
 
         setTasks((prev) => {
