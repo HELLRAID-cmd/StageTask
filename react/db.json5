@@ -1,23 +1,6 @@
 {
-  project: [
-    {
-      title: "ds",
-      desc: "fe",
-      createdAt: 1779389561759,
-      preview: "",
-      id: "IeONySNbvR4",
-    },
-  ],
-  task: [
-    {
-      title: "sdaw",
-      status: "planned",
-      projectId: null,
-      createdAt: 1776799587077,
-      history: [],
-      id: "fG5XW61OD_E",
-    },
-  ],
-  columns: [{ title: "fasd", projectId: "IeONySNbvR4", id: "C_BMfjgYqB4" }],
+  project: [],
+  task: [],
+  columns: [],
   $schema: "./node_modules/json-server/schema.json",
 }
