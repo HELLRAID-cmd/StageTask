@@ -1,9 +1,9 @@
 import { Input, Modal } from "antd";
-import Button from "../../../shared/ui/button";
+import Button from "../../shared/ui/button";
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { MAX_TASK_TEXT } from "../../Utils/Settings";
-import { useColumns } from "../../Context/Columns/ColumnsContext";
+import { MAX_TASK_TEXT } from "../Utils/Settings";
+import { useColumns } from "../Context/Columns/ColumnsContext";
 
 const CreateColumnBtn = ({ projectId }: { projectId: string }) => {
   const [open, setOpen] = useState(false);
