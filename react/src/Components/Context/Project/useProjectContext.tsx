@@ -19,13 +19,6 @@ const useProjectContext = () => {
     setProjects((prev) => [...prev, addedProject]);
   }, []);
 
-  // Функция удаления проекта
-  const deleteProject = useCallback((projectId: string) => {
-    projectsApi.delete(projectId).then(() => {
-      setProjects((prev) => prev.filter((project) => project.id !== projectId));
-    });
-  }, []);
-
   // Вот так выглядит получение данных через GET
   useEffect(() => {
     const checkServer = async () => {
@@ -60,7 +53,6 @@ const useProjectContext = () => {
     setErrorAPI,
     loading,
     setLoading,
-    deleteProject,
     activeProjectId,
     setActiveProjectId,
     getProject,
