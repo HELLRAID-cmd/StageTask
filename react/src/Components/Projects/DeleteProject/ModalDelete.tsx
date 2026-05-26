@@ -41,7 +41,7 @@ const ModalDelete: React.FC<DeleteProps> = ({
         }
       >
         <p className="text-dark mb-2">
-          Чтобы удалить введине название проекта "{project.title}"
+          Чтобы удалить введите название проекта "{project.title}"
         </p>
         <Input
           name="project"
