@@ -2,12 +2,16 @@ import { useCallback, useEffect, useState } from "react";
 import type { Columns } from "../../../shared/props/type";
 import { API_MODE, INTERVAL_TIME } from "../../Utils/Settings";
 import columnsApi from "../../../shared/api/columns";
+import { useTask } from "../Task/TaskContext";
+import tasksApi from "../../../shared/api/task";
 
 const useColumnsContext = () => {
   const [errorAPI, setErrorAPI] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [columns, setColumns] = useState<Columns[]>([]);
   const [activeColumnsId, setActiveColumnsId] = useState<string | null>(null);
+
+  const { tasks } = useTask();
 
   const getColumns = (id: string) => {
     return columns.find((t) => t.id === id);
@@ -20,11 +24,17 @@ const useColumnsContext = () => {
   }, []);
 
   // Функция по удалению колонки
-  const deleteColumn = useCallback(async (taskId: string) => {
-    columnsApi.deleteColumn(taskId).then(() => {
-      setColumns((prev) => prev.filter((task) => task.id !== taskId));
-    });
-  }, []);
+  const deleteColumn = useCallback(
+    async (columnId: string) => {
+      await columnsApi.deleteColumn(columnId);
+
+      const tasksToDelete = tasks.filter((t) => t.columnId === columnId);
+      await Promise.all(tasksToDelete.map((t) => tasksApi.deleteTask(t.id)));
+
+      setColumns((prev) => prev.filter((col) => col.id !== columnId));
+    },
+    [tasks],
+  );
 
   useEffect(() => {
     const checkServer = async () => {
