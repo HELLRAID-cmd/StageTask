@@ -2,7 +2,7 @@ import { ColumnsProvider } from "./Columns/ColumnsProvider";
 import { ProjectProvider } from "./Project/ProjectProvider";
 import { TaskProvider } from "./Task/TaskProvider";
 
-const providersArr = [ProjectProvider, ColumnsProvider, TaskProvider];
+const providersArr = [ProjectProvider, TaskProvider, ColumnsProvider];
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
   return providersArr.reduceRight(
