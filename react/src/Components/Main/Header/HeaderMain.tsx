@@ -3,14 +3,9 @@ import "./HeaderMain.scss";
 import { useProject } from "../../Context/Project/ProjectContext";
 import CustomLink from "../../../shared/ui/Link";
 
-type Props = {
-  showProjectBtn?: boolean;
-};
-
-const HeaderMain = ({ showProjectBtn }: Props) => {
+const HeaderMain = () => {
   const { projects } = useProject();
-
-  const project = projects.length === 0;
+  const project = projects.length > 0;
 
   return (
     <header className="header">
@@ -26,19 +21,15 @@ const HeaderMain = ({ showProjectBtn }: Props) => {
             </Link>
           </div>
           {/* Если нет проектов убрать кнопку */}
-          {showProjectBtn ? (
-            <>
-              {!project && (
-                <CustomLink
-                  to={"/myProject"}
-                  className="header-project"
-                  size="mini"
-                >
-                  Мои проекты
-                </CustomLink>
-              )}
-            </>
-          ) : null}
+          {project && (
+            <CustomLink
+              to={"/myProject"}
+              className="header-project"
+              size="mini"
+            >
+              Мои проекты
+            </CustomLink>
+          )}
         </div>
       </div>
     </header>
