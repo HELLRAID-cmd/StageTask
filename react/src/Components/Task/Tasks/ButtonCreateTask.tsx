@@ -1,17 +1,25 @@
 import { useState } from "react";
 import { Input, Modal } from "antd";
-import { PlusCircleOutlined, CloseOutlined } from "@ant-design/icons";
-import { DATE_UTILS, MAX_TASK_TEXT } from "../Utils/Settings";
-import { useTask } from "../Context/Task/TaskContext";
-import Button from "../../shared/ui/button/Button";
-import { newDate, newDateWithTime } from "../Utils/Date";
+import { CloseOutlined } from "@ant-design/icons";
+import { useTask } from "../../Context/Task/TaskContext";
+import Button from "../../../shared/ui/button";
+import { DATE_UTILS, MAX_TASK_TEXT } from "../../Utils/Settings";
+import { newDate, newDateWithTime } from "../../Utils/Date";
 
-const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
+const ButtonCreateTask = ({
+  columnId,
+  projectId,
+}: {
+  columnId: string;
+  projectId: string;
+}) => {
   const [open, setOpen] = useState(false);
+  const [errLength, setErrLength] = useState(false);
+  const [textDanger, setTextDanger] = useState(false);
+  const [createdData, setCreatedData] = useState<Date | null>(null);
+
   const [inputValueName, setInputValueName] = useState("");
   const [inputDate, setInputDate] = useState<string>("");
-  const [errLength, setErrLength] = useState(false);
-  const [createdData, setCreatedData] = useState<Date | null>(null);
 
   const { createTask, now } = useTask();
 
@@ -23,17 +31,22 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   };
 
   const handleCreate = () => {
-    if (!inputValueName.trim() || inputValueName.length >= 40) return;
+    if (inputValueName.length >= 40) return;
     if (selectedDate < now) return;
+
+    if (inputValueName.trim().length < 5) {
+      setTextDanger(true);
+      return;
+    }
 
     const createdAt = Date.now();
 
     // Создание задачи
     createTask({
       title: inputValueName,
-      status: "planned",
       dueData: inputDate,
       projectId: projectId,
+      columnId: columnId,
       createdAt: createdAt,
       history: [
         {
@@ -43,6 +56,8 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
         },
       ],
     });
+
+    setTextDanger(false);
     setInputValueName("");
     setInputDate("");
     setErrLength(false);
@@ -52,7 +67,7 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
   return (
     <>
       <Button className="project-item__task" onClick={openModal} variant="add">
-        <PlusCircleOutlined style={{ fontSize: "24px" }} />
+        Создать новую задачу
       </Button>
       <Modal
         title="Введите название задачи"
@@ -76,35 +91,39 @@ const ButtonCreateTask = ({ projectId }: { projectId: string }) => {
         <label htmlFor="name" className="mb-2">
           Название*
         </label>
-        {inputValueName.length >= MAX_TASK_TEXT && (
-          <p className="text-danger">Слишком большой текст!</p>
-        )}
         <Input
           id="name"
           placeholder="Введите название"
           value={inputValueName}
-          className="mb-3"
+          // className="mb-3"
           onChange={(e) => {
             setInputValueName(e.target.value);
             if (errLength) setErrLength(false);
           }}
         />
+        {inputValueName.length >= MAX_TASK_TEXT && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
+        {textDanger && (
+          <p className="text-danger">
+            Минимальное название задачи из 5 символов
+          </p>
+        )}
         <label htmlFor="date" className="mb-2">
           Срок задачи
         </label>
-        {selectedDate < now && <p className="text-danger">Неккоректная дата</p>}
         <Input
           id="date"
           type={"date"}
           min={DATE_UTILS.todayISO()}
           placeholder="Введите срок задачи"
-          className="mb-3"
           value={inputDate}
           onChange={(e) => {
             setInputDate(e.target.value);
             if (errLength) setErrLength(false);
           }}
         />
+        {selectedDate < now && <p className="text-danger">Неккоректная дата</p>}
         <p className="task-modal__data text-dark fw-light">
           Дата создания будет:{" "}
           {createdData ? newDateWithTime(createdData) : "-"}

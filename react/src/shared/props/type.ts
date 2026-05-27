@@ -7,10 +7,8 @@ export type Project = {
   id: string;
   title: string;
   desc: string;
-  colorCode: string;
   createdAt: number;
   preview?: string | null;
-  colorCodeDark?: string;
 };
 
 export type DeleteProps = {
@@ -30,8 +28,8 @@ export type ProjectContextType = {
 export type Task = {
   id: string;
   title: string;
-  status: string;
   projectId: string;
+  columnId: string;
   createdAt: number;
   history: TaskHistory[];
   dueData?: string;
@@ -49,6 +47,7 @@ export type TaskContextType = {
   createTask: (
     title: string,
     projectId: string,
+    columnId: string,
     createdAt: number,
     history: [],
     dueData?: string,
@@ -56,6 +55,17 @@ export type TaskContextType = {
   editTaskId: string | null;
   setEditTaskId: React.Dispatch<React.SetStateAction<string | null>>;
   updateTaskTitle: (id: string, newTitle: string) => void;
+};
+
+export type TaskColumnType = {
+  id: string;
+  title: string;
+};
+
+export type Columns = {
+  id: string;
+  projectId: string;
+  title: string;
 };
 
 export type ButtonType = {

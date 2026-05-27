@@ -8,7 +8,10 @@
   }
 
   &-column {
-    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 50px;
   }
 
   &-item {
@@ -16,11 +19,17 @@
     flex-direction: column;
     height: auto;
     position: relative;
-    margin: 0 0 10px 0;
-    background-color: var(--c-white);
+    background-color: var(--c-dark-2);
     border-radius: 10px;
 
     &--expired {
+      background-color: var(--c-stopped);
+    }
+
+    &__data {
+      padding: 0 6px;
+      border-radius: 10px;
+      font-size: var(--f-size-12);
       background-color: var(--c-stopped);
     }
 
@@ -32,8 +41,14 @@
         display: flex;
       }
 
+      &-icon {
+        color: var(--c-white);
+        margin: 0 8px 0 0;
+        cursor: grab;
+      }
+
       &-text {
-        color: var(--c-black);
+        color: var(--c-white);
       }
 
       &-inner {
@@ -49,7 +64,7 @@
     }
 
     &__icon {
-      color: var(--c-black);
+      color: var(--c-white);
 
       &--delete:hover {
         color: var(--c-stopped-dark);
@@ -59,18 +74,8 @@
         color: var(--c-light-blue);
       }
 
-      &--edit:hover{
+      &--edit:hover {
         color: var(--c-completed);
-      }
-
-      &--deadline:hover {
-        color: var(--c-stopped-dark);
-      }
-
-      &--time {
-        position: absolute;
-        top: 0px;
-        right: 0px;
       }
     }
 

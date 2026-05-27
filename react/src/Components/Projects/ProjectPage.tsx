@@ -1,10 +1,12 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import ButtonCreateTask from "../Drag/ButtonCreateTask";
-import TaskColumn from "../Task/Tasks/TaskColumn";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { useRef } from "react";
 import makeScreenShot from "../Utils/MakeScreenShot";
 import { useProject } from "../Context/Project/ProjectContext";
+import HeaderMain from "../Main/Header/HeaderMain";
+import CreateColumnBtn from "../Columns/CreateColumnBtn";
+import TaskColumns from "../Columns/Column";
+import "../Columns/Columns.scss";
 
 // Открывает проект
 const ProjectPage = () => {
@@ -36,57 +38,23 @@ const ProjectPage = () => {
 
   return (
     <section className="sect-project">
+      <HeaderMain />
       <div className="container">
         <div ref={previewRef}>
-          <div className="project-top justify-content-start gap-2 rounded-3 p-2">
-            <Link to={"/myProject"}>
-              <LeftCircleOutlined
-                style={{ fontSize: "40px", color: "#fff" }}
-                onClick={handleScreenshot}
-              />
-            </Link>
-            <h1 className="project-title">{project.title}</h1>
+          <div className="project-top">
+            <div className="project-top__info project-top__info--page">
+              <Link to={"/myProject"}>
+                <LeftCircleOutlined
+                  style={{ fontSize: "40px", color: "#fff" }}
+                  onClick={handleScreenshot}
+                />
+              </Link>
+              <h1 className="project-title">{project.title}</h1>
+              <CreateColumnBtn projectId={project.id} />
+            </div>
           </div>
-          <ul className="project-list project-list--task">
-            <li
-              className="project-item project-item--planned rounded-3 p-3"
-              id={`planned-${project.id}`}
-            >
-              <div className="project-item__top">
-                <p className="project-item__title title-planned mb-4">
-                  Запланировано
-                </p>
-                <ButtonCreateTask projectId={project.id} />
-              </div>
-              <TaskColumn projectId={project.id} status="planned" />
-            </li>
-            <li
-              className="project-item project-item--progress rounded-3 p-3"
-              id={`progress-${project.id}`}
-            >
-              <p className="project-item__title title-progress mb-4">
-                В процессе
-              </p>
-              <TaskColumn projectId={project.id} status="progress" />
-            </li>
-            <li
-              className="project-item project-item--stopped rounded-3 p-3"
-              id={`stopped-${project.id}`}
-            >
-              <p className="project-item__title title-stopped mb-4">
-                Остановленно
-              </p>
-              <TaskColumn projectId={project.id} status="stopped" />
-            </li>
-            <li
-              className="project-item project-item--completed size-xl rounded-3 p-3"
-              id={`completed-${project.id}`}
-            >
-              <p className="project-item__title title-completed mb-4">
-                Выполнено
-              </p>
-              <TaskColumn projectId={project.id} status="completed" />
-            </li>
+          <ul className="columns columns--task">
+            <TaskColumns projectId={project.id} />
           </ul>
         </div>
       </div>

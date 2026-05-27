@@ -5,7 +5,6 @@ import TaskDelete from "./TaskDelete";
 import TaskEdit from "./TaskEdit";
 import { useTask } from "../../Context/Task/TaskContext";
 import TaskDeadline from "./TaskDeadline";
-import { FieldTimeOutlined } from "@ant-design/icons";
 import { isExpired } from "../../Utils/Date";
 
 const TaskButton = ({
@@ -24,30 +23,28 @@ const TaskButton = ({
 
   const expired = isExpired(task.dueData, currentDate);
 
+  const formattedDate = task.dueData
+    ? new Date(task.dueData).toLocaleDateString("ru-RU", {
+        day: "numeric",
+        month: "long",
+      })
+    : null;
+
   const style = {
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : undefined,
+    cursor: "default",
   };
 
   return (
     <div className={`task-item ${expired ? "task-item--expired" : ""}`}>
-      {task.dueData ? (
-        <FieldTimeOutlined
-          style={{ fontSize: "30px", color: expired ? "white" : "red" }}
-          className="task-item__icon task-item__icon--time"
-        />
-      ) : null}
       <div
         ref={setNodeRef}
         className="task-item__btns-btn btn text-light w-100 text-start"
         style={{ ...style }}
       >
-        <span
-          {...listeners}
-          {...attributes}
-          style={{ cursor: "grab", marginRight: 8, color: "#000" }}
-        >
+        <span {...listeners} {...attributes} className="task-item__btns-icon">
           ☰
         </span>
         {editTaskId === task.id ? (
@@ -62,6 +59,9 @@ const TaskButton = ({
             <TaskEdit input={task.title} taskId={task.id} />
             <TaskHistoryBtn taskId={task.id} />
             <TaskDeadline taskId={task.id} />
+            {task.dueData ? (
+              <span className="task-item__data">{formattedDate}</span>
+            ) : null}
             <TaskDelete task={task} />
           </>
         )}

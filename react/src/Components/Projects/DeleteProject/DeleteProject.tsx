@@ -2,12 +2,13 @@ import { DeleteOutlined } from "@ant-design/icons";
 import type { Project } from "../../../shared/props/type";
 import ModalDelete from "./ModalDelete";
 import { useState } from "react";
-import { useProject } from "../../Context/Project/ProjectContext";
 import ButtonProject from "../ButtonProject";
+import { useDeleteProject } from "../../../shared/hooks/useDeleteProject";
 
 const DeleteProject: React.FC<{ project: Project }> = ({ project }) => {
-  const { deleteProject } = useProject();
   const [open, setOpen] = useState(false);
+
+  const deleteProject = useDeleteProject();
 
   return (
     <>

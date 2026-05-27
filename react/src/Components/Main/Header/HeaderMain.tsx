@@ -5,8 +5,7 @@ import CustomLink from "../../../shared/ui/Link";
 
 const HeaderMain = () => {
   const { projects } = useProject();
-
-  const project = projects.length === 0;
+  const project = projects.length > 0;
 
   return (
     <header className="header">
@@ -22,8 +21,12 @@ const HeaderMain = () => {
             </Link>
           </div>
           {/* Если нет проектов убрать кнопку */}
-          {!project && (
-            <CustomLink to={"/myProject"} className="header-project" size="mini">
+          {project && (
+            <CustomLink
+              to={"/myProject"}
+              className="header-project"
+              size="mini"
+            >
               Мои проекты
             </CustomLink>
           )}

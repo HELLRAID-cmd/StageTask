@@ -77,11 +77,11 @@ const tasksApi = {
     return await response.json();
   },
 
-  editDateTask: async (id: string, date: string) => {
+  editDateTask: async (id: string, dueDate: string) => {
     const response = await fetch(`${URL_TASK}/${id}`, {
       method: "PATCH",
       headers: HEADERS,
-      body: JSON.stringify({ date }),
+      body: JSON.stringify({ dueDate }),
     });
 
     if (!response.ok) {

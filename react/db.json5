@@ -1,24 +1,6 @@
 {
-  project: [
-    {
-      title: "w",
-      desc: "w",
-      colorCode: "#6ea0ff",
-      createdAt: 1776685934802,
-      colorCodeDark: "#4263aa",
-      preview: "",
-      id: "0DBN0bcRKrs",
-    },
-  ],
-  task: [
-    {
-      title: "sdaw",
-      status: "planned",
-      projectId: "0DBN0bcRKrs",
-      createdAt: 1776799587077,
-      history: [],
-      id: "fG5XW61OD_E",
-    },
-  ],
+  project: [],
+  task: [],
+  columns: [],
   $schema: "./node_modules/json-server/schema.json",
 }

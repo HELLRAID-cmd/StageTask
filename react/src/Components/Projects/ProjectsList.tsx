@@ -1,15 +1,20 @@
-import "./Project.scss";
+import "./Projects.scss";
+import "./ProjectPage.scss";
 import CardComponent from "../Cards/Card";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useProject } from "../Context/Project/ProjectContext";
 import ButtonCreateProject from "./ButtonCreateProject";
+import HeaderMain from "../Main/Header/HeaderMain";
+import useBackground from "../../shared/hooks/useBackground";
 
 const ProjectsList = () => {
   const { projects, isProjectsEmpty, errorAPI, loading } = useProject();
 
   let content;
   let btnCreate;
+
+  useBackground();
 
   //* Если ошибка с сервером показать ошибку
   if (errorAPI) {
@@ -21,7 +26,7 @@ const ProjectsList = () => {
     //* Если нет проекта(ов) показать кнопку с созданием
   } else if (isProjectsEmpty) {
     content = (
-      <h1 className="project-list__text text-dark heading-primary">
+      <h1 className="project-list__text text-light heading-primary">
         Похоже у вас еще нет проекта, поскорее создайте его!
       </h1>
     );
@@ -45,18 +50,19 @@ const ProjectsList = () => {
 
   return (
     <section className="sect-project">
+      <HeaderMain showProjectBtn={false} />
       <div className="container">
         <div className="project">
-          <div className="project-top rounded-3 p-2">
-            <div className="project-top__left">
+          <div className="project-top">
+            <div className="project-top__info">
               <Link to={"/"}>
                 <LeftCircleOutlined
                   style={{ fontSize: "40px", color: "#fff" }}
                 />
               </Link>
+
               <h1 className="project-title">Мои проекты</h1>
-            </div>
-            <div className="project-top__right">
+
               {loading ? (
                 <span className="text-light">Загрузка...</span>
               ) : (

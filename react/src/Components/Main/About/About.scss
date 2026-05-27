@@ -1,6 +1,7 @@
 @use "../../../../styles/global/mixins" as *;
 
 .about {
+  font-family: var(--ff-main);
   @include vp-767 {
     text-align: center;
   }
