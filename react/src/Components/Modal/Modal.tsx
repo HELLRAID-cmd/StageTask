@@ -10,12 +10,19 @@ import { useProject } from "../Context/Project/ProjectContext";
 const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
   const [inputValueName, setInputValueName] = useState("");
   const [inputValueDesc, setInputValueDesc] = useState("");
+  const [textDanger, setTextDanger] = useState(false);
   const [errLength, setErrLength] = useState(false);
 
   const { createProject } = useProject();
   const navigate = useNavigate();
 
   const handleCreate = () => {
+    if (inputValueName.trim().length < 3) {
+      setTextDanger(true);
+
+      return null;
+    }
+
     createProject({
       title: inputValueName,
       desc: inputValueDesc,
@@ -23,6 +30,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
       preview: "",
     });
 
+    setTextDanger(false);
     setInputValueName("");
     setInputValueDesc("");
     navigate("/myProject");
@@ -53,19 +61,25 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ open, onClose }) => {
         <label htmlFor="name" className="mb-2">
           Название*
         </label>
-        {inputValueName.length >= MAX_PROJECT_NAME && (
-          <p className="text-danger">Слишком большой текст!</p>
-        )}
         <Input
           id="name"
           placeholder="Введите название"
           value={inputValueName}
-          className="mb-3"
           onChange={(e) => {
             setInputValueName(e.target.value);
             if (errLength) setErrLength(false);
           }}
         />
+        {inputValueName.length >= MAX_PROJECT_NAME && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
+
+        {textDanger && (
+          <p className="text-danger">
+            Минимальное название проекта из 3 символов
+          </p>
+        )}
+
         <label htmlFor="desc" className="mb-2">
           Описание
         </label>

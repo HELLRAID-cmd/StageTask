@@ -9,6 +9,7 @@ const CreateColumnBtn = ({ projectId }: { projectId: string }) => {
   const [open, setOpen] = useState(false);
   const [inputValueName, setInputValueName] = useState("");
   const [errLength, setErrLength] = useState(false);
+  const [textDanger, setTextDanger] = useState(false);
   const { createColumns } = useColumns();
 
   const openModal = () => {
@@ -16,11 +17,18 @@ const CreateColumnBtn = ({ projectId }: { projectId: string }) => {
   };
 
   const handleCreateColumns = () => {
+    if (inputValueName.trim().length < 5) {
+      setTextDanger(true);
+
+      return null;
+    }
+
     createColumns({
       title: inputValueName,
       projectId: projectId,
     });
 
+    setTextDanger(false);
     setInputValueName("");
     setOpen(false);
   };
@@ -52,19 +60,23 @@ const CreateColumnBtn = ({ projectId }: { projectId: string }) => {
         <label htmlFor="name" className="mb-2">
           Название*
         </label>
-        {inputValueName.length >= MAX_TASK_TEXT && (
-          <p className="text-danger">Слишком большой текст!</p>
-        )}
         <Input
           id="name"
           placeholder="Введите название"
           value={inputValueName}
-          className="mb-3"
           onChange={(e) => {
             setInputValueName(e.target.value);
             if (errLength) setErrLength(false);
           }}
         />
+        {inputValueName.length >= MAX_TASK_TEXT && (
+          <p className="text-danger">Слишком большой текст!</p>
+        )}
+        {textDanger && (
+          <p className="text-danger">
+            Минимальное название колонки из 5 символов
+          </p>
+        )}
       </Modal>
     </>
   );
