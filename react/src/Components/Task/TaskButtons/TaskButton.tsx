@@ -60,7 +60,7 @@ const TaskButton = ({
             <TaskHistoryBtn taskId={task.id} />
             <TaskDeadline taskId={task.id} />
             {task.dueData ? (
-              <span className="task-item__data">{formattedDate}</span>
+              <span className={`task-item__data ${expired ? "task-item__data--expired" : ""}`}>{formattedDate}</span>
             ) : null}
             <TaskDelete task={task} />
           </>
