@@ -1,0 +1,13 @@
+$kind: http-request
+name: Remove project
+url: "{{BaseURL}}/{{project}}/{{projectID}}"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Проект удален, 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+order: 3935102398813469

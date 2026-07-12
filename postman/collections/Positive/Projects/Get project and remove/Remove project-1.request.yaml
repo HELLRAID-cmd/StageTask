@@ -1,0 +1,13 @@
+$kind: http-request
+name: Remove project
+url: "{{BaseURL}}/{{project}}/{{projectID}}"
+method: DELETE
+scripts:
+  - type: beforeRequest
+    code: "// pm.test(\"Status code is 404\", function () {\r
+
+      //     pm.response.to.have.status(404);\r
+
+      // });"
+    language: text/javascript
+order: 1983702800269311

@@ -1,0 +1,10 @@
+$kind: collection
+name: Get project and remove
+variables:
+  - key: project
+    value: ""
+    secret: false
+  - key: ProjectId
+    value: "{{projectID}}"
+    disabled: true
+    secret: false

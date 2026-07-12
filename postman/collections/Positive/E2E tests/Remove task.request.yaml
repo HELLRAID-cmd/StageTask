@@ -1,0 +1,13 @@
+$kind: http-request
+name: Remove task
+url: "{{BaseURL}}/{{task}}/{{taskID}}"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Задача удалена, 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+order: 3718333811312489

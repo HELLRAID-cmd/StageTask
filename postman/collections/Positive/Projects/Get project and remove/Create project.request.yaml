@@ -1,0 +1,40 @@
+$kind: http-request
+name: Create project
+url: "{{BaseURL}}/{{project}}"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"title\": \"postman title\",\r
+
+    \    \"desc\": \"postman desc\",\r
+
+    \    \"prewiew\": \"\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Set projectID\", function () {\r
+
+      \    let responseText = pm.response.text();\r
+
+      \r
+
+      \    let jsonData = JSON.parse(responseText);\r
+
+      \r
+
+      \    pm.environment.set(\"projectID\", jsonData.id);\r
+
+      });"
+    language: text/javascript
+order: 161876568138589

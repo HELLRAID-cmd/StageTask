@@ -1,0 +1,13 @@
+$kind: http-request
+name: Remove column
+url: "{{BaseURL}}/{{columns}}/{{columnsID}}"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Колонка удалена, 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+order: 3789339976341464
