@@ -1,0 +1,52 @@
+$kind: http-request
+name: Create project
+url: "{{BaseURL}}/{{project}}"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"title\": \"postman title\",\r
+
+    \    \"desc\": \"postman desc\",\r
+
+    \    \"prewiew\": \"\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Проект успешно создался, 201\", function () {\r
+
+      \    if (pm.response.code === 201) {\r
+
+      \        console.log(\"Проект создался\");\r
+
+      \        pm.response.to.have.status(201);\r
+
+      \    } else {\r
+
+      \        console.log(\"Проект не создался, статус:\", pm.response.code);\r
+
+      \        pm.execution.setNextRequest(null);\r
+
+      \    }\r
+
+      \r
+
+      });\r
+
+      \r
+
+      pm.test(\"Set projectID\", function () {\r
+
+      \    let responseText = pm.response.text();\r
+
+      \    let jsonData = JSON.parse(responseText);\r
+
+      \r
+
+      \    pm.environment.set(\"projectID\", jsonData.id);\r
+
+      });"
+    language: text/javascript
+order: 1057766610929541

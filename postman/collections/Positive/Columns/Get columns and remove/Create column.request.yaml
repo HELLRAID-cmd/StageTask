@@ -1,0 +1,66 @@
+$kind: http-request
+name: Create column
+description: |-
+  ### Работа с проектами и колонками (environment: dev)
+
+  В системе используется один `environment` — `dev`.
+
+  #### Особенности
+
+  - Все проекты создаются внутри `dev`
+      
+  - У каждого проекта есть свой уникальный `projectId`
+      
+  - Все колонки привязываются к конкретному проекту через `projectId`
+      
+
+  #### Важно
+
+  - Колонка **всегда создаётся внутри конкретного проекта**
+      
+  - Если указать другой `projectId`, колонка создастся в другом проекте
+      
+  - `environment column API` не определяет проект автоматически — его нужно передавать явно
+      
+
+  #### Итог
+
+  Даже при одном `environment (dev)`:
+
+  - `projectId` остаётся ключевым параметром
+      
+  - Вся логика работы с колонками строится через него
+url: "{{BaseURL}}/{{columns}}"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"title\": \"columns one\",\r
+
+    \    \"projectId\": \"{{projectID}}\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 201\", function () {\r
+
+      \    pm.response.to.have.status(201);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Set columnsID\", function () {\r
+
+      \    let responseText = pm.response.text();\r
+
+      \    let jsonData = JSON.parse(responseText);\r
+
+      \r
+
+      \    pm.environment.set(\"columnsID\", jsonData.id);\r
+
+      });"
+    language: text/javascript
+order: 924929196286

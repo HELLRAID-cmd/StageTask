@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get projects
+url: "{{BaseURL}}/{{project}}"
+method: GET
+order: 1782463845225

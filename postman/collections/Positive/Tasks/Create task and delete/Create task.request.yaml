@@ -1,0 +1,54 @@
+$kind: http-request
+name: Create task
+url: "{{BaseURL}}/{{task}}"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"title\": \"postman title\",\r
+
+    \    \"dueData\": \"\",\r
+
+    \    \"projectId\": \"{{projectID}}\",\r
+
+    \    \"columnId\": \"{{columnsID}}\",\r
+
+    \    \"history\": [\r
+
+    \        {\r
+
+    \            \"id\": \"{{taskID}}\",\r
+
+    \            \"type\": \"created\",\r
+
+    \            \"date\": 1782811687489\r
+
+    \        }\r
+
+    \    ]\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 201\", function () {\r
+
+      \    pm.response.to.have.status(201);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Set taskID\", function () {\r
+
+      \    let responseText = pm.response.text();\r
+
+      \    let jsonData = JSON.parse(responseText);\r
+
+      \r
+
+      \    pm.environment.set(\"taskID\", jsonData.id);\r
+
+      });"
+    language: text/javascript
+order: 1782812225818

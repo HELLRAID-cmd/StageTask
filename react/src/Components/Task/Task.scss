@@ -31,6 +31,10 @@
       border-radius: 10px;
       font-size: var(--f-size-12);
       background-color: var(--c-stopped);
+
+      &--expired {
+        background-color: var(--c-dark-2);
+      }
     }
 
     &__btns {
